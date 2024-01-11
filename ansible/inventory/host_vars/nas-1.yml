@@ -1,0 +1,16 @@
+---
+ansible_host: "192.168.10.11"
+
+gpu:
+  intel:
+    enabled: false
+    driver_version:
+      - intel-driver-1
+
+hba:
+  lspci:
+    enabled: true
+
+usb:
+  ups0:
+    client: true

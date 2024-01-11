@@ -1,0 +1,12 @@
+---
+ansible_host: "192.168.10.252"
+
+gpu:
+  amd:
+    enabled: true
+    driver_version:
+      - nvidia-driver-1
+
+usb:
+  ups2:
+    client: true

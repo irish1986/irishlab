@@ -1,0 +1,78 @@
+---
+- name: Install templating packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - libguestfs-tools
+
+- name: Create templating cronjob
+  ansible.builtin.cron:
+    name: "{{ item }} Template job"
+    state: present
+    minute: "*0"
+    hour: "{{ item.time }}"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    job: >-
+      "./ubuntu.sh {{ item.vmid }} {{ item.storage }} {{ item.distro }} {{ item.version }}  >> ~/template/{{ item.name }}.log 2>&1"
+  loop:
+    - name: ubuntu bionic
+      vmid: 901804
+      storage: ceph
+      distro: bionic
+      version: 18.04
+      time: 1
+    - name: ubuntu focal
+      vmid: 902004
+      storage: ceph
+      distro: focal
+      version: 20.04
+      time: 2
+    - name: ubuntu jammy
+      vmid: 902204
+      storage: ceph
+      distro: jammy
+      version: 22.04
+      time: 3
+    - name: ubuntu kinetic
+      vmid: 902210
+      storage: ceph
+      distro: kinetic
+      version: 22.10
+      time: 4
+    - name: ubuntu lunar
+      vmid: 902304
+      storage: ceph
+      distro: lunar
+      version: 23.04
+      time: 5
+
+- name: Create template directory
+  ansible.builtin.file:
+    path: ~/template
+    state: directory
+    owner: "{{ ansible_user }}"
+    mode: 0775
+
+- name: Copy template shell script
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "~/template/{{ item }}"
+    owner: root
+    group: root
+    mode: 0775
+  loop:
+    - ubuntu.sh
+
+- name: Task name
+  ansible.builtin.stat:
+    path: "/mnt/pve/iso/snippets/ubuntu-user.yml"
+  register: register_name
+
+- name: Task name
+  ansible.builtin.debug:
+    msg: "Ubuntu-user.yml exists on ISO folders"
+  when: register_name.stat.exists

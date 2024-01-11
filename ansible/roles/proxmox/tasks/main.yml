@@ -1,0 +1,18 @@
+---
+
+- name: Setup additional repo
+  ansible.builtin.include_tasks: repo.yml
+- name: Update servers
+  ansible.builtin.include_tasks: update.yml
+- name: Install packages
+  ansible.builtin.include_tasks: packages.yml
+- name: Setup additional hardware
+  ansible.builtin.include_tasks: hardware.yml
+- name: Enable WOL
+  ansible.builtin.include_tasks: wol.yml
+- name: Configure ufw
+  ansible.builtin.include_tasks: ufw.yml
+- name: Deploy cronjob
+  ansible.builtin.include_tasks: cron.yml
+  with_items: "{{ groups['proxmox'] }}"
+  run_once: true

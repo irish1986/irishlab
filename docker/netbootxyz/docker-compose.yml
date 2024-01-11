@@ -1,0 +1,42 @@
+---
+version: "2.1"
+name: netbootxyz
+services:
+  netbootxyz:
+    image: lscr.io/linuxserver/netbootxyz:latest
+    pull_policy: always
+    container_name: netbootxyz
+    restart: unless-stopped
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "3000"
+        protocol: tcp
+      - mode: ingress
+        target: 69
+        published: "69"
+        protocol: udp
+      - mode: ingress
+        target: 8080
+        published: "80"
+        protocol: tcp
+    environment:
+      - PUID=1000 #current user
+      - PGID=1000 #current group
+      - TZ=Etc/UTC
+      - PORT_RANGE=30000:30010 #optional
+      - SUBFOLDER=/ #optional
+    volumes:
+      - ./config:/config
+      - ./assets:/assets #optional
+    # healthcheck:
+    #   test: curl --fail http://localhost || exit 1
+    #   interval: 60s
+    #   retries: 5
+    #   start_period: 20s
+    #   timeout: 10s
+networks:
+  default:
+    name: netbootxyz_default

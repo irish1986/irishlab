@@ -1,0 +1,59 @@
+---
+
+- name: NFS Share | Install nfs packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nfs-common
+
+- name: NFS Share | Unmount directory
+  mount:
+    path: "{{ item }}"
+    state: unmounted
+  loop:
+    - /mnt/zeus/backup
+    - /mnt/zeus/data
+    - /mnt/zeus/downloads
+    - /mnt/zeus/iso
+    - /mnt/zeus/media
+
+- name: NFS Share | Create Folder
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  loop:
+    - /mnt/zeus/backup
+    - /mnt/zeus/data
+    - /mnt/zeus/downloads
+    - /mnt/zeus/iso
+    - /mnt/zeus/media
+
+# sudo ufw allow from client_ip to any port nfs
+
+- name: NFS Share | Mount directory
+  mount:
+    src: "{{ item.src }}"
+    path: "{{ item.path }}"
+    fstype: nfs
+    opts: auto,nofail,noatime,nolock,intr,tcp,actimeo=1800
+    state: mounted
+  with_items:
+    - name: Zeus Backup
+      src: 192.168.10.30:/volume1/backup
+      path: /mnt/zeus/backup
+    - name: Zeus Data
+      src: 192.168.10.30:/volume1/data
+      path: /mnt/zeus/data
+    - name: Zeus Downloads
+      src: 192.168.10.30:/volume1/downloads
+      path: /mnt/zeus/downloads
+    - name: Zeus Iso
+      src: 192.168.10.30:/volume1/iso
+      path: /mnt/zeus/iso
+    - name: Zeus Media
+      src: 192.168.10.30:/volume1/media
+      path: /mnt/zeus/media

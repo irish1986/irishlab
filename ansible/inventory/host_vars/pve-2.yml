@@ -1,0 +1,16 @@
+---
+ansible_host: "192.168.10.22"
+
+gpu:
+  intel:
+    enabled: false
+    driver_version:
+      - intel-driver-1
+
+nic:
+  rtl8125B:
+    enabled: false
+
+usb:
+  ups1:
+    client: true

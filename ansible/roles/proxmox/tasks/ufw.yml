@@ -1,0 +1,63 @@
+---
+- name: Firewall | Install UFW packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ufw
+- name: Firewall | Disable UFW service
+  ansible.builtin.service:
+    name: ufw
+    state: stopped
+- name: Firewall | Set logging
+  community.general.ufw:
+    logging: "on"
+  notify: Reload ufw
+
+- name: Open Proxmox ports
+  community.general.ufw:
+    state: "{{ item.state }}"
+    rule: "{{ item.rule }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - name: WOL
+      state: enabled
+      rule: allow
+      port: "9"
+      proto: udp
+    - name: SSH
+      state: enabled
+      rule: allow
+      port: "22"
+      proto: tcp
+    - name: Proxmox Web UI
+      state: enabled
+      rule: allow
+      port: "8006"
+      proto: tcp
+  notify: Reload ufw
+
+- name: Open CEPH ports
+  community.general.ufw:
+    state: "{{ item.state }}"
+    rule: "{{ item.rule }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - name: Ceph
+      state: enabled
+      rule: allow
+      port: "3300"
+      proto: tcp
+    - name: Ceph Monitor
+      state: enabled
+      rule: allow
+      port: "6789"
+      proto: tcp
+    - name: Ceph OSD
+      state: enabled
+      rule: allow
+      port: 6800:7300
+      proto: tcp
+  notify: Reload ufw

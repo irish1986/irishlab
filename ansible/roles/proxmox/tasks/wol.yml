@@ -1,0 +1,7 @@
+---
+
+- name: Enable Wake On Lan
+  ansible.builtin.command: >
+    pvenode config set -wakeonlan {{ mac_address }}
+  changed_when: false
+  run_once: true

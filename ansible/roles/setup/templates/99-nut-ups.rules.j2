@@ -1,0 +1,7 @@
+SUBSYSTEM!="usb", GOTO="nut-usbups_rules_end"
+
+# TrippLite
+#  e.g. TrippLite SMART1500LCD - usbhid-ups
+ACTION=="add|change", SUBSYSTEM=="usb|usb_device", SUBSYSTEMS=="usb|usb_device", ATTR{idVendor}=="09ae", ATTR{idProduct}=="2012", MODE="664", GROUP="nut", RUN+="/sbin/upsdrvctl stop; /sbin/upsdrvctl start"
+
+LABEL="nut-usbups_rules_end"

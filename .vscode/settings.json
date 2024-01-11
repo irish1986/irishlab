@@ -1,0 +1,20 @@
+{
+    "cSpell.words": [
+        "baremetal",
+        "CEPH",
+        "homelab",
+        "homelabbing",
+        "NVME",
+        "Synolgy",
+        "Wyze"
+    ],
+    "yaml.schemas": {
+      "https://taskfile.dev/schema.json": [
+        "**/Taskfile.yml",
+        "./.taskfiles/ansible.yml",
+        "./.taskfiles/flux.yml",
+        "./.taskfiles/pre-commit.yml",
+        "./.taskfiles/terraformyml"
+      ]
+    }
+}

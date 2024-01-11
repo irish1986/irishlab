@@ -1,0 +1,29 @@
+---
+version: "3"
+
+tasks:
+
+  install:
+    desc: Install pre-commit tool
+    cmds:
+      - pipx install pre-commit
+
+  init:
+    desc: Install pre-commit hooks
+    cmds:
+      - pre-commit install --install-hooks
+
+  disable:
+    desc: Uninstall pre-commit hooks
+    cmds:
+      - pre-commit uninstall
+
+  update:
+    desc: Update pre-commit hooks
+    cmds:
+      - pre-commit autoupdate
+
+  run:
+    desc: Run pre-commit on all files
+    cmds:
+      - pre-commit run --all-files

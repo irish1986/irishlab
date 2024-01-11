@@ -1,0 +1,8 @@
+---
+ansible_host: "192.168.10.50"
+
+usb:
+  ups0:
+    server: true
+  ups1:
+    server: true

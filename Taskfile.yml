@@ -1,0 +1,26 @@
+---
+version: '3'
+
+vars:
+  PROJECT_DIR:
+    sh: "git rev-parse --show-toplevel"
+  ANSIBLE_DIR: "{{.PROJECT_DIR}}/ansible"
+  DOCKER_DIR: "{{.PROJECT_DIR}}/docker"
+  KIND_DIR: "{{.PROJECT_DIR}}/infra/kind"
+
+includes:
+  ansible: .taskfiles/ansible.yml
+  docker: .taskfiles/docker.yml
+  kind: .taskfiles/kind.yml
+  pre-commit: .taskfiles/pre-commit.yml
+
+tasks:
+
+  update:
+    desc: Update & Upgrade
+    cmds:
+      - sudo apt update
+      - sudo apt upgrade -y
+      - sudo apt autoremove -y
+      - sudo apt autoclean -y
+    silent: true

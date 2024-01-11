@@ -1,0 +1,18 @@
+---
+ansible_host: "192.168.10.26"
+
+gpu:
+  intel:
+    enabled: false
+    driver_version:
+      - intel-driver-1
+
+tpu:
+  coral:
+    enabled: true
+    driver_version:
+      - coral-driver-1
+
+usb:
+  ups1:
+    client: true

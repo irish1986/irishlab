@@ -1,0 +1,35 @@
+---
+
+- name: Reboot
+  ansible.builtin.reboot:
+    msg: Rebooting nodes
+    reboot_timeout: 3600
+    test_command: uptime
+  when:
+    - reboot_required_file.stat.exists
+
+- name: Reboot force
+  ansible.builtin.reboot:
+    msg: Rebooting nodes
+    reboot_timeout: 3600
+    test_command: uptime
+
+- name: Reload ufw
+  community.general.ufw:
+    state: reloaded
+
+- name: Update GRUB
+  ansible.builtin.command: >
+    update-grub
+  when:
+    - grub_updated.stat.exists
+  changed_when: false
+
+- name: Refresh initramfs
+  ansible.builtin.command: update-initramfs -u -k all
+  changed_when: false
+
+- name: Restart pveproxy
+  ansible.builtin.service:
+    name: pveproxy
+    state: restarted

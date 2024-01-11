@@ -1,0 +1,48 @@
+---
+
+- name: Configure for AMD CPU
+  ansible.builtin.lineinfile:
+    dest: /etc/default/grub
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
+      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on'
+  register: grub_updated
+  notify: Update GRUB
+
+- name: "Flush handlers"
+  ansible.builtin.meta: flush_handlers
+
+- name: Test for dmesg
+  ansible.builtin.debug:
+    msg: "dmesg | grep -e DMAR -e IOMMU"
+
+- name: Configure Modules
+  ansible.builtin.blockinfile:
+    path: /etc/modules
+    mode: 0644
+    create: true
+    block: |
+      # Modules required for PCI passthrough
+      vfio
+      vfio_iommu_type1
+      vfio_pci
+      vfio_virqfd
+  notify: Reboot linux
+
+- name: Configure ModProbe Blacklist
+  ansible.builtin.lineinfile:
+    create: true
+    dest: /etc/modprobe.d/blacklist.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^blacklist amdgpu"
+      line: "blacklist amdgpu"
+    - regexp: "^blacklist radeon"
+      line: "blacklist radeon"

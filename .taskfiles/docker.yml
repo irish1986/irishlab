@@ -1,0 +1,27 @@
+---
+version: '3'
+
+tasks:
+
+  images:
+    desc: Check all images
+    cmds:
+      - "docker compose images"
+    silent: true
+
+  stop:
+    desc: Stop a running container
+    cmds:
+      - "docker stop {{ .CONTAINER }}"
+
+  version:
+    desc: Check version
+    cmds:
+      - "docker compose version"
+    silent: true
+
+  compose:hello-world:
+    desc: Playbook to setup Proxmox hosts
+    cmds:
+      - "docker compose up -f {{.DOCKER_DIR}}/hello-world/docker-compose.yml"
+    silent: true

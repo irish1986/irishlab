@@ -1,0 +1,12 @@
+---
+profile: null
+
+exclude_paths:
+  - .cache/
+  - .github/
+  - .vscode/
+  - .taskfiles/
+
+skip_list:
+  - fqcn-builtins
+  - yaml

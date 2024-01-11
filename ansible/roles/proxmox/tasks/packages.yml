@@ -1,0 +1,19 @@
+---
+
+- name: Packages | Install Cloud Init packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - cron
+    - libguestfs-tools
+    - wget
+  run_once: true
+
+- name: Packages | Install SDN packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - dnsmasq
+    - libpve-network-perl

@@ -1,0 +1,45 @@
+---
+
+- name: Configure for Intel CPU
+  ansible.builtin.lineinfile:
+    dest: /etc/default/grub
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
+      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet {{ detected_cpu }}_iommu=on iommu=pt pcie_aspm=off initcall_blacklist=sysfb_init'
+  register: grub_updated
+  notify: Update GRUB
+
+- name: "Flush handlers"
+  ansible.builtin.meta: flush_handlers
+
+- name: Configure Modules
+  ansible.builtin.blockinfile:
+    path: /etc/modules
+    mode: 0644
+    create: true
+    block: |
+      # Modules required for PCI passthrough
+      vfio
+      vfio_iommu_type1
+      vfio_pci
+      vfio_virqfd
+
+      # Modules required for Intel GVT
+      kvmgt
+      exngt
+      vfio-mdev
+  notify: Reboot linux
+
+- name: Configure IOMMU | blacklist-apex.conf
+  ansible.builtin.blockinfile:
+    path: /etc/modprobe.d/blacklist-apex.conf
+    mode: 0644
+    create: true
+    block: |
+      blacklist gasket
+      blacklist apex
+      options vfio-pci ids=1ac1:089a

@@ -1,0 +1,21 @@
+---
+- name: Setup
+  hosts:
+    - all
+  become: true
+  gather_facts: true
+  any_errors_fatal: false
+  pre_tasks:
+    - name: Ping machine
+      ansible.builtin.ping:
+    - name: Show the uptime
+      ansible.builtin.debug:
+        msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
+
+  roles:
+    - role: setup
+
+  post_tasks:
+    - name: Status message
+      ansible.builtin.debug:
+        msg: "Playbook ran without any issue."

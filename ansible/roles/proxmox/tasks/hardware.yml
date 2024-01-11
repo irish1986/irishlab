@@ -1,0 +1,37 @@
+---
+
+- name: Set detected_gpu
+  ansible.builtin.set_fact:
+    detected_gpu: amd
+  when:
+    - gpu.amd.enabled is defined and gpu.amd.enabled
+
+- name: Set detected_gpu
+  ansible.builtin.set_fact:
+    detected_gpu: intel
+  when:
+    - gpu.intel.enabled is defined and gpu.intel.enabled
+
+- name: Set detected_gpu
+  ansible.builtin.set_fact:
+    detected_gpu: nvidia
+  when:
+    - gpu.nvidia.enabled is defined and gpu.nvidia.enabled
+
+- name: Set detected_tpu
+  ansible.builtin.set_fact:
+    detected_tpu: coral
+  when:
+    - tpu.coral.enabled is defined and tpu.coral.enabled
+
+- name: Configure IOMMU | GPU
+  ansible.builtin.include_tasks: "{{ detected_gpu }}.yml"
+
+- name: Configure IOMMU | TPU
+  ansible.builtin.include_tasks: "{{ detected_tpu }}.yml"
+
+- name: Update initramfs
+  ansible.builtin.command: >
+    update-initramfs -u
+  changed_when: false
+  notify: reboot initramfs
