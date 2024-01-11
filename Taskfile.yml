@@ -10,6 +10,7 @@ vars:
 
 includes:
   ansible: .taskfiles/ansible.yml
+  bfg: .taskfiles/bfg.yml
   docker: .taskfiles/docker.yml
   kind: .taskfiles/kind.yml
   pre-commit: .taskfiles/pre-commit.yml

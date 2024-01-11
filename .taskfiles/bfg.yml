@@ -1,0 +1,17 @@
+---
+version: "3"
+
+tasks:
+
+  install:
+    desc: Install Java and BFG
+    cmds:
+      - sudo apt install default-jre
+      - wget https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar
+      - mv bfg-1.14.0.jar ~/bfg.jar
+
+  run:
+    desc: Run bfg - Remove sensitive strings
+    cmds:
+      - touch {{.PROJECT_DIR}}/secrets.txt
+      - bfg --replace-text secrets.txt irislab.git

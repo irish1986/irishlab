@@ -1,6 +1,5 @@
 /.wip
 .env
-bfg-1.14.0.jar
 # Local .terraform directories
 **/.terraform/*
 
