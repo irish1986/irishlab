@@ -1,0 +1,65 @@
+---
+
+- name: Test for dmesg
+  ansible.builtin.debug:
+    msg: "dmesg | grep -e DMAR -e IOMMU"
+
+- name: Configure Modules
+  ansible.builtin.blockinfile:
+    path: /etc/modules
+    mode: 0644
+    create: true
+    block: |
+      # Modules required for PCI passthrough
+      vfio
+      vfio_iommu_type1
+      vfio_pci
+      vfio_virqfd
+  notify: Reboot
+
+- name: Configure IOMMU Unsafe Interrupts
+  ansible.builtin.blockinfile:
+    path: /etc/modprobe.d/iommu_unsafe_interrupts.conf
+    mode: 0644
+    create: true
+    block: |
+      # IOMMU Interrupt Remapping
+      options vfio_iommu_type1 allow_unsafe_interrupts=1
+  notify: Reboot
+
+- name: Configure IOMMU Unsafe Interrupts
+  ansible.builtin.blockinfile:
+    path: /etc/modprobe.d/kvm.conf
+    mode: 0644
+    create: true
+    block: |
+      # IOMMU Interrupt Remapping
+      options kvm ignore_msrs=1
+  notify: Reboot
+
+- name: Configure ModProbe Blacklist
+  ansible.builtin.lineinfile:
+    create: true
+    dest: /etc/modprobe.d/blacklist.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^blacklist nouveau"
+      line: "blacklist nouveau"
+    - regexp: "^blacklist nvidia"
+      line: "blacklist nvidia"
+
+- name: VFIO vendor GPU id'
+  ansible.builtin.blockinfile:
+    path: /etc/modprobe.d/vfio.conf
+    mode: 0644
+    create: true
+    block: |
+      # Modules required for PCI passthrough
+      options vfio-pci ids={{ gpu.nvidia.pcie_id }} disable_vga=1
+  notify: Reboot force
+
+- name: "Flush handlers"
+  ansible.builtin.meta: flush_handlers

@@ -13,5 +13,5 @@ tasks:
   run:
     desc: Run bfg - Remove sensitive strings
     cmds:
-      - touch {{.PROJECT_DIR}}/secrets.txt
-      - bfg --replace-text secrets.txt irislab.git
+      - touch {{.PROJECT_DIR}}/.wip/secrets.txt
+      - bfg --replace-text {{.PROJECT_DIR}}/.wip/secrets.txt

@@ -1,0 +1,36 @@
+---
+
+- name: SDN | Install Core packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - libpve-network-perl
+  run_once: true
+
+- name: SDN | Network interfaces configuration
+  ansible.builtin.lineinfile:
+    dest: /etc/network/interfaces
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: "0644"
+  with_items:
+    - regexp: "^source /etc/network/interfaces.d/*"
+      line: "source /etc/network/interfaces.d/*"
+
+- name: SDN | Install DHCP IPAM packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - dnsmasq
+
+# systemctl disable --now dnsmasq
+
+- name: SDN | Install FRRouting packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - frr-pythontools

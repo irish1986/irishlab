@@ -11,6 +11,7 @@
     - nano
     - nfs-common
     - openssh-server
+    - sudo
 
 - name: Packages | Install monitoring packages
   ansible.builtin.apt:

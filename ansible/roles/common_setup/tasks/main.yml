@@ -17,6 +17,7 @@
   ansible.builtin.include_tasks: hardware.yml
 - name: Configure users
   ansible.builtin.include_tasks: user.yml
+  when: inventory_hostname not in groups['proxmox']
 - name: Configure ufw
   ansible.builtin.include_tasks: ufw.yml
 - name: Configure ssh

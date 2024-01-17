@@ -12,7 +12,7 @@
       ansible.builtin.debug:
         msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
   roles:
-    - role: setup
+    - role: common_setup
     - role: docker
     - role: workstation
   post_tasks:

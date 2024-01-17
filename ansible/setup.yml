@@ -13,7 +13,7 @@
         msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
 
   roles:
-    - role: setup
+    - role: common_setup
 
   post_tasks:
     - name: Status message

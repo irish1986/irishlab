@@ -1,4 +1,0 @@
----
-- name: Repo | Placeholder
-  ansible.builtin.debug:
-    msg: "There are no additional repo for now."

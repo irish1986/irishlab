@@ -21,8 +21,6 @@
 - name: Update GRUB
   ansible.builtin.command: >
     update-grub
-  when:
-    - grub_updated.stat.exists
   changed_when: false
 
 - name: Refresh initramfs

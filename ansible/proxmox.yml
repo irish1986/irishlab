@@ -12,8 +12,8 @@
       ansible.builtin.debug:
         msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
   roles:
-    - role: setup
-    - role: proxmox
+    - role: common_setup
+    - role: proxmox_pve
   post_tasks:
     - name: Status message
       ansible.builtin.debug:

@@ -1,16 +1,19 @@
 ---
-ansible_host: "192.168.10.21"
+ansible_host: "192.168.20.21"
+
+mac_address: "3c:7c:3f:c2:ea:71"
 
 gpu:
   intel:
-    enabled: false
+    enabled: true
     driver_version:
       - intel-driver-1
+  nvidia:
+    enabled: true
+    pcie_id: "10de:1cb1,10de:0fb9"
+    driver_version:
+      - nvidia-driver-1
 
 nic:
-  rtl8125B:
+  intel2port: # Intel Corporation Ethernet Controller I225-V
     enabled: false
-
-usb:
-  ups1:
-    client: true

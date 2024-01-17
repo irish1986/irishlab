@@ -1,0 +1,48 @@
+---
+
+- name: Set detected_gpu
+  ansible.builtin.set_fact:
+    detected_gpu: amd
+  when:
+    - gpu.amd.enabled is defined and gpu.amd.enabled
+
+- name: Set detected_gpu
+  ansible.builtin.set_fact:
+    detected_gpu: intel
+  when:
+    - gpu.intel.enabled is defined and gpu.intel.enabled
+
+- name: Set detected_gpu
+  ansible.builtin.set_fact:
+    detected_gpu: nvidia
+  when:
+    - gpu.nvidia.enabled is defined and gpu.nvidia.enabled
+
+- name: Set detected_tpu
+  ansible.builtin.set_fact:
+    detected_tpu: coral
+  when:
+    - tpu.coral.enabled is defined and tpu.coral.enabled
+
+- name: Hardware | GPU
+  block:
+    - name: Configure IOMMU | GPU
+      ansible.builtin.include_tasks: "{{ detected_gpu }}.yml"
+    - name: Update initramfs
+      ansible.builtin.command: >
+        update-initramfs -u
+      changed_when: false
+      notify: reboot initramfs
+  rescue:
+    - name: No GPU enable | GPU
+      ansible.builtin.debug:
+        msg: "There are no GPU enable for these nodes."
+
+- name: Hardware | TPU
+  block:
+    - name: Configure IOMMU | TPU
+      ansible.builtin.include_tasks: "{{ detected_tpu }}.yml"
+  rescue:
+    - name: No TPU enable | TPU
+      ansible.builtin.debug:
+        msg: "There are no TPU enable for these nodes."

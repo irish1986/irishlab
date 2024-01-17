@@ -9,8 +9,7 @@
     mode: 0644
   with_items:
     - regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
-      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet {{ detected_cpu }}_iommu=on'
-  register: grub_updated
+      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on i915.enable_gvt=1"'
   notify: Update GRUB
 
 - name: "Flush handlers"
@@ -31,17 +30,15 @@
       vfio_iommu_type1
       vfio_pci
       vfio_virqfd
-  notify: Reboot linux
 
-- name: Configure IOMMU Unsafe Interrupts
-  ansible.builtin.blockinfile:
-    path: /etc/modprobe.d/iommu_unsafe_interrupts.conf
-    mode: 0644
-    create: true
-    block: |
-      # IOMMU Interrupt Remapping
-      options vfio_iommu_type1 allow_unsafe_interrupts=1
-  notify: Reboot linux
+      # Modules required for Intel GVT
+      kvmgt
+      exngt
+      vfio-mdev
+  notify: Reboot force
+
+- name: "Flush handlers"
+  ansible.builtin.meta: flush_handlers
 
 - name: Configure ModProbe Blacklist
   ansible.builtin.lineinfile:
@@ -52,17 +49,5 @@
     state: present
     mode: 0644
   with_items:
-    - regexp: "^blacklist nouveau"
-      line: "blacklist nouveau"
-    - regexp: "^blacklist nvidia"
-      line: "blacklist nvidia"
-
-- name: VFIO vendor GPU id'
-  ansible.builtin.blockinfile:
-    path: /etc/modprobe.d/vfio.conf
-    mode: 0644
-    create: true
-    block: |
-      # Modules required for PCI passthrough
-      options vfio-pci ids={{ nvidia_gpu_id }} disable_vga=1
-  notify: Reboot linux
+    - regexp: "^blacklist i915"
+      line: "blacklist i915"
