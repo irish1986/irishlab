@@ -62,7 +62,7 @@
   command: >-
     k3s kubectl -n metallb-system get endpoints webhook-service
   changed_when: false
-  when: ansible_hostname == hostvars[groups['control'][0]]['ansible_hostname']
+  when: ansible_hostname == hostvars[groups['k3s_control'][0]]['ansible_hostname']
 
 - name: Apply metallb CRs
   command: >-

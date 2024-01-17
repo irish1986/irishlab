@@ -1,5 +1,13 @@
 ---
 
+- name: Create manifests directory on first control
+  file:
+    path: /tmp/k3s/
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
 # sudo touch /var/run/reboot-required for testing purpose
 - name: Download kured manifest to first control
   ansible.builtin.get_url:

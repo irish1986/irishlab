@@ -1,5 +1,4 @@
 ---
-# kubectl label nodes k3s-4 kubernetes.io/role=worker
 
 - name: Deploy default manifest
   include_tasks: "{{ item }}"
@@ -9,6 +8,7 @@
     - system-upgrade.yml
     # - longhorn.yml
   run_once: true
+  when: ansible_hostname == hostvars[groups['k3s_control'][0]]['ansible_hostname']
 
 - name: Remove tmp directory used for manifests
   file:
@@ -20,6 +20,7 @@
     src: /etc/rancher/k3s/k3s.yaml
   register: kubeconfig_base64
   run_once: true
+  when: ansible_hostname == hostvars[groups['k3s_control'][0]]['ansible_hostname']
 
 # - name: Write Kubernetes config file with the correct cluster address
 #   ansible.builtin.copy:
