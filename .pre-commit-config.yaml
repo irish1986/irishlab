@@ -42,3 +42,11 @@ repos:
     rev: v3.0.1
     hooks:
       - id: docker-compose-check
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.86.0
+    hooks:
+      - id: terraform_fmt
+        args:
+          - --args=-no-color
+          - --args=-diff
+          - --args=-write=false
