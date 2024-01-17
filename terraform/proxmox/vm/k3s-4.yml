@@ -1,0 +1,14 @@
+---
+node: "pve-4"
+
+id: 504
+hostname: "k3s-4"
+tags: "vm,ubuntu,k3s"
+description: "k3s-4"
+pool: "TF"
+
+os: "ubuntu-lts"
+size: "xlarge"
+
+ip_address: "192.168.10.64"
+gateway: "192.168.10.1"

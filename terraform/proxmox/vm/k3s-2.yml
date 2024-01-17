@@ -1,0 +1,14 @@
+---
+node: "pve-2"
+
+id: 502
+hostname: "k3s-2"
+tags: "vm,ubuntu,k3s"
+description: "k3s-2"
+pool: "TF"
+
+os: "ubuntu-lts"
+size: "xlarge"
+
+ip_address: "192.168.10.62"
+gateway: "192.168.10.1"
