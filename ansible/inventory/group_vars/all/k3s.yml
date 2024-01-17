@@ -1,0 +1,57 @@
+---
+
+k3s_version: v1.27.8+k3s2
+longhorn_tag_version: "v1.5.3"
+kured_tag_version: "1.14.2"
+nfd_tag_version: "v0.14.3"
+
+apiserver_endpoint: 192.168.10.60
+
+
+systemd_dir: /etc/systemd/system
+k3s_token: "12345"
+
+flannel_iface: "eth0"
+k3s_node_ip: '{{ ansible_facts[flannel_iface]["ipv4"]["address"] }}'
+
+kube_vip_iface: null
+kube_vip_tag_version: v0.6.4
+
+metal_lb_type: "native"
+metal_lb_mode: "layer2"
+metal_lb_speaker_tag_version: "v0.13.9"
+metal_lb_controller_tag_version: "v0.13.9"
+metal_lb_ip_range: "198.168.10.240-198.168.10.250"
+metal_lb_available_timeout: 600s
+
+k3s_control_taint: "{{ true if groups['node'] | length >= 1 else false }}"
+
+extra_args: >-
+  --flannel-iface={{ flannel_iface }}
+  --node-ip={{ k3s_node_ip }}
+
+# change these to your liking, the only required are: --disable servicelb, --tls-san {{ apiserver_endpoint }}
+extra_server_args: >-
+  {{ extra_args }}
+  {{ '--node-taint node-role.kubernetes.io/master=true:NoSchedule' if k3s_control_taint else '' }}
+  --tls-san {{ apiserver_endpoint }}
+  --disable local-storage
+  --disable servicelb
+  --disable traefik
+  --disable-cloud-controller
+  --write-kubeconfig-mode 0644
+
+server_init_args: >-
+  {% if groups['control'] | length > 1 %}
+    {% if ansible_hostname == hostvars[groups['control'][0]]['ansible_hostname'] %}
+      --cluster-init
+    {% else %}
+      --server https://{{ hostvars[groups['control'][0]]['ansible_eth0']['ipv4']['address'] }}:6443
+    {% endif %}
+    --token {{ k3s_token }}
+  {% endif %}
+  {{ extra_server_args | default('') }}
+
+extra_agent_args: >-
+  {{ extra_args }}
+# --node-label kubernetes.io/role=worker

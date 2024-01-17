@@ -1,0 +1,13 @@
+---
+
+- name: Reenable SWAP in fstab
+  replace:
+    path: /etc/fstab
+    regexp: '^# (.+?\sswap\s+sw\s+.*)$'
+    replace: '\1'
+
+- name: Enable SWAP
+  shell: |
+    swapon -a
+  register: swapon
+  changed_when: swapon.rc != 0

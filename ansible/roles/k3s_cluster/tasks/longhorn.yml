@@ -1,0 +1,19 @@
+---
+
+- name: Download longhorn manifest to first control
+  ansible.builtin.get_url:
+    url: "kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/{{ longhorn_tag_version }}/deploy/longhorn.yaml"
+    dest: "/var/lib/rancher/k3s/server/manifests/longhorn.yaml"
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_hostname == hostvars[groups['control'][0]]['ansible_hostname']
+
+- name: Test longhorn daemonsets configuration
+  command: >-
+    k3s kubectl -n {{ item.namespace }} get {{ item.resource }}
+  changed_when: false
+  with_items:
+    - namespace: longhorn-system
+      resource: deployment/longhorn-ui
+  when: ansible_hostname == hostvars[groups['control'][0]]['ansible_hostname']

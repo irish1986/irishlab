@@ -1,0 +1,36 @@
+---
+
+- name: Create manifests directory on first control
+  file:
+    path: /tmp/k3s/
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Download system-upgrade-controller manifest to first control
+  ansible.builtin.get_url:
+    url: "https://github.com/rancher/system-upgrade-controller/releases/latest/download/system-upgrade-controller.yaml"
+    dest: "/var/lib/rancher/k3s/server/manifests/system-upgrade-controller.yaml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy system-upgrade-controller plan to first control
+  template:
+    src: "{{ item }}.j2"
+    dest: "/var/lib/rancher/k3s/server/manifests/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - system-upgrade-agent.yml
+    - system-upgrade-server.yml
+
+- name: Test system-upgrade deployment
+  command: >-
+    k3s kubectl -n {{ item.namespace }} get {{ item.resource }}
+  changed_when: false
+  with_items:
+    - namespace: system-upgrade
+      resource: deployment/system-upgrade-controller

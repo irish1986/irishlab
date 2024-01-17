@@ -1,0 +1,13 @@
+---
+
+- name: Install packages
+  ansible.builtin.include_tasks: packages.yml
+
+- name: Configure network
+  ansible.builtin.include_tasks: network.yml
+
+- name: Disable swap network
+  ansible.builtin.include_tasks: swap.yml
+
+- name: Download k3s binary
+  ansible.builtin.include_tasks: download.yml

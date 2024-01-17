@@ -1,0 +1,25 @@
+---
+
+- name: Create manifests directory on first control
+  file:
+    path: /tmp/k3s/
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Download kured manifest to first control
+  ansible.builtin.get_url:
+    url: "https://github.com/kubereboot/kured/releases/download/{{ kured_tag_version }}/kured-{{ kured_tag_version }}-dockerhub.yaml"
+    dest: "/var/lib/rancher/k3s/server/manifests/kured.yaml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Test kured daemonsets configuration
+  command: >-
+    k3s kubectl -n {{ item.namespace }} get {{ item.resource }}
+  changed_when: false
+  with_items:
+    - namespace: kube-system
+      resource: daemonsets/kured

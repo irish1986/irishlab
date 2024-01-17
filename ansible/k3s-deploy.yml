@@ -1,0 +1,63 @@
+---
+- name: Setup k3s host
+  hosts:
+    - k3s
+  become: true
+  gather_facts: true
+  any_errors_fatal: false
+  pre_tasks:
+    - name: Ping machine
+      ansible.builtin.ping:
+    - name: Show the uptime
+      ansible.builtin.debug:
+        msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
+  roles:
+    - role: common_setup
+    - role: k3s_setup
+  post_tasks:
+    - name: Status message
+      ansible.builtin.debug:
+        msg: "Playbook ran without any issue."
+
+- name: Setup k3s_control host
+  hosts:
+    - k3s_control
+  become: true
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - role: k3s_control
+  post_tasks:
+    - name: Status message
+      ansible.builtin.debug:
+        msg: "Playbook ran without any issue."
+
+- name: Setup k3s_worker host
+  hosts:
+    - k3s_worker
+  become: true
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - role: k3s_worker
+  post_tasks:
+    - name: Status message
+      ansible.builtin.debug:
+        msg: "Playbook ran without any issue."
+
+
+- name: Configure k3s cluster
+  hosts:
+    - k3s_control
+  become: true
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - role: k3s_cluster
+  post_tasks:
+    - name: Status message
+      ansible.builtin.debug:
+        msg: "Playbook ran without any issue."
+    - name: Status message
+      ansible.builtin.debug:
+        msg: "Run : scp groot@{{ apiserver }}:~/.kube/config ~/.kube/config"

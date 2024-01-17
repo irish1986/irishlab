@@ -1,0 +1,29 @@
+---
+
+- name: Timezone | Locale
+  community.general.timezone:
+    name: "{{ system_timezone | default('Etc/UTC') }}"
+
+- name: Networking | Set hostname to inventory hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname | default('ubuntu') }}"
+- name: Networking | Update /etc/hosts to include inventory hostname
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    block: |
+      127.0.0.1   localhost
+      127.0.1.1   {{ inventory_hostname | default('ubuntu') }}
+
+- name: Enable IPv6 forwarding
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: "1"
+    state: present
+    reload: true
+
+- name: Enable IPv6 router advertisements
+  ansible.posix.sysctl:
+    name: net.ipv6.conf.all.accept_ra
+    value: "2"
+    state: present
+    reload: true
