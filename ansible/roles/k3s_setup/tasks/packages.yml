@@ -8,3 +8,4 @@
     - iptables
     - nfs-common
     - open-iscsi
+    - util-linux

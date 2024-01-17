@@ -1,2 +1,7 @@
 ---
 ansible_user: groot
+
+longhorn_storage_dir: /storage
+longhorn_helm_repourl: https://charts.longhorn.io
+longhorn_namespace: longhorn-system
+longhorn_loadbalancer_ip: 172.17.1.61
