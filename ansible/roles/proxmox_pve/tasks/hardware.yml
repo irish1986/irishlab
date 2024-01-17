@@ -1,5 +1,17 @@
 ---
 
+- name: Set detected_cpu
+  ansible.builtin.set_fact:
+    detected_cpu: amd
+  when:
+    - cpu.amd.enabled is defined and cpu.amd.enabled
+
+- name: Set detected_cpu
+  ansible.builtin.set_fact:
+    detected_cpu: intel
+  when:
+    - cpu.intel.enabled is defined and cpu.intel.enabled
+
 - name: Set detected_gpu
   ansible.builtin.set_fact:
     detected_gpu: amd
@@ -31,8 +43,9 @@
     - name: Update initramfs
       ansible.builtin.command: >
         update-initramfs -u
-      changed_when: false
-      notify: reboot initramfs
+      register: iommu
+      changed_when: iommu.rc != 0
+      notify: Refresh initramfs
   rescue:
     - name: No GPU enable | GPU
       ansible.builtin.debug:

@@ -21,11 +21,14 @@
 - name: Update GRUB
   ansible.builtin.command: >
     update-grub
-  changed_when: false
+  register: grub
+  changed_when: grub.rc != 0
 
 - name: Refresh initramfs
-  ansible.builtin.command: update-initramfs -u -k all
-  changed_when: false
+  ansible.builtin.command: >
+    update-initramfs -u -k all
+  register: initramfs
+  changed_when: initramfs.rc != 0
 
 - name: Restart pveproxy
   ansible.builtin.service:

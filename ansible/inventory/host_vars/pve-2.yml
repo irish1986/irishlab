@@ -1,6 +1,10 @@
 ---
 ansible_host: "192.168.10.22"
 
+cpu:
+  intel:
+    enabled: true
+
 gpu:
   intel:
     enabled: false

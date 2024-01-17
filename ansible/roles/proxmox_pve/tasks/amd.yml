@@ -9,7 +9,7 @@
     mode: 0644
   with_items:
     - regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
-      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on'
+      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet {{ detected_cpu }}_iommu=on'
   register: grub_updated
   notify: Update GRUB
 

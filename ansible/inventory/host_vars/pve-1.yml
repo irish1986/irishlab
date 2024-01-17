@@ -3,6 +3,10 @@ ansible_host: "192.168.20.21"
 
 mac_address: "3c:7c:3f:c2:ea:71"
 
+cpu:
+  intel:
+    enabled: true
+
 gpu:
   intel:
     enabled: true

@@ -8,9 +8,46 @@
   pre_tasks:
     - name: Ping machine
       ansible.builtin.ping:
+
     - name: Show the uptime
       ansible.builtin.debug:
         msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
+
+    - name: Disable Proxmox Enterprise repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: absent
+        filename: /etc/apt/sources.list.d/pve-enterprise.list
+      loop:
+        - deb https://enterprise.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-enterprise
+
+    - name: Disable CEPH Enterprise repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: absent
+        filename: /etc/apt/sources.list.d/ceph.list
+      loop:
+        - deb https://enterprise.proxmox.com/debian/ceph-quincy {{ ansible_distribution_release }} enterprise
+
+    - name: Add Proxmox No Subscription repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: present
+        filename: /etc/apt/sources.list
+      loop:
+        - deb http://download.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-no-subscription
+        - deb http://ftp.ca.debian.org/debian {{ ansible_distribution_release }} main contrib
+        - deb http://ftp.ca.debian.org/debian {{ ansible_distribution_release }}-updates main contrib
+        - deb http://security.debian.org/debian-security {{ ansible_distribution_release }}-security main contrib
+
+    - name: Remove Proxmox Text repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: absent
+        filename: /etc/apt/sources.list
+      loop:
+        - deb http://download.proxmox.com/debian/pve {{ ansible_distribution_release }} pvetest
+
   roles:
     - role: common_setup
     - role: proxmox_pve
@@ -21,16 +58,41 @@
 
 - name: Setup proxmox-pbs host
   hosts:
-    - pbs_test
+    - pbs
   become: true
   gather_facts: true
   any_errors_fatal: false
   pre_tasks:
     - name: Ping machine
       ansible.builtin.ping:
+
     - name: Show the uptime
       ansible.builtin.debug:
         msg: Uptime {{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}
+
+    - name: Disable Proxmox Enterprise repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: absent
+        filename: /etc/apt/pbs-enterprise.list
+      loop:
+        - deb https://enterprise.proxmox.com/debian/pbs {{ ansible_distribution_release }} pbs-enterprise
+
+    - name: Add Proxmox No Subscription repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: present
+        filename: /etc/apt/sources
+      loop:
+        - deb http://download.proxmox.com/debian/pbs {{ ansible_distribution_release }}  pbs-no-subscription
+
+    - name: Remove Proxmox Text repository
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: absent
+        filename: /etc/apt/sources
+      loop:
+        - deb http://download.proxmox.com/debian/pbs {{ ansible_distribution_release }} pbstest
   roles:
     - role: common_setup
     - role: proxmox_pbs

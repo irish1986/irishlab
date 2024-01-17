@@ -1,5 +1,17 @@
 ---
 
+- name: Configure for CPU
+  ansible.builtin.lineinfile:
+    dest: /etc/default/grub
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    mode: 0644
+  with_items:
+    - regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
+      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet {{ detected_cpu }}_iommu=on"'
+  notify: Update GRUB
+
 - name: Test for dmesg
   ansible.builtin.debug:
     msg: "dmesg | grep -e DMAR -e IOMMU"
