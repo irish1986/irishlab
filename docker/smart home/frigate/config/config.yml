@@ -1,0 +1,122 @@
+---
+mqtt:
+  host: 192.168.10.91
+  port: 1883
+  user: mqtt
+  password: mqtt
+  topic_prefix: frigate
+  client_id: frigate
+  stats_interval: 60
+
+birdseye:
+  enabled: true
+  mode: continuous
+
+detectors:
+  coral:
+    type: edgetpu
+    device: pci
+
+detect:
+  fps: 5
+  enabled: true
+  max_disappeared: 25
+
+live:
+  height: 640
+  quality: 1
+
+record:
+  enabled: false
+  expire_interval: 60
+  retain:
+    days: 0
+    mode: all
+  events:
+    pre_capture: 5
+    post_capture: 5
+    retain:
+      default: 10
+
+snapshots:
+  enabled: false
+  timestamp: true
+  bounding_box: true
+  retain:
+    default: 10
+
+ui:
+  use_experimental: false
+  live_mode: mse
+
+cameras:
+  front-yard:
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:allo123@192.168.107.61:554/h264Preview_01_main
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://admin:allo123@192.168.107.61:554/h264Preview_01_sub
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    objects:
+      track:
+        - bicycle
+        - bird
+        - bus
+        - car
+        - cat
+        - dog
+        - motorcycle
+        - person
+      filters:
+        cat:
+          min_score: 0.3
+          threshold: 0.5
+        dog:
+          min_score: 0.3
+          threshold: 0.5
+        person:
+          min_score: 0.4
+          threshold: 0.5
+          min_area: 700
+  office:
+    enabled: false
+    ffmpeg:
+      # hwaccel_args: preset-intel-qsv-h265
+      inputs:
+        - path: rtsp://admin:admin@192.168.107.62:554/h264Preview_01_main
+          input_args: preset-rtsp-restream
+          roles:
+            - record
+        - path: rtsp://admin:admin@192.168.107.62:554/h264Preview_01_sub
+          input_args: preset-rtsp-restream
+          roles:
+            - detect
+    objects:
+      track:
+        - cat
+        - dog
+        - person
+      filters:
+        cat:
+          min_score: 0.3
+          threshold: 0.5
+        dog:
+          min_score: 0.3
+          threshold: 0.5
+        person:
+          min_score: 0.4
+          threshold: 0.5
+          min_area: 700
+    snapshots:
+      enabled: true
+    record:
+      enabled: true
+      retain:
+        days: 2
+      events:
+        retain:
+          default: 10

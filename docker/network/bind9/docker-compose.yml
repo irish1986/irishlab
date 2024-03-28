@@ -1,0 +1,18 @@
+---
+version: "3"
+
+services:
+  bind9:
+    image: ubuntu/bind9:latest
+    pull_policy: always
+    environment:
+      - BIND9_USER=root
+      - TZ=America/Toronto
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    volumes:
+      - ./config:/etc/bind/
+      - ./cache:/var/cache/bind
+      - ./records:/var/lib/bind
+    restart: always

@@ -1,0 +1,95 @@
+---
+http:
+  routers:
+    sonarr:
+      entryPoints:
+        - "web"
+      rule: "Host (`sonarr.lan`)"
+      service: sonarr
+    plex:
+      entryPoints:
+        - "web"
+      rule: "Host (`plex.lan`)"
+      service: plex
+    radarr:
+      entryPoints:
+        - "web"
+      rule: "Host (`radarr.lan`)"
+      service: radarr
+    grafana:
+      entryPoints:
+        - "web"
+      rule: "Host (`grafana.lan`)"
+      service: grafana
+    tdarr:
+      entryPoints:
+        - "web"
+      rule: "Host (`tdarr.lan`)"
+      service: tdarr
+    influxdb:
+      entryPoints:
+        - "web"
+      rule: "Host (`influxdb.lan`)"
+      service: influxdb
+    overseerr:
+      entryPoints:
+        - "web"
+      rule: "Host (`overseerr.lan`)"
+      service: overseerr
+    upsnap:
+      entryPoints:
+        - "web"
+      rule: "Host (`upsnap.lan`)"
+      service: upsnap
+    stash:
+      entryPoints:
+        - "web"
+      rule: "Host (`stash.lan`)"
+      service: upsnap
+
+  services:
+    sonarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.40:8989"
+        passHostHeader: true
+    plex:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.41:32400"
+        passHostHeader: true
+    radarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.40:7878"
+        passHostHeader: true
+    tdarr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.40:8265"
+        passHostHeader: true
+    overseerr:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.40:5055"
+        passHostHeader: true
+    influxdb:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.11:8086"
+        passHostHeader: true
+    grafana:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.11:3000"
+        passHostHeader: true
+    upsnap:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.0.10:5000"
+        passHostHeader: true
+    stash:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.40:6969"
+        passHostHeader: true

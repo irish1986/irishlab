@@ -1,0 +1,16 @@
+---
+version: "3"
+
+volumes:
+  unbound:
+    name: unbound
+    external: false
+
+services:
+  unbound:
+    image: "mvance/unbound:1.17.1"
+    container_name: unbound
+    network_mode: host
+    volumes:
+      - unbound:/opt/unbound/etc/unbound/
+    restart: unless-stopped

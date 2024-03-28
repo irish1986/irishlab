@@ -1,0 +1,21 @@
+$TTL 2d
+
+$ORIGIN homelab.local.
+
+@               IN     SOA      homelab.local.      ns.homelab.local. (
+                                2023100100          ; serial
+                                12h                 ; refresh
+                                15m                 ; retry
+                                3w                  ; expire
+                                2h )                ; minimum TTL
+;
+@ IN NS ns.homelab.local.
+ns              IN      A       192.168.10.9
+homelab.local   IN      A       192.168.10.9
+
+; nslookup test-1.homelab.local 192.168.10.9
+; name servers - A records
+
+bastion         IN      A    192.168.10.10
+admin-1         IN      A    192.168.10.11
+test-1          IN      A    192.168.10.250

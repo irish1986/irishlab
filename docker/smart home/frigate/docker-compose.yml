@@ -1,0 +1,35 @@
+---
+version: "3.9"
+
+volumes:
+  nvr:
+    name: nvr
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/nvr
+
+services:
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate
+    privileged: true
+    cap_add:
+      - CAP_PERFMON
+    shm_size: "384mb"
+    devices:
+      - /dev/apex_0:/dev/apex_0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config/config.yml:/config/config.yml
+      - nvr:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "8554:8554"
+    environment:
+      FRIGATE_RTSP_PASSWORD: "password"
+    restart: unless-stopped

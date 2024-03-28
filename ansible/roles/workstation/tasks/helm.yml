@@ -1,0 +1,69 @@
+---
+
+# curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+# sudo apt-get install apt-transport-https --yes
+# echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+# sudo apt-get update
+# sudo apt-get install helm
+
+- name: Repo | Install dependencies packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+    - software-properties-common
+
+- name: Repo | Add GPG signing key
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: /usr/share/keyrings/"{{ item.dest }}"
+    mode: "0755"
+    force: true
+  with_items:
+    - name: Github CLI
+      url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+      dest: githubcli-archive-keyring.gpg
+    - name: Helm
+      url: https://baltocdn.com/helm/signing.asc
+      dest: helm.gpg
+    - name: Kubectl
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      dest: kubernetes-archive-keyring.gpg
+    - name: Terraform
+      url: https://apt.releases.hashicorp.com/gpg
+      dest: hashicorp-archive-keyring.gpg
+    - name: Tailscale
+      url: https://pkgs.tailscale.com/stable/{{ ansible_distribution_release | lower }}.noarmor.gpg
+      dest: tailscale-archive-keyring.gpg
+
+- name: Repo | Add repository (amd64)
+  apt_repository:
+    filename: "{{ item.file }}"
+    repo: "{{ item.repo }}"
+    state: present
+  with_items:
+    - name: Tailscale
+      file: tailscale
+      repo: deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/{{ tailscale_debian_distro[ansible_distribution | lower] }} {{ ansible_distribution_release | lower }} main
+  when: ansible_facts.architecture == "x86_64"
+
+- name: Repo | Install packages
+  ansible.builtin.apt:
+    update_cache: true
+    force_apt_get: true
+    cache_valid_time: 3600
+- name: Packages | APT Install
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - gh
+    - helm
+    - kubectl
+    - tailscale
+    - terraform
