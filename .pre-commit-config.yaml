@@ -63,7 +63,7 @@ repos:
           - -c
           - .config/.ansible-lint.yml
   - repo: https://github.com/IamTheFij/ansible-pre-commit
-    rev: v1.0.0
+    rev: v0.1.2
     hooks:
       - id: encryption-check
         files: \.(vault|vault.yaml|vault.yml)$
