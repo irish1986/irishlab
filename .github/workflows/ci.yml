@@ -6,9 +6,8 @@ on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
-    paths:
-      - 'ansible/inventory/*'
-      - '!README.md'
+    paths-ignore:
+      - '**/README.md'
   schedule:
     - cron: '30 5 * * 1,3'
 
