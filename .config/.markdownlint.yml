@@ -4,13 +4,29 @@ default: true
 
 # MD013/line-length
 MD013:
+  code_block_line_length: 80
+  heading_line_length: 40
   line_length: 400
+  code_blocks: false
+  headings: true
+  stern: false
+  strict: false
   tables: false
 
 # MD025/front-matter
 MD025:
-  front_matter_title: ""
+  front_matter_title: "^\\s*title\\s*[:=]"
 
 # MD033/inline-html
 MD033:
   allowed_elements: [br, img]
+
+# MD044/proper-names - Proper names should have the correct capitalization
+MD044:
+  names:
+    - DevOps
+    - DevSecOps
+    - Git
+    - Github
+    - GitOps
+  code_blocks: false
