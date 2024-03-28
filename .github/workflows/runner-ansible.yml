@@ -8,20 +8,21 @@ on: # yamllint disable-line rule:truthy
 jobs:
   deploy:
     name: Ansible Runner
-    runs-on: "self-hosted"
+    runs-on: ubuntu-latest
+    # runs-on: "self-hosted"
     timeout-minutes: 5
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: SCP files via ssh key
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          source: './ansible/inventory/*'
-          target: '~/ansible/inventory/'
-          strip_components: 2
+      # - name: SCP files via ssh key
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     port: ${{ secrets.PORT }}
+      #     source: './ansible/inventory/*'
+      #     target: '~/ansible/inventory/'
+      #     strip_components: 2
