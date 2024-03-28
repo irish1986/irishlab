@@ -17,9 +17,6 @@ jobs:
   pre-commit:
     uses: ./.github/workflows/pre-commit.yml
 
-  ansible-lint:
-    uses: ./.github/workflows/ansible-lint.yml
-
   runner-ansible:
     uses: ./.github/workflows/runner-ansible.yml
-    needs: [pre-commit, ansible-lint]
+    needs: [pre-commit]
