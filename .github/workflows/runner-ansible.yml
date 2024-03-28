@@ -19,8 +19,8 @@ jobs:
       - name: SCP files via ssh key
         uses: appleboy/scp-action@master
         with:
-          username: ${username}
-          host: ${host}
+          username: ${{ secrets.SSH_USER }}
+          host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_USER }}
           source: './ansible/inventory/*'
           target: '~/ansible/inventory/'
