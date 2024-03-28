@@ -8,8 +8,7 @@ on: # yamllint disable-line rule:truthy
       - main
     paths:
       - 'ansible/inventory/*'
-    paths-ignore:
-      - '**/README.md'
+      - '!**/README.md'
 
 jobs:
   pre-commit:
