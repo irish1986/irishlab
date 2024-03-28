@@ -1,14 +1,8 @@
 ---
-ansible_host: "192.168.10.41"
-
-gpu0:
-  enabled: false
-  brand: intel
-  gpu_driver_version:
-    - intel-driver-1
+ansible_host: "192.168.20.51"
 
 gpu:
   intel:
-    enabled: true
+    enabled: false
     driver_version:
       - intel-driver-1

@@ -1,0 +1,89 @@
+version: '3.4'
+
+networks:
+  vpn:
+    driver: bridge
+    name: vpn
+
+volumes:
+  qbittorrent:
+    name: qbittorrent
+    external: false
+  downloads:
+    name: downloads
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/downloads/
+  iso:
+    name: iso
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/iso/template/iso
+  porn:
+    name: porn
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/porn
+  movies:
+    name: movies
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/movies
+  music:
+    name: music
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/music
+  tv:
+    name: tv
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/tv
+
+services:
+
+  vpn:
+    container_name: vpn
+    image: docker.io/qmcgaw/gluetun:latest
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - vpn
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    environment:
+      - VPN_SERVICE_PROVIDER=nordvpn
+      - OPENVPN_USER=${username}
+      - OPENVPN_PASSWORD=${password}
+      - SERVER_REGIONS=Canada
+      - SERVER_HOSTNAMES=ca1549.nordvpn.com
+    restart: unless-stopped
+
+  qbittorrent:
+    container_name: qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
+    pull_policy: if_not_present
+    depends_on:
+      - vpn
+    network_mode: 'service:vpn'
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+      - WEBUI_PORT=8080
+    volumes:
+      - 'qbittorrent:/config'
+      - 'downloads:/downloads'
+      - 'iso:/iso'
+      - 'movies:/movies'
+      - 'porn:/porn'
+      - 'tv:/tv'
+    restart: unless-stopped

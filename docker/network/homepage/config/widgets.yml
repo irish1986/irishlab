@@ -1,0 +1,21 @@
+---
+- datetime:
+    text_size: xl
+    format:
+      timeStyle: short
+- logo:
+    icon: https://avatars.githubusercontent.com/u/13018674?s=400&u=c0888d4e40dd40e6ce0ee2541869e21ac1795e2c&v=4
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+- search:
+    provider: google
+    target: _blank
+- openmeteo:
+    label: Montreal
+    latitude: 45.612160
+    longitude: -73.624960
+    timezone: America/Montreal
+    units: metric
+    cache: 5

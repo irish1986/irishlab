@@ -1,0 +1,49 @@
+---
+version: '3.4'
+
+volumes:
+  media:
+    name: media
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/
+  tdarr_configs:
+    name: tdarr_configs
+    external: false
+  tdarr_logs:
+    name: tdarr_logs
+    external: false
+  tdarr_server:
+    name: tdarr_server
+    external: false
+
+services:
+  tdarr:
+    container_name: tdarr
+    image: ghcr.io/haveagitgat/tdarr:latest
+    pull_policy: always
+    network_mode: bridge
+    ports:
+      - 8265:8265
+      - 8266:8266
+      - 8267:8267
+      - 8268:8268
+    environment:
+      - TZ=America/Toronto
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=002
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+      - internalNode=false
+      - inContainer=true
+      - nodeName=docker-0
+    volumes:
+      - media:/media
+      - media:/temp
+      - tdarr_configs:/app/configs
+      - tdarr_logs:/app/logs
+      - tdarr_server:/app/server
+    restart: unless-stopped

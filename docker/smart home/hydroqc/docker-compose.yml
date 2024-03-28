@@ -1,0 +1,20 @@
+---
+version: "3"
+services:
+  hydroqc2mqtt:
+    image: registry.gitlab.com/hydroqc/hydroqc2mqtt
+    restart: always
+    environment:
+      MQTT_USERNAME: 'yourmqttusername'
+      MQTT_PASSWORD: 'yourmqttpassword'
+      MQTT_HOST: 'yourmqttserver'
+      MQTT_PORT: '1883'
+      HQ2M_CONTRACTS_0_NAME: 'maison'
+      HQ2M_CONTRACTS_0_USERNAME: 'HQUsername'
+      HQ2M_CONTRACTS_0_PASSWORD: 'HQPassword'
+      HQ2M_CONTRACTS_0_CUSTOMER: 'HQCustomerNo'
+      HQ2M_CONTRACTS_0_ACCOUNT: 'HQAccountNo'
+      HQ2M_CONTRACTS_0_CONTRACT: 'HQContractNo'
+      HQ2M_CONTRACTS_0_SYNC_HOURLY_CONSUMPTION_ENABLED: "true"
+      HQ2M_CONTRACTS_0_HOME_ASSISTANT_WEBSOCKET_URL: 'http://haos.lan:8123/api/websocket'
+      HQ2M_CONTRACTS_0_HOME_ASSISTANT_TOKEN: 'HAToken'

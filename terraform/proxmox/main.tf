@@ -1,30 +1,3 @@
-terraform {
-  required_version = ">= 0.15"
-  required_providers {
-    dns = {
-      source  = "hashicorp/dns"
-      version = "3.3.2"
-    }
-    proxmox = {
-      source  = "telmate/proxmox"
-      version = "2.9.14"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.5.1"
-    }
-  }
-}
-
-# credentials.auto.tfvars
-provider "proxmox" {
-  pm_api_url      = var.proxmox_api_url
-  pm_user         = var.proxmox_user
-  pm_password     = var.proxmox_password
-  pm_parallel     = 3
-  pm_tls_insecure = true
-}
-
 locals {
   lxc_files = fileset(".", "lxc/*.yml")
   lxc       = { for file in local.lxc_files : basename(file) => yamldecode(file(file)) }

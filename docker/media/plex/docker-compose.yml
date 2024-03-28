@@ -1,0 +1,55 @@
+---
+version: '3.4'
+
+volumes:
+  plex:
+    name: plex
+    external: false
+  movies:
+    name: movies
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/movies
+  music:
+    name: music
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/music
+  tv:
+    name: tv
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/tv
+
+services:
+  plex:
+    container_name: plex
+    image: lscr.io/linuxserver/plex:latest
+    ports:
+      - 1900:1900/udp
+      - 3005:3005
+      - 32400:32400
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+      - 32469:32469
+      - 5353:5353/udp
+      - 8324:8324
+    # devices:
+    #   - "/dev/dri:/dev/dri"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM=${api_token} # https://www.plex.tv/claim/
+    volumes:
+      - 'plex:/config'
+      - 'tv:/tv'
+      - 'movies:/movies'
+      - 'music:/music'
+    restart: unless-stopped

@@ -1,0 +1,53 @@
+---
+- Developer:
+    - Dev.To:
+        - abbr: DEV
+          href: https://dev.to/
+    - Github:
+        - abbr: GH
+          href: https://github.com/
+    - Hacker News:
+        - abbr: HN
+          href: https://news.ycombinator.com
+    - Medium:
+        - abbr: Md
+          href: https://medium.com/
+    - Stack Overflow:
+        - abbr: SO
+          href: https://stackoverflow.com/
+    - Roadmap.Sh:
+        - abbr: RM
+          href: https://roadmap.sh/
+
+- Entertainment:
+    - DAZN:
+        - abbr: DAZN
+          href: https://www.dazn.com/
+    - Spotify:
+        - abbr: Spot
+          href: https://open.spotify.com/
+    - Twitch:
+        - abbr: Tw
+          href: https://www.twitch.com/
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com/
+
+- Finance:
+    - Desjardins:
+        - abbr: D
+          href: https://www.desjardins.com/
+    - National Bank of Canada:
+        - abbr: NBC
+          href: https://nbc.ca
+
+- Social:
+    - Facebook:
+        - abbr: FB
+          href: https://facebook.com/
+    - Reddit:
+        - abbr: RE
+          href: https://reddit.com/
+    - Twitter:
+        - abbr: X
+          href: https://x.com/

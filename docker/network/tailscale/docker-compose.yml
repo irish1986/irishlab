@@ -1,0 +1,26 @@
+---
+version: "3.9"
+
+# docker exec tailscale tailscale up --advertise-exit-node
+
+services:
+  tailscale:
+    container_name: tailscale
+    image: tailscale/tailscale:latest
+    privileged: true
+    network_mode: host
+    volumes:
+      - /var/lib:/var/lib
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - TS_AUTH_KEY=tskey-auth-${api_token}
+    cap_add:
+      - net_admin
+      - sys_module
+    command: tailscaled
+    healthcheck:
+      test: ["CMD-SHELL", "tailscale status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped

@@ -1,0 +1,41 @@
+---
+version: '3.4'
+
+volumes:
+  bazarr:
+    name: bazarr
+    external: false
+  downloads:
+    name: downloads
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/downloads/
+  movies:
+    name: movies
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/movies
+  tv:
+    name: tv
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/tv
+
+services:
+  bazarr:
+    container_name: bazarr
+    image: lscr.io/linuxserver/bazarr:latest
+    ports:
+      - 6767:6767
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - 'bazarr:/config'
+      - 'movies:/movies'
+      - 'tv:/tv'
+    restart: unless-stopped

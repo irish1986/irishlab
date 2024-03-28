@@ -1,0 +1,35 @@
+---
+version: '3.4'
+
+volumes:
+  lidarr:
+    name: lidarr
+    external: false
+  downloads:
+    name: downloads
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/downloads/
+  music:
+    name: music
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/music
+
+services:
+  lidarr:
+    container_name: lidarr
+    image: lscr.io/linuxserver/lidarr:latest
+    ports:
+      - 8686:8686
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - 'lidarr:/config'
+      - 'music:/music'
+      - 'downloads:/downloads'
+    restart: unless-stopped

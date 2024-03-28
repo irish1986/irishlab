@@ -1,0 +1,43 @@
+---
+version: '3.4'
+
+volumes:
+  media:
+    name: media
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/
+  tdarr_configs:
+    name: tdarr_configs
+    external: false
+  tdarr_logs:
+    name: tdarr_logs
+    external: false
+
+services:
+  tdarr-node:
+    container_name: tdarr-node
+    image: ghcr.io/haveagitgat/tdarr_node:latest
+    pull_policy: always
+    network_mode: bridge
+    ports:
+      - 8266:8266
+      - 8267:8267
+      - 8268:8268
+    environment:
+      - TZ=America/Toronto
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=002
+      - serverIP=192.168.10.40
+      - serverPort=8266
+      - inContainer=true
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - media:/media
+      - media:/temp
+      - tdarr_configs:/app/configs
+      - tdarr_logs:/app/logs
+    restart: unless-stopped

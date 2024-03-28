@@ -1,0 +1,3 @@
+# cloud-config https://cloudinit.readthedocs.io/
+dsmode: local
+instance_id: cloud-image

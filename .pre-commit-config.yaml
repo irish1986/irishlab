@@ -50,10 +50,6 @@ repos:
         args:
           - -c
           - .config/.ansible-lint.yml
-  - repo: https://github.com/iamthefij/docker-pre-commit
-    rev: v3.0.1
-    hooks:
-      - id: docker-compose-check
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.86.0
     hooks:

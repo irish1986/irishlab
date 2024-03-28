@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: "3.8"
 name: ansible-semaphore
 volumes:
   ansible-semaphore-config:
@@ -11,7 +11,7 @@ volumes:
 
 services:
   ansible-semaphore:
-    image: semaphoreui/semaphore:v2.9.37
+    image: semaphoreui/semaphore:latest
     pull_policy: always
     container_name: ansible-semaphore
     restart: always
@@ -20,23 +20,14 @@ services:
     ports:
       - mode: ingress
         target: 3000
-        published: "3000"
+        published: "3010"
         protocol: tcp
     environment:
-      SEMAPHORE_ADMIN_EMAIL: admin@localhost
-      SEMAPHORE_ADMIN_NAME: admin
-      SEMAPHORE_ADMIN_PASSWORD: password
-      SEMAPHORE_ADMIN: admin
+      SEMAPHORE_ADMIN_EMAIL: ${email}
+      SEMAPHORE_ADMIN_NAME: ${username}
+      SEMAPHORE_ADMIN_PASSWORD: ${password}
+      SEMAPHORE_ADMIN: ${username}
       SEMAPHORE_DB_DIALECT: bolt
     volumes:
       - ansible-semaphore-config:/etc/semaphore
       - ansible-semaphore-db:/var/lib/semaphore
-    # healthcheck:
-    #   test: curl --fail http://localhost || exit 1
-    #   interval: 60s
-    #   retries: 5
-    #   start_period: 20s
-    #   timeout: 10s
-networks:
-  default:
-    name: ansible-semaphore_default

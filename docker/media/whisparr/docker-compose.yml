@@ -1,0 +1,35 @@
+---
+version: '3.4'
+
+volumes:
+  whisparr:
+    name: whisparr
+    external: false
+  downloads:
+    name: downloads
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/downloads/
+  porn:
+    name: porn
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/porn
+
+services:
+  whisparr:
+    container_name: whisparr
+    image: hotio/whisparr:latest
+    ports:
+      - 6969:6969
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - 'whisparr:/config'
+      - 'porn:/porn'
+      - 'downloads:/downloads'
+    restart: unless-stopped

@@ -1,0 +1,41 @@
+---
+version: '3.4'
+
+volumes:
+  stash:
+    name: stash
+    external: false
+  porn:
+    name: porn
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/porn
+
+services:
+
+  stash:
+    image: stashapp/stash:latest
+    container_name: stash
+    pull_policy: if_not_present
+    ports:
+      - "9999:9999"
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "2m"
+    environment:
+      - STASH_STASH=/data/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+      - STASH_PORT=9999
+    volumes:
+      - ./config:/root/.stash
+      - porn:/data
+      - ./metadata:/metadata
+      - ./cache:/cache
+      - ./blobs:/blobs
+      - ./generated:/generated
+    restart: unless-stopped

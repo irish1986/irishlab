@@ -1,14 +1,14 @@
 ---
-ansible_host: "192.168.10.91"
+ansible_host: "192.168.20.5"
 
 gpu:
   intel:
-    enabled: true
+    enabled: false
     driver_version:
       - amd-driver-1
 
 tpu:
   coral:
-    enabled: true
+    enabled: false
     driver_version:
       - coral-driver-1

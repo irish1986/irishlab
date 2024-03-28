@@ -1,0 +1,369 @@
+---
+- Homelab:
+    - nas-1:
+        icon: truenas-scale.png
+        href: https://nas-1.lan
+        description: TrueNAS Scale
+        ping: nas-1.lan
+        widget:
+          type: truenas
+          url: https://nas-1.lan
+          username: ${username}
+          password: ${password}
+    - nas-2:
+        icon: truenas-scale.png
+        href: https://nas-2.lan
+        description: TrueNAS Scale
+        ping: 192.168.30.12
+        widget:
+          type: truenas
+          url: https://192.168.30.12
+          username: ${username}
+          password: ${password}
+    - pbs-1:
+        icon: proxmox.png
+        href: https://pbs-1.lan:8007
+        description: Proxmox Backup Server
+        ping: 192.168.30.21
+        widget:
+          type: proxmoxbackupserver
+          url: https://192.168.30.21:8007
+          username: ${username}
+          password: ${password}
+    - pbs-2:
+        icon: proxmox.png
+        href: https://pbs-2.lan:8007
+        description: Proxmox Backup Server
+        ping: 192.168.30.22
+        widget:
+          type: proxmoxbackupserver
+          url: https://192.168.30.22:8007
+          username: ${username}
+          password: ${password}
+    - pve-1:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.21
+        widget:
+          type: proxmox
+          url: https://192.168.20.21:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-2:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.22
+        widget:
+          type: proxmox
+          url: https://192.168.20.22:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-3:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.23
+        widget:
+          type: proxmox
+          url: https://192.168.20.23:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-4:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.24
+        widget:
+          type: proxmox
+          url: https://192.168.20.24:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-5:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.25
+        widget:
+          type: proxmox
+          url: https://192.168.20.25:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-6:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.26
+        widget:
+          type: proxmox
+          url: https://192.168.20.26:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-7:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.27
+        widget:
+          type: proxmox
+          url: https://192.168.20.27:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pve-8:
+        icon: proxmox.png
+        href: https://pve.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.28
+        widget:
+          type: proxmox
+          url: https://192.168.20.28:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pvt-1:
+        icon: proxmox.png
+        href: https://pvt.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.251
+        widget:
+          type: proxmox
+          url: https://192.168.20.251:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pvt-2:
+        icon: proxmox.png
+        href: https://pvt.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.252
+        widget:
+          type: proxmox
+          url: https://192.168.20.252:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+    - pvt-3:
+        icon: proxmox.png
+        href: https://pvt.lan:8006
+        description: Proxmox Virtual Environment
+        ping: 192.168.20.253
+        widget:
+          type: proxmox
+          url: https://192.168.20.253:8006
+          username: ${username}
+          password: ${password}
+          node: ${node}
+- Services:
+    - Ansible:
+        icon: ansible.png
+        href: http://ansible.lan:3010
+        description: Ansible Runner
+        ping: 192.168.1.5
+- Media Management:
+    - Plex:
+        icon: plex.png
+        href: http://plex.lan:32400
+        description: Plex Media Server
+        ping: 192.168.20.50
+        widget:
+          type: plex
+          url: http://192.168.20.50:32400
+          key: ${api_token}
+    - Stash:
+        icon: stash.png
+        href: http://stash.lan:9999
+        description: Stash Media
+        ping: 192.168.20.51
+    - HDHomerun:
+        icon: hdhomerun.png
+        href: http://iptv.lan
+        description: HD Homerun
+        ping: http://iptv.lan
+        widget:
+          type: hdhomerun
+          url: http://iptv.lan
+          tuner: 0
+          fields: ["channels", "hd"]
+    - Immich:
+        icon: immich.png
+        href: http://immich.lan
+        description: Picture Management
+        ping: http://immich.lan
+        widget:
+          type: immich
+          url: http://immich.lan
+          key: ${api_token}
+- Downloader:
+    - Prowlarr:
+        icon: prowlarr.png
+        href: http://prowlarr.lan:9696
+        description: Prowlarr
+        ping: 192.168.20.51
+        widget:
+          type: prowlarr
+          url: http://192.168.20.51:9696
+          key: ${api_token}
+    - Overseerr:
+        icon: overseerr.png
+        href: http://overseerr.lan:5055
+        description: Request Management
+        ping: 192.168.20.51
+        widget:
+          type: overseerr
+          url: http://192.168.20.51:5055
+          key: ${api_token}
+    - Lidarr:
+        icon: lidarr.png
+        href: http://lidarr.lan:8686
+        description: Music Management
+        ping: 192.168.20.51
+        widget:
+          type: lidarr
+          url: http://192.168.20.51:8686
+          key: ${api_token}
+    - Sonarr:
+        icon: sonarr.png
+        href: http://sonarr.lan:8989
+        description: Series Management
+        ping: 192.168.20.51
+        widget:
+          type: sonarr
+          url: http://192.168.20.51:8989
+          key: ${api_token}
+          enableQueue: true
+    - Radarr:
+        icon: radarr.png
+        href: http://radarr.lan:7878
+        description: Movie Management
+        ping: 192.168.20.51
+        widget:
+          type: radarr
+          url: http://192.168.20.51:7878
+          key: ${api_token}
+          enableQueue: true
+    - Tautulli:
+        icon: tautulli.png
+        href: http://tautulli.lan/
+        description: Tautulli
+        ping: 192.168.20.51
+        widget:
+          type: tautulli
+          url: http://192.168.20.51
+          key: ${api_token}
+    - Whisparr:
+        icon: whisparr.png
+        href: http://whisparr.lan:6969
+        description: Whisparr
+        ping: 192.168.20.51
+    - Bazarr:
+        icon: bazarr.png
+        href: http://bazarr.lan:6767
+        description: Subtitle Management
+        ping: 192.168.20.51
+        widget:
+          type: bazarr
+          url: http://192.168.20.51:6767
+          key: ${api_token}
+- Networking:
+    - Omada:
+        icon: omada.svg
+        href: https://ctr-1.lan
+        description: Omada Controller
+        ping: 192.168.1.2
+        widget:
+          type: omada
+          url: https://192.168.1.2
+          username: ${username}
+          password: ${password}
+          site: ${site}
+    - Pi-Hole:
+        icon: pi-hole.svg
+        href: http://dns-1.lan/admin
+        description: DNS Server
+        ping: 192.168.1.5
+        widget:
+          type: pihole
+          url: http://192.168.1.5
+          key: ${api_token}
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: http://torrent.lan:8080
+        description: qBittorent
+        ping: 192.168.20.51
+        widget:
+          type: qbittorrent
+          url: http://torrent.lan:8080
+          username: ${username}
+          password: ${password}
+    - Cloudflared:
+        icon: cloudflare.svg
+        href: http://dns-1.lan
+        description: CF Tunnel
+        ping: 1.1.1.1
+        widget:
+          type: cloudflared
+          accountid: ${account}
+          tunnelid: ${tunnel}
+          key: ${api_token}
+    - Gluetun:
+        icon: gluetun.png
+        href: http://gluetun.lan:8000
+        description: gluetun
+        ping: 192.168.20.51
+        widget:
+          type: gluetun
+          url: http://gluetun.lan:8000
+    - Tailscale:
+        icon: tailscale.png
+        href: https://dns-1.tails/admin
+        description: dns-1.tails
+        ping: 100.118.31.23
+        widget:
+          type: tailscale
+          deviceid: ${device}
+          key: tskey-api-${api_token}
+    - TekSavvy:
+        icon: https://www.teksavvy.com/wp-content/themes/teksavvy/assets/svg/teksavvy-logo.svg
+        description: Public IP
+        ping: 69.165.200.102
+        widget:
+          type: customapi
+          url: https://api.ipify.org?format=json
+          refreshInterval: 10000
+          method: GET
+          mappings:
+            - field: 'ip'
+              format: text
+- Smart Home:
+    - Home Assistant:
+        icon: home-assistant.svg
+        href: http://haos.lan:8123
+        description: Home Assistant OS
+        ping: 192.168.20.4
+        widget:
+          type: homeassistant
+          url: http://192.168.20.4:8123
+          key: ${api_token}
+    - Frigate:
+        icon: frigate.svg
+        href: http://pvr.lan
+        description: Frigate PVR
+        ping: 192.168.107.21
+    - IotaWatt:
+        icon: IotaWatt.svg
+        href: http://iotawatt.lan
+        description: IotaWatt Power Monitoring
+        ping: 192.168.107.5
+    - Zigbee2Mqtt:
+        icon: zigbee.svg
+        href: http://z2m.lan
+        description: Zigbee2Mqtt
+        ping: 192.168.107.21

@@ -1,0 +1,35 @@
+---
+version: '3.4'
+
+volumes:
+  sonarr:
+    name: sonarr
+    external: false
+  downloads:
+    name: downloads
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/downloads/
+  tv:
+    name: tv
+    driver_opts:
+      type: nfs
+      o: addr=nas-1.lan,nolock,soft,rw
+      device: :/mnt/rusty/media/tv
+
+services:
+  sonarr:
+    container_name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
+    ports:
+      - 8989:8989
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Toronto
+    volumes:
+      - 'sonarr:/config'
+      - 'tv:/tv'
+      - 'downloads:/downloads'
+    restart: unless-stopped

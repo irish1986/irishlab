@@ -12,11 +12,11 @@
     path: "{{ item }}"
     state: unmounted
   loop:
-    - /mnt/zeus/backup
-    - /mnt/zeus/data
-    - /mnt/zeus/downloads
-    - /mnt/zeus/iso
-    - /mnt/zeus/media
+    - /mnt/nas-1/backup
+    - /mnt/nas-1/data
+    - /mnt/nas-1/downloads
+    - /mnt/nas-1/iso
+    - /mnt/nas-1/media
 
 - name: NFS Share | Create Folder
   file:
@@ -26,11 +26,11 @@
     group: root
     mode: 0755
   loop:
-    - /mnt/zeus/backup
-    - /mnt/zeus/data
-    - /mnt/zeus/downloads
-    - /mnt/zeus/iso
-    - /mnt/zeus/media
+    - /mnt/nas-1/backup
+    - /mnt/nas-1/data
+    - /mnt/nas-1/downloads
+    - /mnt/nas-1/iso
+    - /mnt/nas-1/media
 
 # sudo ufw allow from client_ip to any port nfs
 
@@ -42,18 +42,18 @@
     opts: auto,nofail,noatime,nolock,intr,tcp,actimeo=1800
     state: mounted
   with_items:
-    - name: Zeus Backup
-      src: 192.168.10.30:/volume1/backup
-      path: /mnt/zeus/backup
-    - name: Zeus Data
-      src: 192.168.10.30:/volume1/data
-      path: /mnt/zeus/data
-    - name: Zeus Downloads
-      src: 192.168.10.30:/volume1/downloads
-      path: /mnt/zeus/downloads
-    - name: Zeus Iso
-      src: 192.168.10.30:/volume1/iso
-      path: /mnt/zeus/iso
-    - name: Zeus Media
-      src: 192.168.10.30:/volume1/media
-      path: /mnt/zeus/media
+    - name: Flashy Iso
+      src: nas-1.lan:/mnt/flashy/iso
+      path: /mnt/nas-1/iso
+    - name: Rusty Backup
+      src: nas-1.lan://mnt/rusty/backup
+      path: /mnt/nas-1/backup
+    - name: Rusty Data
+      src: nas-1.lan://mnt/rusty/data
+      path: /mnt/nas-1/data
+    - name: Rusty Downloads
+      src: nas-1.lan://mnt/rusty/downloads
+      path: /mnt/nas-1/downloads
+    - name: Rusty Media
+      src: nas-1.lan:/mnt/rusty/media
+      path: /mnt/nas-1/media
