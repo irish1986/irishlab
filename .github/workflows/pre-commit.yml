@@ -29,10 +29,10 @@ jobs:
           cache: 'pip' # caching pip dependencies
 
       - name: Restore Ansible cache
-        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # 4.0
+        uses: actions/cache/restore@4.0
         with:
           path: ~/.ansible/collections
-          key: ansible-${{ hashFiles('collections/requirements.yml') }}
+          key: ansible-${{ hashFiles('ansible/collections/requirements.yml') }}
 
       - name: Run Pre-Commit
         uses: pre-commit/action@v3.0.1
