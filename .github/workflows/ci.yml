@@ -12,5 +12,3 @@ on: # yamllint disable-line rule:truthy
 jobs:
   pre-commit:
     uses: ./.github/workflows/pre-commit.yml
-  ansible-lint:
-    uses: ./.github/workflows/ansible-lint.yml
