@@ -1,5 +1,5 @@
 ---
-name: ansible-lint
+name: Run Ansible-Lint
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
@@ -9,6 +9,8 @@ jobs:
   lint:
     name: Ansible Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+
     steps:
       - uses: actions/checkout@v4
       - name: Run ansible-lint

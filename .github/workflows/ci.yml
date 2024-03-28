@@ -3,6 +3,8 @@ name: Continous Integration
 
 on: # yamllint disable-line rule:truthy
   pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -14,7 +16,11 @@ on: # yamllint disable-line rule:truthy
 jobs:
   pre-commit:
     uses: ./.github/workflows/pre-commit.yml
+
   ansible-lint:
     uses: ./.github/workflows/ansible-lint.yml
+    needs: [pre-commit]
+
   runner-ansible:
     uses: ./.github/workflows/runner-ansible.yml
+    needs: [pre-commit, ansible-lint]
