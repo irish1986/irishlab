@@ -10,9 +10,12 @@ jobs:
     name: Pre-Commit
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
-    env:
-      PYTHON_VERSION: "3.11"
+    strategy:
+      matrix:
+        PYTHON_VERSION:
+          - "3.10"
+          - "3.11"
+          - "3.12"
 
     steps:
       - name: Not on Monday or Wednesday
