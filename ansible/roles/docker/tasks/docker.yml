@@ -6,6 +6,7 @@
     state: present
     update_cache: true
   loop:
+    - apparmor-utils
     - containerd.io
     - docker-buildx-plugin
     - docker-ce

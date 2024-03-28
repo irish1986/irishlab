@@ -11,12 +11,13 @@ repos:
       - id: check-merge-conflict
       - id: check-vcs-permalinks
       - id: forbid-new-submodules
+      - id: forbid-submodules
       # Common errors
       - id: end-of-file-fixer
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
       - id: check-yaml
-        files: .*\.(yaml|yml)$
+        files: \.(yaml|yml)$
       - id: check-merge-conflict
       # Cross platform
       - id: check-case-conflict
@@ -35,6 +36,17 @@ repos:
     rev: 0.2.0
     hooks:
       - id: fix-smartquotes
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.39.0
+    hooks:
+      - id: markdownlint
+        args:
+          - --config
+          - .config/.markdownlint.yml
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.6.27
+    hooks:
+      - id: actionlint
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.35.1
     hooks:
@@ -42,7 +54,7 @@ repos:
         args:
           - -c
           - .config/.yamllint.yml
-  - repo: https://github.com/ansible-community/ansible-lint.git
+  - repo: https://github.com/ansible-community/ansible-lint
     rev: v24.2.1
     hooks:
       - id: ansible-lint
@@ -50,11 +62,20 @@ repos:
         args:
           - -c
           - .config/.ansible-lint.yml
+  - repo: https://github.com/IamTheFij/ansible-pre-commit
+    rev: v1.0.0
+    hooks:
+      - id: encryption-check
+        files: \.(vault|vault.yaml|vault.yml)$
+  - repo: https://github.com/iamthefij/docker-pre-commit
+    rev: v3.0.1
+    hooks:
+      - id: docker-compose-check
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.88.4
     hooks:
       - id: terraform_fmt
-        files: .*\.(tf|tfvars)$
+        files: \.(tf|tfvars)$
         args:
           - --args=-no-color
           - --args=-diff

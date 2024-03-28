@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Details
+# Details
 
 **What steps did you take and what happened:**
 

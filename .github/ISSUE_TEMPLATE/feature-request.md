@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Details
+# Details
 
 **Describe the solution you'd like:**
 

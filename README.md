@@ -1,6 +1,6 @@
-<img src="https://camo.githubusercontent.com/5b298bf6b0596795602bd771c5bddbb963e83e0f/68747470733a2f2f692e696d6775722e636f6d2f7031527a586a512e706e67" align="left" width="144px" height="144px"/>
-
 # irishlab
+
+<img src="https://camo.githubusercontent.com/5b298bf6b0596795602bd771c5bddbb963e83e0f/68747470733a2f2f692e696d6775722e636f6d2f7031527a586a512e706e67" alt="irishlab"  align="left" width="144px" height="144px"/>
 
 ... where I learn Architecture, Infrastructure, Networking, DevOps, and a few others things.
 
@@ -76,7 +76,9 @@ Template are provisioned using Promox template using [Ubuntu Cloud Image](https:
 
 ### Synology
 
-My DS1812+ was commissioned in March 2014 and has been my first dip in the world of homelabbing.  It has been my primary server for quite a while and my main network attach storage for almost a decade.  It been through many disks configuration, software upgrade as well couple of power supplies but in [early October 2023, Synology End-of-Life Announcement for DSM 6.2](https://www.synology.com/en-us/products/status/eol-dsm62) means this device sunset as come.  Given it been my workhorse for many years I have learn quite a lot from it and my greatest lesson is to **move away from proprietary ecosystem**.  Finally, I do have an extra DS218J located at my parents house as my primary offsite backup for invaluable data.
+My DS1812+ was commissioned in March 2014 and has been my first dip in the world of homelabbing.  It has been my primary server for quite a while and my main network attach storage for almost a decade.
+It been through many disks configuration, software upgrade as well couple of power supplies but in [early October 2023, Synology End-of-Life Announcement for DSM 6.2](https://www.synology.com/en-us/products/status/eol-dsm62) means this device sunset as come.
+Given it been my workhorse for many years I have learn quite a lot from it and my greatest lesson is to **move away from proprietary ecosystem**.  Finally, I do have an extra DS218J located at my parents house as my primary offsite backup for invaluable data.
 
 ## Hypervisor
 
@@ -101,6 +103,9 @@ This repo generally attempts to follow the structure and practices of the excell
 ### K3S
 
 The cluster is running on a mixed of [Ubuntu AMD64 Cloud Image](https://cloud-images.ubuntu.com/) deployed via Terraform as virtual mac2hine on my Proxmox cluster.
+
+- List item
+  - Nested list item indented by 3 spaces
 
 - **Server nodes** (aka control node) are defined as a host running the `k3s server` command, with control-plane and datastore components managed by K3s.
   - One (1) node is  running [Focal Fossa](https://releases.ubuntu.com/focal/)
@@ -136,7 +141,7 @@ The Git repository contains the following directories under `cluster` and are or
 - **core** directory (depends on **crds**) are important infrastructure applications (grouped by namespace) that should never be pruned by Flux
 - **apps** directory (depends on **core**) is where your common applications (grouped by namespace) could be placed, Flux will prune resources here if they are not tracked by Git anymore
 
-```
+```bash
 ./cluster
 ├── ./apps
 ├── ./base

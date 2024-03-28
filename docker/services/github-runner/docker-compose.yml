@@ -1,0 +1,18 @@
+---
+version: '3.8'
+services:
+  gh-worker:
+    image: myoung34/github-runner:latest
+    environment:
+      REPO_URL: https://github.com/irish1986/irishlab
+      RUNNER_NAME: gh-worker
+      RUNNER_TOKEN: ${api_token}
+      RUNNER_WORKDIR: /tmp/runner/work
+      RUNNER_GROUP: runner
+      RUNNER_SCOPE: 'repo'
+      LABELS: linux,x64,gpu
+    security_opt:
+      - label:disable
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/tmp/runner:/tmp/runner'

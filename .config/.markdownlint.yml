@@ -1,0 +1,16 @@
+---
+# Default state for all rules
+default: true
+
+# MD013/line-length
+MD013:
+  line_length: 400
+  tables: false
+
+# MD025/front-matter
+MD025:
+  front_matter_title: ""
+
+# MD033/inline-html
+MD033:
+  allowed_elements: [br, img]

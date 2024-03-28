@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-## Details
+# Details
 
 **Ask your question:**
 
