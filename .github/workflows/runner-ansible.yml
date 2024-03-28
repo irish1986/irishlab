@@ -2,15 +2,14 @@
 name: Runner - Ansible Inventory
 
 on: # yamllint disable-line rule:truthy
-  push:
-    branches:
-      - main
-    paths:
-      - 'ansible/inventory/*'
+  workflow_dispatch:
+  workflow_call:
 
 jobs:
   deploy:
+    name: Ansible Runner
     runs-on: "self-hosted"
+    timeout-minutes: 5
 
     steps:
       - name: Checkout

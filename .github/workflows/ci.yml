@@ -6,9 +6,15 @@ on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
+    paths:
+      - 'ansible/inventory/*'
     paths-ignore:
       - '**/README.md'
 
 jobs:
   pre-commit:
     uses: ./.github/workflows/pre-commit.yml
+  ansible-lint:
+    uses: ./.github/workflows/ansible-lint.yml
+  runner-ansible:
+    uses: ./.github/workflows/runner-ansible.yml
