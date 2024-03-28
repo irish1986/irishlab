@@ -12,10 +12,7 @@ jobs:
     timeout-minutes: 5
     strategy:
       matrix:
-        PYTHON_VERSION:
-          - "3.8"
-          - "3.9"
-          - "3.10"
+        PYTHON_VERSION: # https://devguide.python.org/versions/
           - "3.11"
           - "3.12"
 
