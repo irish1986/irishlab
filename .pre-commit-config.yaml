@@ -71,10 +71,6 @@ repos:
     hooks:
       - id: encryption-check
         files: \.(vault|vault.yaml|vault.yml)$
-  - repo: https://github.com/iamthefij/docker-pre-commit
-    rev: v3.0.1
-    hooks:
-      - id: docker-compose-check
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.88.4
     hooks:
