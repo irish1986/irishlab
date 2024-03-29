@@ -1,0 +1,23 @@
+---
+name: CI notify
+
+on: # yamllint disable-line rule:truthy
+  workflow_run:
+    workflows: ["Continous Integration"]
+    types:
+      - completed
+  schedule:
+    - cron: '30 5 * * 1,3'
+
+jobs:
+
+  runner-tf:
+    uses: ./.github/workflows/runner-tf.yml
+
+  runner-dns:
+    uses: ./.github/workflows/runner-dns.yml
+    needs: [runner-tf]
+
+  runner-ansible:
+    uses: ./.github/workflows/runner-ansible.yml
+    needs: [runner-tf]
