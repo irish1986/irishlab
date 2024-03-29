@@ -16,8 +16,6 @@ jobs:
 
   runner-dns:
     uses: ./.github/workflows/runner-dns.yml
-    needs: [runner-tf]
 
   runner-ansible:
     uses: ./.github/workflows/runner-ansible.yml
-    needs: [runner-tf]
