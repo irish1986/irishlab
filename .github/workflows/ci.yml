@@ -22,7 +22,7 @@ jobs:
     needs: [pre-commit]
 
   runner-tf:
-    uses: ./.github/workflows/runner-ansible.yml
+    uses: ./.github/workflows/runner-tf.yml
     needs: [pre-commit, runner-dns]
 
   runner-ansible:
