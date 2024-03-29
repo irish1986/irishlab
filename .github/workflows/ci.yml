@@ -20,3 +20,7 @@ jobs:
   runner-ansible:
     uses: ./.github/workflows/runner-ansible.yml
     needs: [pre-commit]
+
+  runner-dns:
+    uses: ./.github/workflows/runner-dns.yml
+    needs: [pre-commit]
