@@ -1,9 +1,9 @@
 ---
-version: "3"
+name: bind9
 
 services:
   bind9:
-    image: ubuntu/bind9:latest
+    image: docker.io/ubuntu/bind9:latest
     pull_policy: always
     environment:
       - BIND9_USER=root

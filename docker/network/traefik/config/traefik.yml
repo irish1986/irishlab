@@ -1,23 +1,39 @@
 ---
 global:
-  checkNewVersion: true
-  sendAnonymousUsage: true
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+log:
+  level: ERROR
 
 api:
   dashboard: true
   insecure: true
+  debug: false
 
 entryPoints:
   web:
-    address: :80
+    address: :88
     http:
       redirections:
         entryPoint:
           to: websecure
           scheme: https
-          permanent: true
   websecure:
     address: :443
+
+certificatesResolvers:
+  cloudflare:
+    acme:
+      email: "simon.harvey.86@gmail.com"
+      storage: /etc/traefik/certs/cloudflare-acme.json
+      caServer: 'https://acme-v02.api.letsencrypt.org/directory'
+      keyType: EC256
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "8.8.8.8:53"
 
 serversTransport:
   insecureSkipVerify: true
@@ -25,18 +41,9 @@ serversTransport:
 providers:
   docker:
     exposedByDefault: false
-  file:
-    directory: /etc/traefik
+    endpoint: 'unix:///var/run/docker.sock'
     watch: true
-
-certificatesResolvers:
-  cloudflare:
-    acme:
-      email: mail@example.com
-      storage: acme.json
-      dnsChallenge:
-        provider: cloudflare
-        # disablePropagationCheck: true # uncomment this if you have issues pulling certificates through cloudflare, By setting this flag to true disables the need to wait for the propagation of the TXT record to all authoritative name servers.
-        resolvers:
-          - '1.1.1.1:53'
-          - '1.0.0.1:53'
+    swarmMode: false
+  file:
+    directory: /etc/traefik/conf/
+    watch: true

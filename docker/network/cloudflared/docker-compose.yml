@@ -1,5 +1,5 @@
 ---
-version: "3.8"
+name: cloudflared
 
 networks:
   cloudflared:
@@ -9,7 +9,7 @@ networks:
 services:
   cloudflared:
     container_name: cloudflare-tunnel
-    image: cloudflare/cloudflared:latest
+    image: docker.io/cloudflare/cloudflared:latest
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${api_token}

@@ -1,5 +1,5 @@
 ---
-version: '3.8'
+name: zigbee2mqtt
 volumes:
   zigbee2mqtt:
     name: zigbee2mqtt
@@ -7,7 +7,7 @@ volumes:
 services:
   zigbee2mqtt:
     container_name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt:latest
+    image: docker.io/koenkk/zigbee2mqtt:latest
     volumes:
       - zigbee2mqtt:/app/data
       - /run/udev:/run/udev:ro

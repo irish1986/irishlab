@@ -1,30 +1,28 @@
 ---
-version: '3.7'
-
+name: traefik
 networks:
-  lan:
-    name: lan
-    external: false
-
+  frontend:
+    external: true
+  backend:
+    external: true
 services:
   traefik:
     image: docker.io/traefik:latest
     container_name: traefik
     networks:
-      - lan
+      - frontend
+      - backend
     ports:
-      - 80:80
+      - 80:88
       - 443:443
-      - 8080:8080
+      - 8080:8088
     volumes:
-      - /etc/traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    healthcheck:
-      test: wget --quiet --tries=1 --spider http://ping.127.0.0.1.nip.io/ping || exit 1
-      interval: 10s
-      timeout: 1s
-      retries: 3
-      start_period: 10s
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./config/conf/:/etc/traefik/conf/
+      - ./config/certs/:/etc/traefik/certs/
+    environment:
+      - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
     command:
       - "--global.sendAnonymousUsage=true"
       - "--api.insecure=true"

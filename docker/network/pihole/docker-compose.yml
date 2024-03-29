@@ -1,11 +1,11 @@
 ---
-version: "3"
+name: pihole
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:latest
+    image: docker.io/pihole/pihole:latest
     ports:
       - "53:53/tcp"
       - "53:53/udp"

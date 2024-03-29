@@ -1,8 +1,8 @@
 ---
-version: '3.8'
+name: gh-worker
 services:
   gh-worker:
-    image: myoung34/github-runner:latest
+    image: docker.io/myoung34/github-runner:latest
     environment:
       REPO_URL: https://github.com/irish1986/irishlab
       RUNNER_NAME: gh-worker

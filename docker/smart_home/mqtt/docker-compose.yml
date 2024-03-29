@@ -1,12 +1,12 @@
 ---
 # docker-compose exec mqtt mosquitto_passwd -c /mosquitto/conf/mosquitto.passwd mqtt
 # mosquitto_passwd -c /mosquitto/config/password.txt mqtt
-version: '3.8'
+name: mqtt
 
 services:
   mqtt:
     container_name: mqtt
-    image: eclipse-mosquitto:latest
+    image: docker.io/eclipse-mosquitto:latest
     volumes:
       - ./mosquitto:/mosquitto
       - ./mosquitto/data:/mosquitto/data

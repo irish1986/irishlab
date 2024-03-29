@@ -1,12 +1,12 @@
 ---
-version: "3.9"
+name: tailscaled
 
 # docker exec tailscale tailscale up --advertise-exit-node
 
 services:
-  tailscale:
-    container_name: tailscale
-    image: tailscale/tailscale:latest
+  tailscaled:
+    container_name: tailscaled
+    image: docker.io/tailscale/tailscale:latest
     privileged: true
     network_mode: host
     volumes:

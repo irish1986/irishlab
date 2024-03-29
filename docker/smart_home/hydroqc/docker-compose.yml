@@ -1,8 +1,8 @@
 ---
-version: "3"
+name: hydroqc2mqtt
 services:
   hydroqc2mqtt:
-    image: registry.gitlab.com/hydroqc/hydroqc2mqtt
+    image: gitlab.com/hydroqc/hydroqc2mqtt
     restart: always
     environment:
       MQTT_USERNAME: 'yourmqttusername'

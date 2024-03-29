@@ -1,6 +1,5 @@
 ---
-
-version: "3"
+name: portainer
 
 volumes:
   portainer:
@@ -9,7 +8,7 @@ volumes:
 
 services:
   portainer:
-    image: portainer/portainer-ce:latest
+    image: docker.io/portainer/portainer-ce:latest
     ports:
       - 8000:8000
       - 9443:9443

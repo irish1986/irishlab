@@ -1,5 +1,5 @@
 ---
-version: '3.4'
+name: grafana
 
 volumes:
   grafana:
@@ -8,7 +8,7 @@ volumes:
 
 services:
   grafana:
-    image: grafana/grafana-oss:latest
+    image: docker.io/grafana/grafana-oss:latest
     container_name: grafana
     ports:
       - "3000:3000"

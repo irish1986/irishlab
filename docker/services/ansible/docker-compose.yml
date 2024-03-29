@@ -1,5 +1,4 @@
 ---
-version: "3.8"
 name: ansible-semaphore
 volumes:
   ansible-semaphore-config:
@@ -11,7 +10,7 @@ volumes:
 
 services:
   ansible-semaphore:
-    image: semaphoreui/semaphore:latest
+    image: docker.io/semaphoreui/semaphore:latest
     pull_policy: always
     container_name: ansible-semaphore
     restart: always

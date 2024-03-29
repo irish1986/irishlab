@@ -1,5 +1,5 @@
 ---
-version: '3'
+name: influxdb
 
 volumes:
   influxdb:
@@ -9,7 +9,7 @@ volumes:
 services:
   influxdb:
     container_name: influxdb
-    image: influxdb:2.1-alpine
+    image: docker.io/influxdb:2.1-alpine
     ports:
       - '8086:8086'
     volumes:
