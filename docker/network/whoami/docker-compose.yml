@@ -1,0 +1,24 @@
+---
+name: whoami
+services:
+  whoami:
+    image: docker.io/traefik/whoami:latest
+    pull_policy: always
+    container_name: nginx
+    restart: unless-stopped
+    # networks:
+    #   - frontend
+    #   - backend
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.whoami-http.entrypoints: "web"
+      traefik.http.routers.whoami-http.rule: "Host(`whoami.home.irishlab.io`)"
+      traefik.http.routers.whoami-https.entrypoints: "websecure"
+      traefik.http.routers.whoami-https.rule: "Host(`whoami.home.irishlab.io`)"
+      traefik.http.routers.whoami-https.tls: "true"
+      traefik.http.routers.whoami-https.tls.certresolver: "cloudflare"
