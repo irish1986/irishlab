@@ -25,7 +25,7 @@ MD013:
 # MD025/front-matter
 MD025:
   level: 1
-  front_matter_title: "^\\s*title\\s*[:=]"
+  front_matter_title: ""
 
 # MD033/inline-html
 MD033:
@@ -34,16 +34,14 @@ MD033:
 # MD041/first-line-heading/first-line-h1
 MD041:
   level: 1
-  front_matter_title: "^\\s*title\\s*[:=]"
+  front_matter_title: ""
 
-# MD044/proper-names - Proper names should have the correct capitalization
+# MD044/proper-names
 MD044:
   names:
     - DevOps
     - DevSecOps
     - Git
-    - Github
-    - GitOps
   code_blocks: false
 
 # MD046/code-block-style
