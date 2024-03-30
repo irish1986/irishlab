@@ -10,6 +10,7 @@
       "fileMatch": [
         "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
       ],
+    },
   "pre-commit": {
       "enabled": true
     }
