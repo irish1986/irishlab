@@ -5,12 +5,12 @@
     ":timezone(America/New_York)",
     "config:recommended"
   ],
-  "dependencyDashboardTitle": "Renovate Dashboard",,
-"kubernetes": {
-    "fileMatch": [
-      "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
-    ],
-"pre-commit": {
-    "enabled": true
-  }
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  "kubernetes": {
+      "fileMatch": [
+        "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
+      ],
+  "pre-commit": {
+      "enabled": true
+    }
 }
