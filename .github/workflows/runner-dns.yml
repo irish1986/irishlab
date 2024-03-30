@@ -8,7 +8,7 @@ on: # yamllint disable-line rule:truthy
 jobs:
   deploy:
     name: Runner - DNS
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     # runs-on: "self-hosted"
     timeout-minutes: 5
 
