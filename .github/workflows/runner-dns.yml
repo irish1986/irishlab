@@ -30,7 +30,7 @@ jobs:
   cd-tf-dns:
     name: Runner - DNS Terraform
     runs-on: ubuntu-22.04
-    environment: production
+    # environment: production
     timeout-minutes: 5
 
     steps:
