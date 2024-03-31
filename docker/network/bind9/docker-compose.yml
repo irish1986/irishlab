@@ -3,7 +3,7 @@ name: bind9
 
 services:
   bind9:
-    image: docker.io/ubuntu/bind9:latest
+    image: docker.io/ubuntu/bind9:9.18-22.10_edge
     pull_policy: always
     environment:
       - BIND9_USER=root

@@ -69,7 +69,7 @@ services:
 
   qbittorrent:
     container_name: qbittorrent
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:4.6.4
     pull_policy: if_not_present
     depends_on:
       - vpn

@@ -8,7 +8,7 @@ volumes:
 
 services:
   overseerr:
-    image: lscr.io/linuxserver/overseerr:latest
+    image: lscr.io/linuxserver/overseerr:1.33.2
     container_name: overseerr
     environment:
       - PUID=1000

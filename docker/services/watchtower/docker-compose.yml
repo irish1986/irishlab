@@ -4,7 +4,7 @@ version: "3"
 services:
   watchtower:
     container_name: watchtower
-    image: ghcr.io/containrrr/watchtower:latest
+    image: ghcr.io/containrrr/watchtower:v1.7.1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped

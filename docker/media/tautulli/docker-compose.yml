@@ -9,7 +9,7 @@ volumes:
 services:
   tautulli:
     container_name: tautulli
-    image: lscr.io/linuxserver/tautulli:latest
+    image: lscr.io/linuxserver/tautulli:2.13.4
     ports:
       - 8181:8181
     environment:

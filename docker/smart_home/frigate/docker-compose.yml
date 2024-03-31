@@ -12,7 +12,7 @@ volumes:
 services:
   frigate:
     container_name: frigate
-    image: ghcr.io/blakeblackshear/frigate
+    image: ghcr.io/blakeblackshear/frigate:0.13.2
     privileged: true
     cap_add:
       - CAP_PERFMON

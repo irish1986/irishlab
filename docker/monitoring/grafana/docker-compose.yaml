@@ -8,7 +8,7 @@ volumes:
 
 services:
   grafana:
-    image: docker.io/grafana/grafana-oss:latest
+    image: docker.io/grafana/grafana-oss:10.1.9
     container_name: grafana
     ports:
       - "3000:3000"

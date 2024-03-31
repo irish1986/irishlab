@@ -7,7 +7,7 @@ networks:
     external: true
 services:
   traefik:
-    image: docker.io/traefik:latest
+    image: docker.io/traefik:v3.0
     container_name: traefik
     networks:
       - frontend

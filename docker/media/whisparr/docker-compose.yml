@@ -21,7 +21,7 @@ volumes:
 services:
   whisparr:
     container_name: whisparr
-    image: hotio/whisparr:latest
+    image: ghcr.io/hotio/whisparr:v3-3.0.0.530
     ports:
       - 6969:6969
     environment:

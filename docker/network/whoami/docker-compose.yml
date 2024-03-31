@@ -2,7 +2,7 @@
 name: whoami
 services:
   whoami:
-    image: docker.io/traefik/whoami:latest
+    image: docker.io/traefik/whoami:v1.10
     pull_policy: always
     container_name: nginx
     restart: unless-stopped

@@ -9,7 +9,7 @@ volumes:
 services:
   prowlarr:
     container_name: prowlarr
-    image: lscr.io/linuxserver/prowlarr:latest
+    image: lscr.io/linuxserver/prowlarr:1.15.0
     ports:
       - 9696:9696
     environment:

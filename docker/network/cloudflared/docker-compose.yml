@@ -9,7 +9,7 @@ networks:
 services:
   cloudflared:
     container_name: cloudflare-tunnel
-    image: docker.io/cloudflare/cloudflared:latest
+    image: docker.io/cloudflare/cloudflared:2024.3.0
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${api_token}

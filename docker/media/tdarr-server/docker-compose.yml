@@ -21,7 +21,7 @@ volumes:
 services:
   tdarr:
     container_name: tdarr
-    image: ghcr.io/haveagitgat/tdarr:latest
+    image: ghcr.io/haveagitgat/tdarr:2.17.01
     pull_policy: always
     network_mode: bridge
     ports:
