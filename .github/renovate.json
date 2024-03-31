@@ -6,6 +6,11 @@
     "config:recommended"
   ],
   "dependencyDashboardTitle": "Renovate Dashboard",
+  "github-runners": {
+    "fileMatch": [
+      "(^|/).github/workflows/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
   "kubernetes": {
       "fileMatch": [
         "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
