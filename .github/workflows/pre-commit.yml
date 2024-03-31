@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install --user ansible-core==2.12.3 
+          python3 -m pip install --user ansible
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Install Ansible-Galaxy Requirements
