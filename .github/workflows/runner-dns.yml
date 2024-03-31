@@ -5,6 +5,10 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
   workflow_call:
 
+defaults:
+  run:
+    working-directory:./terraform
+
 jobs:
   cd-local-dns:
     name: Runner - DNS Local
