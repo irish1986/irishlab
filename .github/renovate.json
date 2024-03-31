@@ -3,7 +3,9 @@
   "dependencyDashboardTitle": "Renovate Dashboard",
   "extends": [
     ":disableRateLimiting",
+    "docker:enableMajor",
     ":timezone(America/New_York)",
+    ":semanticCommits",
     "config:recommended"
   ],
   "ansible-galaxy": {
