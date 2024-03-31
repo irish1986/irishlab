@@ -43,12 +43,8 @@ jobs:
       - name: Install Ansible-Galaxy Requirements
         run: |
           ansible-galaxy install -r ansible/collections/requirements.yml
+          ansible-galaxy collection list
 
-      - name: Restore Ansible cache
-        uses: actions/cache/restore@v4.0.2
-        with:
-          path: ~/.ansible/collections
-          key: ansible-${{ hashFiles('ansible/collections/requirements.yml') }}
-
+ 
       - name: Run Pre-Commit
         uses: pre-commit/action@v3.0.1
