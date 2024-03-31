@@ -1,22 +1,37 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "ansible-galaxy": {
+    "fileMatch": [
+      "(^|/)ansible/collections/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  "docker-compose": {
+    "fileMatch": [
+      "(^|/)docker/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
   "extends": [
     ":disableRateLimiting",
     ":timezone(America/New_York)",
     "config:recommended"
   ],
-  "dependencyDashboardTitle": "Renovate Dashboard",
   "github-runners": {
     "fileMatch": [
       "(^|/).github/workflows/.+\\.ya?ml(?:\\.j2)?$"
     ]
   },
   "kubernetes": {
-      "fileMatch": [
-        "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
-      ]
-    },
+    "fileMatch": [
+      "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
   "pre-commit": {
-      "enabled": true
-    }
+    "enabled": true
+  },
+  "terraform": {
+    "fileMatch": [
+      "(^|/)terraform/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  }
 }

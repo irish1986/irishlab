@@ -21,6 +21,7 @@ repos:
       - id: check-merge-conflict
       - id: check-json
       - id: pretty-format-json
+        args: [--autofix]
       # Cross platform
       - id: check-case-conflict
       - id: mixed-line-ending
