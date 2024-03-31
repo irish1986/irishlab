@@ -16,9 +16,6 @@
       "(^|/)docker/.+\\.ya?ml(?:\\.j2)?$"
     ]
   },
-  "github-runners": {
-    "enabled": true
-  },
   "kubernetes": {
     "fileMatch": [
       "(^|/)k8s/.+\\.ya?ml(?:\\.j2)?$"
