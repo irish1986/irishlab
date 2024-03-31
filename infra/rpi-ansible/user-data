@@ -6,11 +6,12 @@ timezone: UTC
 ssh_pwauth: true
 
 users:
-- name: groot
-  gecos: irish
-  groups: sudo
-  sudo: "ALL=(ALL) NOPASSWD:ALL"
-  lock_passwd: false
+- name: ansible
+  gecos: ansible
+  primary-group: users
+  groups: users,adm,dialout,audio,plugdev,netdev,video
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  lock_passwd: true
   shell: /bin/bash
   passwd: ${password}
   ssh_import_id:
@@ -21,8 +22,16 @@ package_upgrade: true
 package_reboot_if_required: true
 
 packages:
+- ansible
 - git
 - sudo
+
+runcmd:
+  - 'sudo ansible-pull -U https://github.com/irish1986/irishlab.git -i inventory.yml provision.yml > /var/log/ansible-provision.run 2>&1'
+
+powerstate:
+  delay: "+5"
+  mode: reboot
 
 output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
