@@ -26,18 +26,15 @@ jobs:
       #     source: './ansible/inventory/*'
       #     target: '~/ansible/inventory/'
       #     strip_components: 2
+
   cd-tf-dns:
     name: Runner - DNS Terraform
     runs-on: ubuntu-22.04
     environment: production
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
+    timeout-minutes: 5
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
+      # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v3
 
