@@ -1,25 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "ansible-galaxy": {
-    "fileMatch": [
-      "(^|/)ansible/collections/.+\\.ya?ml(?:\\.j2)?$"
-    ]
-  },
   "dependencyDashboardTitle": "Renovate Dashboard",
-  "docker-compose": {
-    "fileMatch": [
-      "(^|/)docker/.+\\.ya?ml(?:\\.j2)?$"
-    ]
-  },
   "extends": [
     ":disableRateLimiting",
     ":timezone(America/New_York)",
     "config:recommended"
   ],
-  "github-runners": {
+  "ansible-galaxy": {
     "fileMatch": [
-      "(^|/).github/workflows/.+\\.ya?ml(?:\\.j2)?$"
+      "(^|/)ansible/collections/.+\\.ya?ml(?:\\.j2)?$"
     ]
+  },
+  "docker-compose": {
+    "fileMatch": [
+      "(^|/)docker/.+\\.ya?ml(?:\\.j2)?$"
+    ]
+  },
+  "github-runners": {
+    "enabled": true
   },
   "kubernetes": {
     "fileMatch": [
