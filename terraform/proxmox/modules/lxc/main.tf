@@ -51,20 +51,20 @@ locals {
   }
   operating_system = {
     "debian" = {
-      os = "debian11"
+      os   = "debian11"
       type = "l26"
     }
 
-    "rhel"   = {
-      os = "rhel9"
+    "rhel" = {
+      os   = "rhel9"
       type = "l26"
     }
-    "rocky"  = {
-      os = "rocky9"
+    "rocky" = {
+      os   = "rocky9"
       type = "l26"
     }
     "windows" = {
-      os = "Win22"
+      os   = "Win22"
       type = "win11"
     }
   }
@@ -103,7 +103,7 @@ resource "proxmox_vm_qemu" "vm-server" {
   tags = var.tags
 
   lifecycle {
-    ignore_changes = [desc,tags,network,disk,cicustom]
+    ignore_changes = [desc, tags, network, disk, cicustom]
   }
 
 }

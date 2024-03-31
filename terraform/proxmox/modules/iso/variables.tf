@@ -1,38 +1,38 @@
 variable "node" {
   description = "Proxmox Node ID"
-  type = string
-  default = "pve-1"
+  type        = string
+  default     = "pve-1"
 }
 
 variable "id" {
   description = "Proxmox VM ID"
-  type = string
+  type        = string
 }
 
 variable "hostname" {
   description = "Proxmox VM Name"
-  type = string
+  type        = string
 }
 
 variable "tags" {
   description = "Proxmox Tag"
-  type = string
+  type        = string
 }
 
 variable "description" {
   description = "Proxmox Description"
-  type = string
+  type        = string
 }
 
 variable "pool" {
   description = "Proxmox Pool"
-  type = string
+  type        = string
 }
 
 variable "os" {
   description = "Proxmox Pool"
-  default = "ubuntu-lts"
-  type = string
+  default     = "ubuntu-lts"
+  type        = string
 }
 
 variable "size" {

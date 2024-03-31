@@ -78,6 +78,7 @@ repos:
       - id: terraform_fmt
         files: \.(tf|tfvars)$
         args:
-          - --args=-no-color
+          - --args=-check
           - --args=-diff
+          - --args=-recursive
           - --args=-write=false

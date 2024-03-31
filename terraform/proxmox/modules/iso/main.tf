@@ -17,8 +17,8 @@ terraform {
 
 locals {
   operating_system = {
-    "ubuntu-lts"  = {
-      os = "ubuntu-cloud-jammy"
+    "ubuntu-lts" = {
+      os   = "ubuntu-cloud-jammy"
       type = "l26"
     }
   }
@@ -59,36 +59,36 @@ locals {
 resource "proxmox_vm_qemu" "vm-iso" {
   target_node = var.node
 
-  vmid        = var.id
-  name        = var.hostname
-  tags        = var.tags
-  desc        = var.description
-  pool        = var.pool
+  vmid = var.id
+  name = var.hostname
+  tags = var.tags
+  desc = var.description
+  pool = var.pool
 
-  iso         = "local:iso/ubuntu-20.04.4-live-server-amd64.iso"
-  os_type     = "ubuntu"
-  bios        = "seabios"
-  agent       = 1
+  iso     = "local:iso/ubuntu-20.04.4-live-server-amd64.iso"
+  os_type = "ubuntu"
+  bios    = "seabios"
+  agent   = 1
 
-  cpu           = "host"
-  numa          = true
-  sockets       = local.sizing[var.size].sockets
-  cores         = local.sizing[var.size].cores
-  memory        = local.sizing[var.size].memory
+  cpu     = "host"
+  numa    = true
+  sockets = local.sizing[var.size].sockets
+  cores   = local.sizing[var.size].cores
+  memory  = local.sizing[var.size].memory
 
-  scsihw        = "virtio-scsi-single"
+  scsihw = "virtio-scsi-single"
   disk {
-    slot        = 0
-    type        = "scsi"
-    storage     = "ceph"
-    size        = local.sizing[var.size].disk
-    backup      = true
+    slot    = 0
+    type    = "scsi"
+    storage = "ceph"
+    size    = local.sizing[var.size].disk
+    backup  = true
   }
 
   network {
-    model       = "virtio"
-    bridge      = "vmbr0"
-    firewall    = false
+    model    = "virtio"
+    bridge   = "vmbr0"
+    firewall = false
   }
 
 }
