@@ -1,31 +1,44 @@
 ---
 # Areas
-area/ansible:
-  - changed-files:
-      - any-glob-to-any-file: "ansible/**/*"
-area/docs:
+ansible:
   - changed-files:
       - any-glob-to-any-file:
-          - "docs/**/*"
+          - "ansible/**/*"
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".config/**/*"
+          - ".pre-commit-config.yaml"
+docker:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "docker/**/*"
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
           - "README.md"
-area/github:
+github:
   - changed-files:
-      - any-glob-to-any-file: ".github/**/*"
-area/kubernetes:
+      - any-glob-to-any-file:
+          - ".github/**/*"
+infra:
   - changed-files:
-      - any-glob-to-any-file: "kubernetes/**/*"
-area/taskfile:
+      - any-glob-to-any-file:
+          - "infra/**/*"
+kubernetes:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "k8s/**/*"
+taskfile:
   - changed-files:
       - any-glob-to-any-file:
           - ".taskfiles/**/*"
           - "Taskfile.yaml"
-area/terraform:
+terraform:
   - changed-files:
-      - any-glob-to-any-file: "terraform/**/*"
-# Clusters
-cluster/main:
+      - any-glob-to-any-file:
+          - "terraform/**/*"
+vscode:
   - changed-files:
-      - any-glob-to-any-file: "kubernetes/main/**/*"
-cluster/storage:
-  - changed-files:
-      - any-glob-to-any-file: "kubernetes/storage/**/*"
+      - any-glob-to-any-file:
+          - ".vscode/**/*"
