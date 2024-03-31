@@ -25,8 +25,6 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
       # Security
-      - id: detect-aws-credentials
-        args: ['--allow-missing-credentials']
       - id: detect-private-key
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.5
