@@ -22,7 +22,7 @@ jobs:
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@v2.2.3
 
-      - name: Check for updates
+      - name: Check Flux for updates
         id: update
         run: |
           flux install --export > ./k8s/cluster/base/flux-system/gotk-components.yaml
