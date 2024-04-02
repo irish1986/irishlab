@@ -1,6 +1,7 @@
 ---
-ignore: |
-  .vscode/
+ignore:
+  - .vscode/
+  - k8s/cluster/base/flux-system
 extends: default
 rules:
   braces:

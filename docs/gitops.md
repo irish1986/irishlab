@@ -47,9 +47,9 @@ curl -s https://fluxcd.io/install.sh | sudo bash
 1. Create token [here](https://github.com/settings/tokens).
 
 ```bash
-export GITHUB_TOKEN=<your-token>
-export GITHUB_USER=irish1986
-export GITHUB_REPO=gitops
+  export GITHUB_TOKEN=<your-token>
+  export GITHUB_USER=irish1986
+  export GITHUB_REPO=irishlab
 ```
 
 1. Create a repo
