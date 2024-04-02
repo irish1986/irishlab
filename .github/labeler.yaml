@@ -9,6 +9,8 @@ config:
       - any-glob-to-any-file:
           - ".config/**/*"
           - ".pre-commit-config.yaml"
+          - ".gitattributes"
+          - ".gitignore"
 docker:
   - changed-files:
       - any-glob-to-any-file:
@@ -16,7 +18,9 @@ docker:
 docs:
   - changed-files:
       - any-glob-to-any-file:
+          - "docs/**/*"
           - "README.md"
+          - "LICENSE"
 github:
   - changed-files:
       - any-glob-to-any-file:
