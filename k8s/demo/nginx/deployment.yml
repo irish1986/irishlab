@@ -4,11 +4,13 @@ kind: Deployment
 metadata:
   name: nginx-deployment
   namespace: default
+  labels:
+    app: nginx
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: nginx
-  replicas: 3
   template:
     metadata:
       labels:
@@ -18,4 +20,5 @@ spec:
         - name: nginx
           image: docker.io/nginx:1.25.4-alpine-slim
           ports:
-            - containerPort: 80
+            - name: nginx
+              containerPort: 80

@@ -1,12 +1,14 @@
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: nginx
+  name: whoami-svc
   namespace: default
+  labels:
+    service: whoami
 spec:
   selector:
-    app: nginx
+    app: whoami
   ports:
     - protocol: TCP
       port: 80

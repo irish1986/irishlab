@@ -1,0 +1,21 @@
+---
+name: podinfo
+services:
+  podinfo:
+    image: docker.io/stefanprodan/podinfo:6.5.4
+    pull_policy: always
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - mode: ingress
+        target: 9898
+        published: "9898"
+        protocol: tcp
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.podinfo-http.entrypoints: "web"
+      traefik.http.routers.podinfo-http.rule: "Host(`podinfo.home.irishlab.io`)"
+      traefik.http.routers.podinfo-https.entrypoints: "websecure"
+      traefik.http.routers.podinfo-https.rule: "Host(`podinfo.home.irishlab.io`)"
+      traefik.http.routers.podinfo-https.tls: "true"
+      traefik.http.routers.podinfo-https.tls.certresolver: "cloudflare"
