@@ -2,7 +2,6 @@
 name: Update flux
 
 on: # yamllint disable-line rule:truthy
-  workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
 
@@ -24,9 +23,9 @@ jobs:
       - name: Check for updates
         id: update
         run: |
-            flux install --export > ./k8s/cluster/base/flux-system/gotk-components.yaml
-            VERSION="$(flux -v)"
-            echo "flux_version=$VERSION" >> $GITHUB_OUTPUT
+          flux install --export > ./k8s/cluster/base/flux-system/gotk-components.yaml
+          VERSION="$(flux -v)"
+          echo "flux_version=$VERSION" >> $GITHUB_OUTPUT
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
