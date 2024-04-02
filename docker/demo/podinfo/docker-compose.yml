@@ -2,7 +2,7 @@
 name: podinfo
 services:
   podinfo:
-    image: docker.io/stefanprodan/podinfo:6.5.4
+    image: docker.io/stefanprodan/podinfo:6.6.1
     pull_policy: always
     container_name: nginx
     restart: unless-stopped
