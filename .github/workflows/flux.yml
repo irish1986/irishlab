@@ -1,0 +1,37 @@
+---
+name: Update flux
+
+on: # yamllint disable-line rule:truthy
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-flux:
+    name: Update flux
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@main
+      - name: Check for updates
+        id: update
+        run: |
+            flux install --export > ./k8s/cluster/base/flux-system/gotk-components.yaml
+            VERSION="$(flux -v)"
+            echo "flux_version=$VERSION" >> $GITHUB_OUTPUT
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-flux
+          commit-message: Update to ${{ steps.update.outputs.flux_version }}
+          title: Update to ${{ steps.update.outputs.flux_version }}
+          body: ${{ steps.update.outputs.flux_version }}
