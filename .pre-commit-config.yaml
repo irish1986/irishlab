@@ -59,6 +59,16 @@ repos:
         args:
           - -c
           - .config/.yamllint.yml
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.88.4
+    hooks:
+      - id: terraform_fmt
+        files: \.(tf|tfvars)$
+        args:
+          - --args=-check
+          - --args=-diff
+          - --args=-recursive
+          - --args=-write=false
   - repo: https://github.com/ansible-community/ansible-lint
     rev: v24.2.1
     hooks:
@@ -82,13 +92,3 @@ repos:
     hooks:
       - id: k8svalidate
         files: \.(yaml|yml)$
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.88.4
-    hooks:
-      - id: terraform_fmt
-        files: \.(tf|tfvars)$
-        args:
-          - --args=-check
-          - --args=-diff
-          - --args=-recursive
-          - --args=-write=false
