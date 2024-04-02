@@ -19,11 +19,13 @@ repos:
         files: \.(yaml|yml)$
       - id: end-of-file-fixer
       - id: trailing-whitespace
-        args: [--markdown-linebreak-ext=md]
+        args:
+          - --markdown-linebreak-ext=md
       # Cross platform
       - id: check-case-conflict
       - id: mixed-line-ending
-        args: [--fix=lf]
+        args:
+          - --fix=lf
       # Security
       - id: detect-private-key
   - repo: https://github.com/Lucas-C/pre-commit-hooks
@@ -35,6 +37,10 @@ repos:
     rev: 0.2.0
     hooks:
       - id: fix-smartquotes
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.2.0
+    hooks:
+      - id: detect-secrets
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.39.0
     hooks:
@@ -71,6 +77,11 @@ repos:
     rev: v3.0.1
     hooks:
       - id: docker-compose-check
+  - repo: https://github.com/Agilicus/pre-commit-hook-k8svalidate.git
+    rev: v0.0.8
+    hooks:
+      - id: k8svalidate
+        files: \.(yaml|yml)$
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.88.4
     hooks:

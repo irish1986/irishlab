@@ -1,6 +1,4 @@
 ---
-version: "3.9"
-
 volumes:
   nvr:
     name: nvr
@@ -31,5 +29,5 @@ services:
       - "5000:5000"
       - "8554:8554"
     environment:
-      FRIGATE_RTSP_PASSWORD: "password"
+      FRIGATE_RTSP_PASSWORD: ${password}
     restart: unless-stopped

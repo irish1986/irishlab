@@ -1,9 +1,9 @@
 ---
 mqtt:
-  host: 192.168.10.91
-  port: 1883
-  user: mqtt
-  password: mqtt
+  host: ${host}
+  port: ${port}
+  user: ${username}
+  password: ${password}
   topic_prefix: frigate
   client_id: frigate
   stats_interval: 60
@@ -50,14 +50,14 @@ ui:
   live_mode: mse
 
 cameras:
-  front-yard:
+  cam1:
     ffmpeg:
       inputs:
-        - path: rtsp://admin:allo123@192.168.107.61:554/h264Preview_01_main
+        - path: rtsp://${username}:${password}${host}:554/h264Preview_01_main
           input_args: preset-rtsp-restream
           roles:
             - record
-        - path: rtsp://admin:allo123@192.168.107.61:554/h264Preview_01_sub
+        - path: rtsp://${username}:${password}@${host}:554/h264Preview_01_sub
           input_args: preset-rtsp-restream
           roles:
             - detect
@@ -82,41 +82,3 @@ cameras:
           min_score: 0.4
           threshold: 0.5
           min_area: 700
-  office:
-    enabled: false
-    ffmpeg:
-      # hwaccel_args: preset-intel-qsv-h265
-      inputs:
-        - path: rtsp://admin:admin@192.168.107.62:554/h264Preview_01_main
-          input_args: preset-rtsp-restream
-          roles:
-            - record
-        - path: rtsp://admin:admin@192.168.107.62:554/h264Preview_01_sub
-          input_args: preset-rtsp-restream
-          roles:
-            - detect
-    objects:
-      track:
-        - cat
-        - dog
-        - person
-      filters:
-        cat:
-          min_score: 0.3
-          threshold: 0.5
-        dog:
-          min_score: 0.3
-          threshold: 0.5
-        person:
-          min_score: 0.4
-          threshold: 0.5
-          min_area: 700
-    snapshots:
-      enabled: true
-    record:
-      enabled: true
-      retain:
-        days: 2
-      events:
-        retain:
-          default: 10

@@ -16,6 +16,6 @@
   ansible.builtin.blockinfile:
     path: /etc/sudoers
     insertafter: "%sudo ALL=(ALL:ALL) ALL"
-    block: |
+    block: | # pragma: allowlist secret
       # Gives sudo access to the devops group
       {{ ansible_user }}        ALL=(ALL)       NOPASSWD: ALL

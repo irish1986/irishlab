@@ -1,5 +1,4 @@
 ---
-version: "2.1"
 name: netbootxyz
 volumes:
   mydata:
