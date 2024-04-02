@@ -26,7 +26,7 @@ jobs:
         id: update
         run: |
           flux install --export > ./k8s/cluster/base/flux-system/gotk-components.yaml
-          VERSION="$(flux -v)"
+          VERSION=$(flux -v)
           echo "flux_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
