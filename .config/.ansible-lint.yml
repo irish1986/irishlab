@@ -1,12 +1,15 @@
 ---
-profile: min
+profile: shared
 
 exclude_paths:
   - .cache/
   - .github/
   - .vscode/
   - .taskfiles/
+  - docker/
+  - infra/
+  - k8s/
+  - terraform/
 
 skip_list:
-  - fqcn-builtins
   - yaml
