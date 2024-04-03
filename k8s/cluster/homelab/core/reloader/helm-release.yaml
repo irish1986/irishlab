@@ -2,25 +2,23 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-    name: node-problem-detector
-    namespace: node-problem-detector
+    name: stakater
+    namespace: reloader
 spec:
     interval: 5m
     install:
         createNamespace: true
-        crds: CreateReplace
         remediation:
             retries: 3
     upgrade:
-        crds: CreateReplace
         remediation:
             retries: 3
     chart:
         spec:
-            chart: node-problem-detector
-            version: 0.8.17
+            chart: reloader
+            version: 1.0.74
             interval: 5m
             sourceRef:
                 kind: HelmRepository
-                name: deliveryhero
+                name: stakater
                 namespace: flux-system
