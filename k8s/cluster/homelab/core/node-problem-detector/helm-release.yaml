@@ -18,7 +18,7 @@ spec:
     chart:
         spec:
             chart: node-problem-detector
-            version: 0.8.17
+            version: 2.3.12
             interval: 5m
             sourceRef:
                 kind: HelmRepository
