@@ -12,5 +12,6 @@ resources:
     - longhorn-system
     - node-feature-discovery
     - nvidia
+    - plex
     - podinfo
     - reloader
