@@ -17,10 +17,10 @@ spec:
             retries: 3
     chart:
         spec:
-            chart: nfd
+            chart: node-feature-discovery
             version: 0.15.3
             interval: 5m
             sourceRef:
                 kind: HelmRepository
-                name: node-feature-discovery
+                name: nfd
                 namespace: flux-system
