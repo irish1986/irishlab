@@ -23,14 +23,14 @@ spec:
             sourceRef:
                 kind: HelmRepository
                 name: podinfo
-                namespace: default
+                namespace: flux-system
     values:
         replicaCount: 3
         backend: http://backend-podinfo:9898/echo
 
         resources:
-        limits:
-            memory: 256Mi
-        requests:
-            cpu: 100m
-            memory: 64Mi
+            limits:
+                memory: 256Mi
+            requests:
+                cpu: 100m
+                memory: 64Mi
