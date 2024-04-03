@@ -8,3 +8,4 @@ resources:
     - kured
     - longhorn-system
     - node-feature-discovery
+    - node-problem-detector
