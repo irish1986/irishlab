@@ -6,7 +6,8 @@ resources:
     - chaos-mesh
     - descheduler
     - eraser
-    - intel-device-plugins-operator
+    - intel-device-discovery
+    - nvidia-gpu-discovery
     - kube-vip
     - kured
     - longhorn-system
