@@ -6,6 +6,7 @@ resources:
     - chaos-mesh
     - descheduler
     - eraser
+    - intel
     - kube-vip
     - kubereboot
     - longhorn-system
