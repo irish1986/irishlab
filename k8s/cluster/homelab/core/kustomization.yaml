@@ -7,3 +7,4 @@ resources:
     - kube-vip
     - kured
     - longhorn-system
+    - node-feature-discovery
