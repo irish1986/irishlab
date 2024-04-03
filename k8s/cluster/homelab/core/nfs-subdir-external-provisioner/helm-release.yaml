@@ -26,3 +26,6 @@ spec:
         nfs:
             server: 192.168.30.11
             path: "/mnt/rusty/data"
+        storageClass:
+            pathPattern: "/${.PVC.namespace}-${.PVC.name}"
+            onDelete: retain
