@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
     name: nvidia-feature-discovery
-    namespace: invidia-gpu-discovery
+    namespace: nvidia-gpu-discovery
 spec:
     interval: 5m
     install:
