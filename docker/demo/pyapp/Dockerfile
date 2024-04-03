@@ -1,4 +1,4 @@
-FROM python:3.7.3-alpine3.9 as base
+FROM python:3.7.6-alpine3.9 as base
 
 RUN pip install Flask==2.0.3
 
