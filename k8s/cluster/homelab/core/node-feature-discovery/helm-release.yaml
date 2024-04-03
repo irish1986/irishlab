@@ -22,5 +22,5 @@ spec:
             interval: 5m
             sourceRef:
                 kind: HelmRepository
-                name: nfd
+                name: node-feature-discovery
                 namespace: flux-system
