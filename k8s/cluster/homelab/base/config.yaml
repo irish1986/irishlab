@@ -2,13 +2,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-    name: configs
+    name: config
     namespace: flux-system
 spec:
     interval: 5m0s
     dependsOn:
         - name: core
-    path: ./k8s/cluster/homelab/configs
+    path: ./k8s/cluster/homelab/config
     prune: true
     sourceRef:
         kind: GitRepository
