@@ -10,7 +10,7 @@ resources:
     - kube-vip
     - kubereboot
     - longhorn-system
-    - nfs
+    - nfs-subdir-external-provisioner
     - node-feature-discovery
     - nvidia
     - plex

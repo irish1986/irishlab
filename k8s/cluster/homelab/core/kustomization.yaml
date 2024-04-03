@@ -10,7 +10,7 @@ resources:
     - kube-vip
     - kured
     - longhorn-system
-    - nfs
+    - nfs-subdir-external-provisioner
     - node-feature-discovery
     - node-problem-detector
     - nvidia-gpu-discovery
