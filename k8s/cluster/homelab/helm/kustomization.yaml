@@ -7,4 +7,5 @@ resources:
     - kube-vip
     - kubereboot
     - longhorn-system
+    - node-feature-discovery
     - podinfo
