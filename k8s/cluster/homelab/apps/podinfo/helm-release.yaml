@@ -24,3 +24,6 @@ spec:
                 kind: HelmRepository
                 name: podinfo
                 namespace: default
+    values:
+        replicaCount: 3
+        backend: http://backend-podinfo:9898/echo
