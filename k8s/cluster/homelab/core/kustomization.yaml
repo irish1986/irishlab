@@ -7,10 +7,11 @@ resources:
     - descheduler
     - eraser
     - intel-device-discovery
-    - nvidia-gpu-discovery
     - kube-vip
     - kured
     - longhorn-system
+    - nfs
     - node-feature-discovery
     - node-problem-detector
+    - nvidia-gpu-discovery
     - reloader
