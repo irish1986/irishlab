@@ -1,4 +1,5 @@
 ---
+# kind create cluster --name fluxcd --image kindest/node:v1.29.2
 apiVersion: k3d.io/v1alpha4
 kind: Simple
 metadata:
