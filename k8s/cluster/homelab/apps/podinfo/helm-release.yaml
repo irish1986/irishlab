@@ -37,6 +37,6 @@ spec:
         hpa:
             enabled: true
             maxReplicas: 10
-            cpu:
-            memory:
+            cpu: 50m
+            memory: 32Mi
             requests:
