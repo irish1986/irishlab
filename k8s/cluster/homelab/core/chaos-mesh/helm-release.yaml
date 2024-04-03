@@ -26,3 +26,5 @@ spec:
         chaosDaemon:
             runtime: "containerd"
             socketPath: "/run/containerd/containerd.sock"
+        dashboard:
+            securityMode: false
