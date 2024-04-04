@@ -165,6 +165,7 @@ A big thank you goes to these awesome people and their projects who inspired me 
 - [clayshek/homelab-monorepo](https://github.com/clayshek/homelab-monorepo)
 - [diromns/home-cluster](https://github.com/Diromns/home-cluster)
 - [geerlingguy](https://www.jeffgeerling.com/)
+- [Khue's Homelab](https://homelab.khuedoan.com/)
 - [onedr0p/home-ops](https://github.com/onedr0p/home-ops)
 - [pascaliske/infrastructure](https://github.com/pascaliske/infrastructure)
 - [pikubernetescluster](https://picluster.ricsanfre.com/)
