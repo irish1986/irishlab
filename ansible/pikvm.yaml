@@ -1,0 +1,20 @@
+---
+- name: Provision piKvm
+  hosts:
+    - kvm
+  become: true
+  gather_facts: true
+  any_errors_fatal: true
+  pre_tasks:
+    - name: Pausing for 5 seconds...
+      ansible.builtin.pause:
+        seconds: 5
+    - name: Mount read-write
+      ansible.builtin.command: /usr/local/bin/rw
+      changed_when: false
+  roles:
+    - role: pikvm
+  post_tasks:
+    - name: Mount read-only
+      ansible.builtin.command: /usr/local/bin/ro
+      changed_when: false

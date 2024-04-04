@@ -1,5 +1,4 @@
 ---
-
 - name: Fail2Ban | Install package
   ansible.builtin.apt:
     name: "{{ item }}"
@@ -11,7 +10,7 @@
 - name: Fail2Ban | jail.local
   ansible.builtin.blockinfile:
     path: /etc/fail2ban/jail.local
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       [sshd]

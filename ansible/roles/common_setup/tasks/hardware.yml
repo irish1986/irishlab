@@ -1,5 +1,4 @@
 ---
-
 - name: Hardware | AMD GPU
   ansible.builtin.include_tasks: amd.yml
   when:

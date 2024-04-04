@@ -1,0 +1,3 @@
+---
+pikvm_tesmart_kvm_addr: 192.168.1.10
+pikvm_tesmart_kvm_port: 5000

@@ -1,4 +1,4 @@
 ---
 ansible_user: root
 
-system_timezone: "UTC"
+system_timezone: UTC

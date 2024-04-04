@@ -34,5 +34,4 @@
     repo: deb [arch=arm64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }} stable
     state: present
   when:
-    - ansible_facts.architecture is search("arm") and ansible_facts.userspace_bits == "64" or
-      ansible_facts.architecture is search("aarch64")
+    - ansible_facts.architecture is search("arm") and ansible_facts.userspace_bits == "64" or ansible_facts.architecture is search("aarch64")

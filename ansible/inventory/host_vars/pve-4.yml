@@ -1,10 +1,9 @@
 ---
-ansible_host: "192.168.10.24"
+ansible_host: 192.168.10.24
 
 cpu:
   intel:
     enabled: true
-
 
 gpu:
   intel:

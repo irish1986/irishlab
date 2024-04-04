@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Install common
   when:
     - ansible_os_family == "Debian"
@@ -17,7 +16,7 @@
         - git
         - gh
 
-- name: "Pull our Git repository"
+- name: Pull our Git repository
   git:
     repo: git@github.com:roelofjan-elsinga/portfolio.git
     dest: /var/www/html/roelofjanelsinga.com

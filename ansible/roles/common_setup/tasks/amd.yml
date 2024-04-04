@@ -1,4 +1,4 @@
 ---
 - name: Hardware | amd
   ansible.builtin.debug:
-    msg: "This host has amd gpu enable."
+    msg: This host has amd gpu enable.

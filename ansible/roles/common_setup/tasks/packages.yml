@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Install common packages
   ansible.builtin.apt:
     name: "{{ item }}"

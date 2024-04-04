@@ -1,48 +1,45 @@
 ---
 # Areas
-ansible:
+area/ansible:
   - changed-files:
       - any-glob-to-any-file:
           - "ansible/**/*"
-config:
+area/config:
   - changed-files:
       - any-glob-to-any-file:
           - ".config/**/*"
           - ".pre-commit-config.yaml"
           - ".gitattributes"
           - ".gitignore"
-docker:
+          - ".vscode/**/*"
+area/docker:
   - changed-files:
       - any-glob-to-any-file:
           - "docker/**/*"
-docs:
+area/docs:
   - changed-files:
       - any-glob-to-any-file:
           - "docs/**/*"
           - "README.md"
           - "LICENSE"
-github:
+area/github:
   - changed-files:
       - any-glob-to-any-file:
           - ".github/**/*"
-infra:
+area/infra:
   - changed-files:
       - any-glob-to-any-file:
           - "infra/**/*"
-kubernetes:
+area/kubernetes:
   - changed-files:
       - any-glob-to-any-file:
           - "k8s/**/*"
-taskfile:
+area/taskfile:
   - changed-files:
       - any-glob-to-any-file:
           - ".taskfiles/**/*"
           - "Taskfile.yaml"
-terraform:
+area/terraform:
   - changed-files:
       - any-glob-to-any-file:
           - "terraform/**/*"
-vscode:
-  - changed-files:
-      - any-glob-to-any-file:
-          - ".vscode/**/*"

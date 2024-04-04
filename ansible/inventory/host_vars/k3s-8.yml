@@ -1,5 +1,5 @@
 ---
-ansible_host: "192.168.10.68"
+ansible_host: 192.168.10.68
 
 gpu:
   intel:

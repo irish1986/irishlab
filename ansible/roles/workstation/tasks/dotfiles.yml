@@ -1,5 +1,5 @@
 ---
-- name: "Check out dotfiles from repository"
+- name: Check out dotfiles from repository
   ansible.builtin.git:
     repo: https://github.com/irish1986/dotfiles.git
     version: abcd1234

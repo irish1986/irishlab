@@ -1,5 +1,4 @@
 ---
-
 - name: Stop k3s
   systemd:
     name: k3s
@@ -20,10 +19,7 @@
 
 - name: Init cluster inside the transient k3s-init service
   command:
-    cmd: "systemd-run -p RestartSec=2 \
-                      -p Restart=on-failure \
-                      --unit=k3s-init \
-                      k3s server {{ server_init_args }}"
+    cmd: systemd-run -p RestartSec=2 -p Restart=on-failure --unit=k3s-init k3s server {{ server_init_args }}
     creates: "{{ systemd_dir }}/k3s-init.service"
 
 - name: Verification
@@ -47,11 +43,11 @@
 - name: Copy K3s service file
   register: k3s_service
   template:
-    src: "k3s.service.j2"
+    src: k3s.service.j2
     dest: "{{ systemd_dir }}/k3s.service"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Enable and check K3s service
   systemd:
@@ -72,7 +68,7 @@
 - name: Change file access node-token
   file:
     path: /var/lib/rancher/k3s/server
-    mode: 0644
+    mode: "0644"
 
 - name: Read node-token from master
   slurp:
@@ -93,13 +89,13 @@
     path: /home/{{ ansible_user }}/.kube
     state: directory
     owner: "{{ ansible_user }}"
-    mode: 0755
+    mode: "0755"
 
 - name: Change file access config file
   file:
     path: /etc/rancher/k3s/k3s.yaml
     owner: "{{ ansible_user }}"
-    mode: 0755
+    mode: "0755"
 
 - name: Copy config file to user home directory
   copy:
@@ -107,7 +103,7 @@
     dest: /home/{{ ansible_user }}/.kube/config
     remote_src: true
     owner: "{{ ansible_user }}"
-    mode: 0644
+    mode: "0644"
 
 - name: Configure kubectl cluster to {{ apiserver_endpoint }}
   command: >-

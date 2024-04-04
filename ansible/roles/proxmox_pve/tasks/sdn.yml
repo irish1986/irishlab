@@ -1,5 +1,4 @@
 ---
-
 - name: SDN | Install Core packages
   ansible.builtin.apt:
     name: "{{ item }}"
@@ -16,8 +15,8 @@
     state: present
     mode: "0644"
   with_items:
-    - regexp: "^source /etc/network/interfaces.d/*"
-      line: "source /etc/network/interfaces.d/*"
+    - regexp: ^source /etc/network/interfaces.d/*
+      line: source /etc/network/interfaces.d/*
 
 - name: SDN | Install DHCP IPAM packages
   ansible.builtin.apt:

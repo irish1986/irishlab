@@ -1,5 +1,4 @@
 ---
-
 - name: Add vscode apt key
   ansible.builtin.apt_key:
     url: "{{ vscode_apt_key_url }}"

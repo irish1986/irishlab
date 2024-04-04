@@ -1,5 +1,4 @@
 ---
-
 - name: NFS Share | Install nfs packages
   ansible.builtin.apt:
     name: "{{ item }}"
@@ -24,7 +23,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   loop:
     - /mnt/nas-1/backup
     - /mnt/nas-1/data

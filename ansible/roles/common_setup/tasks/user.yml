@@ -9,9 +9,9 @@
   ansible.builtin.lineinfile:
     dest: /etc/sudoers
     state: present
-    regexp: "^%sudo"
+    regexp: ^%sudo
     line: "%sudo ALL=(ALL:ALL) ALL"
-    validate: "/usr/sbin/visudo -cf %s"
+    validate: /usr/sbin/visudo -cf %s
 - name: User | Give sudo access to {{ ansible_user }}
   ansible.builtin.blockinfile:
     path: /etc/sudoers

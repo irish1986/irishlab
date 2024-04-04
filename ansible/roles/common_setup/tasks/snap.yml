@@ -21,8 +21,8 @@
     state: absent
     path: "{{ item }}"
   loop:
-    - "/snap"
-    - "/var/snap"
-    - "/var/lib/snapd"
-    - "/var/cache/snapd"
-    - "/usr/lib/snapd"
+    - /snap
+    - /var/snap
+    - /var/lib/snapd
+    - /var/cache/snapd
+    - /usr/lib/snapd

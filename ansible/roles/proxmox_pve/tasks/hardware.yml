@@ -1,5 +1,4 @@
 ---
-
 - name: Set detected_cpu
   ansible.builtin.set_fact:
     detected_cpu: amd
@@ -49,7 +48,7 @@
   rescue:
     - name: No GPU enable | GPU
       ansible.builtin.debug:
-        msg: "There are no GPU enable for these nodes."
+        msg: There are no GPU enable for these nodes.
 
 - name: Hardware | TPU
   block:
@@ -58,4 +57,4 @@
   rescue:
     - name: No TPU enable | TPU
       ansible.builtin.debug:
-        msg: "There are no TPU enable for these nodes."
+        msg: There are no TPU enable for these nodes.

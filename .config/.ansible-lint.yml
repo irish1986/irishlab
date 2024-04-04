@@ -10,6 +10,3 @@ exclude_paths:
   - infra/
   - k8s/
   - terraform/
-
-skip_list:
-  - yaml

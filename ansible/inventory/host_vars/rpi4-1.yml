@@ -1,2 +1,2 @@
 ---
-ansible_host: "192.168.10.31"
+ansible_host: 192.168.10.31

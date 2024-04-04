@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Install k3s packages
   ansible.builtin.apt:
     name: "{{ item }}"

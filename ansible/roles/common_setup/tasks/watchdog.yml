@@ -1,6 +1,5 @@
 # echo c > /proc/sysrq-trigger
 ---
-
 # sudo nano /boot/firmware/config.txt
 # # Enable watchdog monitoring
 # dtparam=watchdog=on
@@ -11,10 +10,10 @@
   block:
     - name: Watchdog | RPi4 Config
       ansible.builtin.debug:
-        msg: "sudo nano /boot/firmware/config.txt"
+        msg: sudo nano /boot/firmware/config.txt
     - name: Watchdog | RPi4 Config
       ansible.builtin.debug:
-        msg: "dtparam=watchdog=on"
+        msg: dtparam=watchdog=on
 
 - name: Watchdog | Cloud Init Config
   when:
@@ -44,19 +43,19 @@
         regexp: "{{ item.regexp }}"
         line: "{{ item.line }}"
         state: present
-        mode: 0644
+        mode: "0644"
       with_items:
-        - regexp: "^watchdog_module="
-          line: 'watchdog_module="i6300esb"'
+        - regexp: ^watchdog_module=
+          line: watchdog_module="i6300esb"
       when:
         - ansible_virtualization_role == "guest"
     - name: Deploy | Watchdog configuration
       ansible.builtin.template:
         src: "{{ item }}.j2"
-        dest: "/etc/{{ item }}"
+        dest: /etc/{{ item }}
         owner: root
         group: root
-        mode: 0644
+        mode: "0644"
       loop:
         - watchdog.conf
       notify: Start watchdog

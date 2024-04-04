@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Debian Family
   block:
     - name: Packages | Update
@@ -19,7 +18,7 @@
   rescue:
     - name: APT Cache | Message
       ansible.builtin.debug:
-        msg: "There was an error during the update cycle."
+        msg: There was an error during the update cycle.
   always:
     - name: Check if reboot is required
       ansible.builtin.stat:

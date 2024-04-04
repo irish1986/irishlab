@@ -1,12 +1,11 @@
 ---
-
 - name: Create manifests directory on first control
   file:
     path: /tmp/k3s/
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Create the storage directory if it does not exist
   ansible.builtin.file:
@@ -14,7 +13,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Add longhorn repository to the controller
   kubernetes.core.helm_repository:
@@ -39,11 +38,11 @@
 
 - name: Download longhorn manifest to first control
   ansible.builtin.get_url:
-    url: "kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/{{ longhorn_tag_version }}/deploy/longhorn.yaml"
-    dest: "/var/lib/rancher/k3s/server/manifests/longhorn.yaml"
+    url: kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/{{ longhorn_tag_version }}/deploy/longhorn.yaml
+    dest: /var/lib/rancher/k3s/server/manifests/longhorn.yaml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Test longhorn daemonsets configuration
   command: >-

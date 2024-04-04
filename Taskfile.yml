@@ -1,9 +1,9 @@
 ---
-version: '3'
+version: "3"
 
 vars:
   PROJECT_DIR:
-    sh: "git rev-parse --show-toplevel"
+    sh: git rev-parse --show-toplevel
   ANSIBLE_DIR: "{{.PROJECT_DIR}}/ansible"
   DOCKER_DIR: "{{.PROJECT_DIR}}/docker"
   KIND_DIR: "{{.PROJECT_DIR}}/infra/kind"

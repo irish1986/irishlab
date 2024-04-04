@@ -1,5 +1,5 @@
 ---
-ansible_host: "192.168.20.252"
+ansible_host: 192.168.20.252
 
 cpu:
   amd:

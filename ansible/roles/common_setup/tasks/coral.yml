@@ -30,13 +30,13 @@
 - name: Ensure the desired udev rules are in place
   ansible.builtin.blockinfile:
     path: /etc/udev/rules.d/65-apex.rules
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       SUBSYSTEM==\"apex\", MODE=\"0660\", GROUP=\"apex\"
 - name: Reload Udev
   ansible.builtin.command: |
-          udevadm control --reload
+    udevadm control --reload
   register: udev
   changed_when: udev.rc != 0
 - name: User | Create apex group

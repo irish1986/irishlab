@@ -1,20 +1,19 @@
 ---
-
 - name: Create manifests directory on first control
   file:
     path: /tmp/k3s/
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Download kured manifest to first control
   ansible.builtin.get_url:
-    url: "https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref={{ nfd_tag_version }}"
-    dest: "/var/lib/rancher/k3s/server/manifests/nfd.yaml"
+    url: https://github.com/kubernetes-sigs/node-feature-discovery/deployment/overlays/default?ref={{ nfd_tag_version }}
+    dest: /var/lib/rancher/k3s/server/manifests/nfd.yaml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   loop:
     - https://github.com/intel/intel-device-plugins-for-kubernetes/deployments/nfd?ref=v0.29.0
     - https://github.com/intel/intel-device-plugins-for-kubernetes/deployments/nfd/overlays/node-feature-rules?ref=v0.29.0

@@ -8,5 +8,7 @@ collections:
     version: 3.8.1
   - name: community.general
     version: 7.5.6
+  - name: community.sops
+    version: 1.6.7
   - name: kubernetes.core
     version: 3.0.1

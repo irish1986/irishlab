@@ -1,5 +1,4 @@
 ---
-
 - name: Python | Install python packages
   ansible.builtin.apt:
     name: "{{ item }}"

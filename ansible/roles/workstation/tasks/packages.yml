@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Install workstation APT packages
   ansible.builtin.apt:
     name: "{{ item }}"

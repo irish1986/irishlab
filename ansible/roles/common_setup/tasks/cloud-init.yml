@@ -3,17 +3,17 @@
   block:
     - name: Cloud-Init | Check for Cloud-Init folder
       ansible.builtin.stat:
-        path: '/etc/cloud/'
+        path: /etc/cloud/
       register: etc_cloud_folder
     - name: Cloud-Init | Disable /etc/cloud/cloud-init.disabled
       ansible.builtin.copy:
-        dest: '/etc/cloud/cloud-init.disabled'
-        content: 'disabled by ansible\n'
-        owner: 'root'
-        group: 'root'
-        mode: '0644'
+        dest: /etc/cloud/cloud-init.disabled
+        content: disabled by ansible\n
+        owner: root
+        group: root
+        mode: "0644"
       when:
-        - 'etc_cloud_folder.stat.exists'
+        - etc_cloud_folder.stat.exists
     - name: Cloud-Init | Remove package
       ansible.builtin.apt:
         name: "{{ item }}"
@@ -21,7 +21,7 @@
       loop:
         - cloud-init
       when:
-        - 'etc_cloud_folder.stat.exists'
+        - etc_cloud_folder.stat.exists
     - name: Cloud-Init | Disable all services
       ansible.builtin.service:
         name: "{{ item }}"
@@ -32,8 +32,8 @@
         - cloud-init-local.service
         - cloud-init.service
       when:
-        - 'etc_cloud_folder.stat.exists'
+        - etc_cloud_folder.stat.exists
   rescue:
     - name: Cloud-Init | Something wrong
       ansible.builtin.debug:
-        msg: "Playbook had an issue with Cloud-Init disabling."
+        msg: Playbook had an issue with Cloud-Init disabling.

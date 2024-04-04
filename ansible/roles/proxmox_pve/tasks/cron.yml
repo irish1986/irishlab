@@ -31,24 +31,24 @@
     path: ~/template
     state: directory
     owner: "{{ ansible_user }}"
-    mode: 0775
+    mode: "0775"
 
 - name: Copy template shell script
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "~/template/{{ item }}"
+    dest: ~/template/{{ item }}
     owner: root
     group: root
-    mode: 0775
+    mode: "0775"
   loop:
     - ubuntu.sh
 
 - name: Task name
   ansible.builtin.stat:
-    path: "/mnt/pve/iso/snippets/ubuntu-user.yml"
+    path: /mnt/pve/iso/snippets/ubuntu-user.yml
   register: register_name
 
 - name: Task name
   ansible.builtin.debug:
-    msg: "Ubuntu-user.yml exists on ISO folders"
+    msg: Ubuntu-user.yml exists on ISO folders
   when: register_name.stat.exists

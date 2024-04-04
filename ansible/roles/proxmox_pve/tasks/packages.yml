@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Install Cloud Init packages
   ansible.builtin.apt:
     name: "{{ item }}"

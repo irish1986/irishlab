@@ -1,25 +1,24 @@
 ---
-
 - name: Configure for CPU
   ansible.builtin.lineinfile:
     dest: /etc/default/grub
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
-    mode: 0644
+    mode: "0644"
   with_items:
-    - regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
-      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet {{ detected_cpu }}_iommu=on"'
+    - regexp: ^GRUB_CMDLINE_LINUX_DEFAULT=
+      line: GRUB_CMDLINE_LINUX_DEFAULT="quiet {{ detected_cpu }}_iommu=on"
   notify: Update GRUB
 
 - name: Test for dmesg
   ansible.builtin.debug:
-    msg: "dmesg | grep -e DMAR -e IOMMU"
+    msg: dmesg | grep -e DMAR -e IOMMU
 
 - name: Configure Modules
   ansible.builtin.blockinfile:
     path: /etc/modules
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       # Modules required for PCI passthrough
@@ -32,7 +31,7 @@
 - name: Configure IOMMU Unsafe Interrupts
   ansible.builtin.blockinfile:
     path: /etc/modprobe.d/iommu_unsafe_interrupts.conf
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       # IOMMU Interrupt Remapping
@@ -42,7 +41,7 @@
 - name: Configure IOMMU Unsafe Interrupts
   ansible.builtin.blockinfile:
     path: /etc/modprobe.d/kvm.conf
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       # IOMMU Interrupt Remapping
@@ -56,22 +55,22 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
-    mode: 0644
+    mode: "0644"
   with_items:
-    - regexp: "^blacklist nouveau"
-      line: "blacklist nouveau"
-    - regexp: "^blacklist nvidia"
-      line: "blacklist nvidia"
+    - regexp: ^blacklist nouveau
+      line: blacklist nouveau
+    - regexp: ^blacklist nvidia
+      line: blacklist nvidia
 
 - name: VFIO vendor GPU id'
   ansible.builtin.blockinfile:
     path: /etc/modprobe.d/vfio.conf
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       # Modules required for PCI passthrough
       options vfio-pci ids={{ gpu.nvidia.pcie_id }} disable_vga=1
   notify: Reboot force
 
-- name: "Flush handlers"
+- name: Flush handlers
   ansible.builtin.meta: flush_handlers

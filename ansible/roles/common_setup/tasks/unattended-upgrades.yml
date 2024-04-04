@@ -1,5 +1,4 @@
 ---
-
 - name: Unattended-Upgrades | Install package
   ansible.builtin.apt:
     name: "{{ item }}"
@@ -11,7 +10,7 @@
 - name: Unattended-Upgrades | 2norecommends
   ansible.builtin.blockinfile:
     path: /etc/apt/apt.conf.d/2norecommends
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       APT::Get::Install-Recommends "false";
@@ -22,7 +21,7 @@
 - name: Unattended-Upgrades | 10periodic
   ansible.builtin.blockinfile:
     path: /etc/apt/apt.conf.d/10periodic
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       APT::Periodic::AutocleanInterval "7";
@@ -33,7 +32,7 @@
 - name: Unattended-Upgrades | 50unattended-upgrades
   ansible.builtin.blockinfile:
     path: /etc/apt/apt.conf.d/50unattended-upgrades
-    mode: 0644
+    mode: "0644"
     create: true
     block: |
       Unattended-Upgrade::Allowed-Origins {

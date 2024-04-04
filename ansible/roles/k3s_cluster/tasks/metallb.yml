@@ -1,20 +1,19 @@
 ---
-
 - name: Create manifests directory on first control
   file:
     path: /tmp/k3s/
     state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Copy metallb CRs manifest to first
   template:
-    src: "metallb-crs.yml.j2"
-    dest: "/tmp/k3s/metallb-crs.yaml"
+    src: metallb-crs.yml.j2
+    dest: /tmp/k3s/metallb-crs.yaml
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
 
 - name: Test metallb-system namespace
   command: >-

@@ -1,5 +1,4 @@
 ---
-
 - name: Update package manager
   ansible.builtin.apt:
     update_cache: true

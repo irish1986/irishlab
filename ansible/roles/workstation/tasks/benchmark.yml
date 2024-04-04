@@ -1,5 +1,4 @@
 ---
-
 - name: Packages | Install benchmark APT packages
   ansible.builtin.apt:
     name: "{{ item }}"

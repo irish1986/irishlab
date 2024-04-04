@@ -1,5 +1,4 @@
 ---
-
 - name: Nvidia | Add repository (amd64)
   apt_repository:
     repo: ppa:graphics-drivers/ppa

@@ -1,5 +1,4 @@
 ---
-
 - name: Deploy default manifest
   include_tasks: "{{ item }}"
   loop:

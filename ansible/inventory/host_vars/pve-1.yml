@@ -1,7 +1,7 @@
 ---
-ansible_host: "192.168.20.21"
+ansible_host: 192.168.20.21
 
-mac_address: "3c:7c:3f:c2:ea:71"
+mac_address: 3c:7c:3f:c2:ea:71
 
 cpu:
   intel:
@@ -14,7 +14,7 @@ gpu:
       - intel-driver-1
   nvidia:
     enabled: true
-    pcie_id: "10de:1cb1,10de:0fb9"
+    pcie_id: 10de:1cb1,10de:0fb9
     driver_version:
       - nvidia-driver-1
 

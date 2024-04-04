@@ -1,5 +1,4 @@
 ---
-
 - name: NUT | Install required packages
   apt:
     name: "{{ item }}"
@@ -10,10 +9,10 @@
 - name: NUT | Clients Configuration file
   ansible.builtin.template:
     src: "{{ item }}.j2"
-    dest: "/etc/nut/{{ item }}"
+    dest: /etc/nut/{{ item }}
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   loop:
     - upsmon.conf
     - nut.conf

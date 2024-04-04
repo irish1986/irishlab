@@ -3,17 +3,17 @@
   command: >
     which k3s
   register: which_k3s
-  changed_when: "which_k3s.rc == 1"
+  changed_when: which_k3s.rc == 1
   ignore_errors: true
 
 - name: Copy K3s service file
   template:
-    src: "k3s.service.j2"
+    src: k3s.service.j2
     dest: "{{ systemd_dir }}/k3s-node.service"
     owner: root
     group: root
-    mode: 0755
-  when: "which_k3s.rc == 1"
+    mode: "0755"
+  when: which_k3s.rc == 1
 
 - name: Enable and check K3s service
   systemd:
@@ -21,7 +21,7 @@
     daemon_reload: true
     state: restarted
     enabled: true
-  when: "which_k3s.rc == 1"
+  when: which_k3s.rc == 1
 
 # - name: Add worker node type for all nodes
 #   command: kubectl label node {{ item }} kubernetes.io/role=worker

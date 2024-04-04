@@ -1,5 +1,4 @@
 ---
-
 - name: Docker | Install required packages
   ansible.builtin.apt:
     name: "{{ item }}"
@@ -27,4 +26,4 @@
   rescue:
     - name: Docker | Docker API not found
       ansible.builtin.debug:
-        msg: "Docker API not found, maybe it is not installed"
+        msg: Docker API not found, maybe it is not installed

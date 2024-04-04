@@ -18,4 +18,4 @@
   post_tasks:
     - name: Status message
       ansible.builtin.debug:
-        msg: "Playbook ran without any issue."
+        msg: Playbook ran without any issue.

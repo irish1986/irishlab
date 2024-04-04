@@ -1,5 +1,4 @@
 ---
-
 - name: Timezone | Locale
   community.general.timezone:
     name: "{{ system_timezone | default('Etc/UTC') }}"

@@ -17,7 +17,7 @@
   post_tasks:
     - name: Status message
       ansible.builtin.debug:
-        msg: "Playbook ran without any issue."
+        msg: Playbook ran without any issue.
 
 - name: Setup k3s_control host
   hosts:
@@ -30,7 +30,7 @@
   post_tasks:
     - name: Status message
       ansible.builtin.debug:
-        msg: "Playbook ran without any issue."
+        msg: Playbook ran without any issue.
 
 - name: Setup k3s_worker host
   hosts:
@@ -43,8 +43,7 @@
   post_tasks:
     - name: Status message
       ansible.builtin.debug:
-        msg: "Playbook ran without any issue."
-
+        msg: Playbook ran without any issue.
 
 - name: Configure k3s cluster
   hosts:
@@ -57,7 +56,7 @@
   post_tasks:
     - name: Status message
       ansible.builtin.debug:
-        msg: "Playbook ran without any issue."
+        msg: Playbook ran without any issue.
     - name: Status message
       ansible.builtin.debug:
         msg: "Run : scp groot@{{ apiserver }}:~/.kube/config ~/.kube/config"

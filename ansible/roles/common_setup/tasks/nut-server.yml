@@ -11,10 +11,10 @@
 - name: NUT | Servers Configuration file
   ansible.builtin.template:
     src: "{{ item }}.j2"
-    dest: "/etc/nut/{{ item }}"
+    dest: /etc/nut/{{ item }}
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   loop:
     - ups.conf
     - upsmon.conf
@@ -25,10 +25,10 @@
 - name: NUT | USB Configuration file
   ansible.builtin.template:
     src: "{{ item }}.j2"
-    dest: "/etc/udev/rules.d/{{ item }}"
+    dest: /etc/udev/rules.d/{{ item }}
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   loop:
     - 99-nut-ups.rules
   notify: Reload nut

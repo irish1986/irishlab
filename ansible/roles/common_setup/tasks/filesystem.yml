@@ -1,8 +1,7 @@
 ---
-
 - name: Filesystem | swap | disable at runtime
   ansible.builtin.command: |
-      swapoff -a
+    swapoff -a
   when: ansible_swaptotal_mb > 0
   register: swap_changed
   changed_when: swap_changed.rc != 0
