@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: https://github.com/irish1986/irishlab.git
+  url: ssh://git@github.com/irish1986/irishlab
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
