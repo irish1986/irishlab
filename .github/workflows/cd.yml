@@ -2,11 +2,7 @@
 name: Continous Deployment
 
 on: # yamllint disable-line rule:truthy
-  workflow_run:
-    workflows: ["Continous Integration"]
-    types:
-      - completed
-
+  workflow_dispatch:
 jobs:
 
   runner-tf:
