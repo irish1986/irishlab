@@ -12,16 +12,19 @@ concurrency:
 jobs:
   labeler:
     name: Labeler
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+
     steps:
       - name: Generate Token
         uses: actions/create-github-app-token@v1.9.3
         id: generate-token
         with:
-          app-id: "${{ secrets.HOMEOPS_BOT_APP_ID }}"
-          private-key: "${{ secrets.HOMEOPS_BOT_PRIVATE_KEY }}"
+          app-id: "${{ secrets.IRISHLAB_BOT_APP_ID }}"
+          private-key: "${{ secrets.IRISHLAB_BOT_PRIVATE_KEY }}"
+
       - name: Labeler
         uses: actions/labeler@v5.0.0
         with:
-          configuration-path: .github/labeler.yaml
+          configuration-path: .github/labeler.yml
           repo-token: "${{ steps.generate-token.outputs.token }}"

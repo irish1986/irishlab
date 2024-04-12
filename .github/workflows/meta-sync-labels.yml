@@ -12,19 +12,23 @@ concurrency:
 jobs:
   labels:
     name: Sync Labels
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.2
+
       - name: Generate Token
         uses: actions/create-github-app-token@v1.9.3
         id: generate-token
         with:
           app-id: "${{ secrets.HOMEOPS_BOT_APP_ID }}"
           private-key: "${{ secrets.HOMEOPS_BOT_PRIVATE_KEY }}"
+
       - name: Sync Labels
         uses: EndBug/label-sync@v2.3.3
         with:
-          config-file: .github/labels.yaml
+          config-file: .github/labels.yml
           token: "${{ steps.generate-token.outputs.token }}"
           delete-other-labels: true
