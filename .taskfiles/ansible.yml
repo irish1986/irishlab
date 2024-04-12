@@ -24,10 +24,16 @@ tasks:
       - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/docker.yml"
     silent: true
 
-  playbook:proxmox:
+  playbook:pbs:
     desc: Playbook to setup Proxmox hosts
     cmds:
-      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/proxmox.yml"
+      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/pbs.yml"
+    silent: true
+
+  playbook:pve:
+    desc: Playbook to setup Proxmox hosts
+    cmds:
+      - "ansible-playbook -i {{.ANSIBLE_INVENTORY_DIR}}/hosts.yml {{.ANSIBLE_PLAYBOOK_DIR}}/pve.yml"
     silent: true
 
   playbook:setup:

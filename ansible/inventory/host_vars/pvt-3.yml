@@ -1,6 +1,8 @@
 ---
 ansible_host: 192.168.20.253
 
+mac_address: d8:9e:f3:e3:b2:6e
+
 cpu:
   amd:
     enabled: true
