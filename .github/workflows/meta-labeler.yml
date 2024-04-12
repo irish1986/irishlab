@@ -2,9 +2,8 @@
 name: Meta - Labeler
 
 on: # yamllint disable-line rule:truthy
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+  workflow_call:
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
