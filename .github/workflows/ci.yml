@@ -16,8 +16,8 @@ jobs:
   meta-labeler:
     uses: ./.github/workflows/meta-labeler.yml
 
-  meta-sync-labels:
-    uses: ./.github/workflows/meta-sync-labels.yml
+  # meta-sync-labels:
+  #   uses: ./.github/workflows/meta-sync-labels.yml
 
   pre-commit:
     uses: ./.github/workflows/pre-commit.yml
