@@ -19,8 +19,8 @@ services:
     volumes:
       - pictures:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     ports:
       - 2283:3001
     depends_on:
@@ -35,8 +35,8 @@ services:
     volumes:
       - pictures:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     depends_on:
       - redis
       - database
@@ -47,8 +47,8 @@ services:
     image: ghcr.io/immich-app/immich-machine-learning:v1.101.0
     volumes:
       - model-cache:/cache
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     restart: always
 
   redis:
