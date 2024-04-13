@@ -19,7 +19,7 @@ volumes:
 services:
   lidarr:
     container_name: lidarr
-    image: lscr.io/linuxserver/lidarr:2.1.7
+    image: lscr.io/linuxserver/lidarr:2.2.5
     ports:
       - 8686:8686
     environment:
