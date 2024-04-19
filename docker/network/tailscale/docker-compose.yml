@@ -6,7 +6,7 @@ name: tailscaled
 services:
   tailscaled:
     container_name: tailscaled
-    image: docker.io/tailscale/tailscale:v1.62.1
+    image: docker.io/tailscale/tailscale:v1.64.2
     privileged: true
     network_mode: host
     volumes:
