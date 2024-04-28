@@ -19,7 +19,7 @@ volumes:
 services:
   radarr:
     container_name: radarr
-    image: lscr.io/linuxserver/radarr:5.3.6
+    image: lscr.io/linuxserver/radarr:5.4.6
     ports:
       - 7878:7878
     environment:
