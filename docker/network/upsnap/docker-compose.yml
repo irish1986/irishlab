@@ -6,7 +6,7 @@ volumes:
 services:
   upsnap:
     container_name: upsnap
-    image: ghcr.io/seriousm4x/upsnap:4.2.8
+    image: ghcr.io/seriousm4x/upsnap:4.2.9
     network_mode: host
     environment:
       - TZ=America/Toronto
