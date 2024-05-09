@@ -10,16 +10,6 @@
           url: https://nas-1.lan
           username: ${username}
           password: ${password}
-    - nas-2:
-        icon: truenas-scale.png
-        href: https://nas-2.lan
-        description: TrueNAS Scale
-        ping: 192.168.30.12
-        widget:
-          type: truenas
-          url: https://192.168.30.12
-          username: ${username}
-          password: ${password}
     - pbs-1:
         icon: proxmox.png
         href: https://pbs-1.lan:8007
@@ -30,16 +20,6 @@
           url: https://192.168.30.21:8007
           username: ${username}
           password: ${password}
-    - pbs-2:
-        icon: proxmox.png
-        href: https://pbs-2.lan:8007
-        description: Proxmox Backup Server
-        ping: 192.168.30.22
-        widget:
-          type: proxmoxbackupserver
-          url: https://192.168.30.22:8007
-          username: ${username}
-          password: ${password}
     - pve-1:
         icon: proxmox.png
         href: https://pve.lan:8006
@@ -48,83 +28,6 @@
         widget:
           type: proxmox
           url: https://192.168.20.21:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-2:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.22
-        widget:
-          type: proxmox
-          url: https://192.168.20.22:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-3:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.23
-        widget:
-          type: proxmox
-          url: https://192.168.20.23:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-4:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.24
-        widget:
-          type: proxmox
-          url: https://192.168.20.24:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-5:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.25
-        widget:
-          type: proxmox
-          url: https://192.168.20.25:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-6:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.26
-        widget:
-          type: proxmox
-          url: https://192.168.20.26:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-7:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.27
-        widget:
-          type: proxmox
-          url: https://192.168.20.27:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pve-8:
-        icon: proxmox.png
-        href: https://pve.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.28
-        widget:
-          type: proxmox
-          url: https://192.168.20.28:8006
           username: ${username}
           password: ${password}
           node: ${node}
@@ -139,34 +42,30 @@
           username: ${username}
           password: ${password}
           node: ${node}
-    - pvt-2:
-        icon: proxmox.png
-        href: https://pvt.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.252
-        widget:
-          type: proxmox
-          url: https://192.168.20.252:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
-    - pvt-3:
-        icon: proxmox.png
-        href: https://pvt.lan:8006
-        description: Proxmox Virtual Environment
-        ping: 192.168.20.253
-        widget:
-          type: proxmox
-          url: https://192.168.20.253:8006
-          username: ${username}
-          password: ${password}
-          node: ${node}
 - Services:
     - Ansible:
         icon: ansible.png
         href: http://ansible.lan:3010
         description: Ansible Runner
         ping: 192.168.1.5
+    - Pi-Hole:
+        icon: pi-hole.svg
+        href: https://pihole.local.irishlab.io
+        description: DNS Server
+        ping: 192.168.1.5
+        widget:
+          type: pihole
+          url: http://192.168.1.5
+          key: ${api_token}
+    - Uptime-Kuma:
+        icon: uptimekuma.svg
+        href: https://uptime.local.irishlab.io
+        description: Uptime Robot
+        ping: 192.168.1.5
+        widget:
+          type: uptimekuma
+          url: http://192.168.1.5:3001
+          slug: statuspageslug
 - Media Management:
     - Plex:
         icon: plex.png
@@ -194,12 +93,12 @@
           fields: ["channels", "hd"]
     - Immich:
         icon: immich.png
-        href: http://immich.lan
+        href: https://immich.local.irishlab.io/
         description: Picture Management
         ping: http://immich.lan
         widget:
           type: immich
-          url: http://immich.lan
+          url: https://immich.local.irishlab.io/
           key: ${api_token}
 - Downloader:
     - Prowlarr:
@@ -284,15 +183,6 @@
           username: ${username}
           password: ${password}
           site: ${site}
-    - Pi-Hole:
-        icon: pi-hole.svg
-        href: http://dns-1.lan/admin
-        description: DNS Server
-        ping: 192.168.1.5
-        widget:
-          type: pihole
-          url: http://192.168.1.5
-          key: ${api_token}
     - qBittorrent:
         icon: qbittorrent.png
         href: http://torrent.lan:8080

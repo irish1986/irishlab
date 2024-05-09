@@ -7,10 +7,12 @@ networks:
 
 services:
   whoami:
+    container_name: whoami
     image: docker.io/traefik/whoami:v1.10
     pull_policy: always
-    container_name: whoami
     restart: unless-stopped
+    command:
+      - --name=external
     deploy:
       restart_policy:
         condition: on-failure
@@ -26,10 +28,14 @@ services:
           memory: 64M
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.entrypoints=https"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.local.irishlab.io`)"
-      - "traefik.http.routers.whoami.service=whoami"
-      - "traefik.http.routers.whoami.tls=true"
-      - "traefik.http.services.whoami.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
+
+      - "traefik.http.routers.external.entrypoints=https"
+      - "traefik.http.routers.external.rule=Host(`external.local.irishlab.io`)"
+      - "traefik.http.routers.external.service=external"
+      - "traefik.http.routers.external.tls=true"
+
+      - "traefik.http.services.external.loadbalancer.server.port=80"
+      - "traefik.constraint=proxy-public"
     networks:
       - proxy

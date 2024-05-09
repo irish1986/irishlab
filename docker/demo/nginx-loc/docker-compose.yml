@@ -1,0 +1,11 @@
+---
+name: nginx
+
+services:
+  nginx:
+    image: nginx:1.26.0-alpine
+    pull_policy: always
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80

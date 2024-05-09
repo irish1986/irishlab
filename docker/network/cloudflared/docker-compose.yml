@@ -2,15 +2,16 @@
 name: cloudflared
 
 networks:
-  cloudflared:
-    driver: bridge
-    name: cloudflared
+  cloud:
+    external: true
 
 services:
   cloudflared:
     container_name: cloudflare-tunnel
     image: docker.io/cloudflare/cloudflared:2024.4.1
-    command: tunnel run
-    environment:
-      - TUNNEL_TOKEN=${api_token}
+    command: tunnel run --token ${api_token}
     restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - cloud

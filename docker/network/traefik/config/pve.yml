@@ -1,0 +1,34 @@
+---
+http:
+  # region routers
+  routers:
+    pve-1:
+      entryPoints:
+        - "https"
+      rule: "Host(`pve-1.local.irishlab.io`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: pve-1
+    pvt-1:
+      entryPoints:
+        - "https"
+      rule: "Host(`pvt-1.local.irishlab.io`)"
+      middlewares:
+        - default-headers
+        - https-redirectscheme
+      tls: {}
+      service: pvt-1
+  # region services
+  services:
+    pve-1:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.20.21:8006"
+        passHostHeader: true
+    pvt-1:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.20.251:8006"
+        passHostHeader: true

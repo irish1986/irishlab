@@ -1,14 +1,26 @@
 ---
+name: homepage
+
+networks:
+  proxy:
+    external: true
+
 services:
   homepage:
     container_name: homepage
-    image: ghcr.io/gethomepage/homepage:v0.8.13
-    ports:
-      - 3000:3000
+    image: ghcr.io/gethomepage/homepage:v0.8.12
     volumes:
-      - ./config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./config:/app/config
     environment:
       PUID: 1000
       PGID: 1000
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homepage.entrypoints=https"
+      - "traefik.http.routers.homepage.rule=Host(`homepage.local.irishlab.io`)"
+      - "traefik.http.routers.homepage.tls=true"
+      - "traefik.http.services.homepage.loadbalancer.server.port=3000"
+    networks:
+      - proxy

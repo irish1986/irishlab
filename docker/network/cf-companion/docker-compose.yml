@@ -1,0 +1,39 @@
+---
+name: cf-companion
+
+networks:
+  cloud:
+    external: true
+  proxy:
+    external: true
+
+services:
+  cloudflare-companion:
+    image: ghcr.io/tiredofit/docker-traefik-cloudflare-companion:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TIMEZONE=Europe/London
+
+      - LOG_TYPE=CONSOLE
+      - LOG_LEVEL=INFO
+
+      - TRAEFIK_VERSION=2
+      - RC_TYPE=CNAME
+
+      - TARGET_DOMAIN=${ROOT_DOMAIN}
+      - REFRESH_ENTRIES=TRUE
+
+      - DOCKER_SWARM_MODE=TRUE
+
+      - ENABLE_TRAEFIK_POLL=TRUE
+      - TRAEFIK_POLL_URL=https://traefik.${ROOT_DOMAIN}/api
+      - TRAEFIK_FILTER_LABEL=traefik.constraint
+      - TRAEFIK_FILTER=proxy-public
+
+      - DOMAIN1=${ROOT_DOMAIN}
+      - DOMAIN1_ZONE_ID=${ZONE_ID}
+      - DOMAIN1_PROXIED=TRUE
+    restart: always
+    networks:
+      - proxy

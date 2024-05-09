@@ -89,15 +89,6 @@ sudo add-apt-repository multiverse
 sudo apt update && sudo apt install steam -y
 ```
 
-Install terraform
-
-```bash
-wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update && sudo apt install terraform -y
-```
-
 Install vscode
 
 ```bash
@@ -105,38 +96,4 @@ wget -O- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
 rm -f packages.microsoft.gpg
 sudo apt update && sudo apt install code -y
-```
-
-## ZSH
-
-Install zsh package and oh-my-zsh
-
-```bash
-sudo apt update && sudo apt install zsh -y
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-Install powerlevel10k theme
-
-```bash
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```
-
-Install a zsh plugins
-
-```bash
-git clone https://github.com/MichaelAquilina/zsh-you-should-use ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
-git clone https://github.com/ptavares/zsh-exa ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-exa
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# plugins=(docker exa-zsh git kubectl sudo you-should-use web-search zsh-autosuggestions zsh-exa zsh-syntax-highlighting)
-```
-
-## Dev Tool
-
-## Hardware & Drivers
-
-Install a few packages
-
-```bash
 ```

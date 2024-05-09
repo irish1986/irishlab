@@ -1,35 +1,51 @@
 ---
-name: traefik
-networks:
-  frontend:
+
+networks: # docker network create proxy
+  proxy:
     external: true
-  backend:
-    external: true
+
 services:
   traefik:
-    image: docker.io/traefik:v3.0
+    image: traefik:v3.0
     container_name: traefik
-    networks:
-      - frontend
-      - backend
-    ports:
-      - mode: ingress
-        target: 80
-        published: "88"
-        protocol: tcp
-      - mode: ingress
-        target: 443
-        published: "443"
-        protocol: tcp
-      - mode: ingress
-        target: 8080
-        published: "8088"
-        protocol: tcp
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./config/traefik.yml:/etc/traefik/traefik.yaml:ro
-      - ./config/conf/:/etc/traefik/conf/
-      - ./config/certs/:/etc/traefik/certs/
-    environment:
-      - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - 88:80
+      - 443:443/tcp
+    environment:
+      CF_DNS_API_TOKEN_FILE: /run/secrets/cf_api_token
+      TRAEFIK_DASHBOARD_CREDENTIALS: /run/secrets/traefik_dashboard_credentials
+    secrets:
+      - cf_api_token
+      - traefik_dashboard_credentials
+    volumes:
+      - /etc/localtime:/etc/localtime:roc
+      - ./config/traefik.yml:/traefik.yml:ro
+      - ./config/acme.json:/acme.json
+      - ./data/config.yml:/config.yml:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik-dashboard.local.irishlab.io`)"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=local.irishlab.io"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.local.irishlab.io"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.traefik.rule=Host(`traefik-dashboard.local.irishlab.io`)"
+
+secrets:
+  cf_api_token:
+    file: ./cf_api_token
+  traefik_dashboard_credentials:
+    file: ./traefik_dashboard_credentials

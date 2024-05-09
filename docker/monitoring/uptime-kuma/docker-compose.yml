@@ -1,0 +1,26 @@
+---
+name: uptime-kuma
+
+networks:
+  cloud:
+    external: true
+  proxy:
+    external: true
+
+services:
+  uptime-kuma:
+    container_name: uptime-kuma
+    image: louislam/uptime-kuma:1.23.13-alpine
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./uptime-kuma-data:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kuma.entrypoints=https"
+      - "traefik.http.routers.kuma.rule=Host(`uptime.local.irishlab.io`)"
+      - "traefik.http.routers.kuma.tls=true"
+      - "traefik.http.services.kuma.loadbalancer.server.port=3001"
+    networks:
+      - cloud
+      - proxy

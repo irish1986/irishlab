@@ -1,0 +1,21 @@
+---
+name: nginx
+
+networks:
+  proxy:
+    external: true
+
+services:
+  nginx:
+    image: nginx:1.26.0-alpine
+    pull_policy: always
+    container_name: nginx
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=https"
+      - "traefik.http.routers.nginx.rule=Host(`nginx.local.irishlab.io`)"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+    networks:
+      - proxy
