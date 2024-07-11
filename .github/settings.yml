@@ -1,0 +1,5 @@
+# These settings are synced to GitHub by https://github.com/github/safe-settings
+repository:
+  license_template: mit
+  description: This is my repository description
+  homepage: https://www.example.com
