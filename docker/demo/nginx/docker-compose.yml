@@ -7,7 +7,7 @@ networks:
 
 services:
   nginx:
-    image: nginx:1.26.0-alpine
+    image: nginx:1.27.2-alpine
     pull_policy: always
     container_name: nginx
     restart: unless-stopped
