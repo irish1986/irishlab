@@ -2,7 +2,7 @@
 name: gh-worker
 services:
   gh-worker:
-    image: docker.io/myoung34/github-runner:2.316.1
+    image: docker.io/myoung34/github-runner:2.320.0
     environment:
       REPO_URL: https://github.com/irish1986/irishlab
       RUNNER_NAME: gh-worker
