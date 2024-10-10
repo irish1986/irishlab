@@ -25,7 +25,7 @@ volumes:
 services:
   bazarr:
     container_name: bazarr
-    image: lscr.io/linuxserver/bazarr:1.4.2
+    image: lscr.io/linuxserver/bazarr:1.4.5
     ports:
       - 6767:6767
     environment:
