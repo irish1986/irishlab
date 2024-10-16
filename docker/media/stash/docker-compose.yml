@@ -13,7 +13,7 @@ volumes:
 services:
 
   stash:
-    image: stashapp/stash:v0.25.1
+    image: stashapp/stash:v0.27.2
     container_name: stash
     pull_policy: if_not_present
     ports:
