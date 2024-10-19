@@ -6,7 +6,7 @@ volumes:
 
 services:
   unbound:
-    image: "mvance/unbound:1.19.3"
+    image: "mvance/unbound:1.22.0"
     container_name: unbound
     network_mode: host
     volumes:
