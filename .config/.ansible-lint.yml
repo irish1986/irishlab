@@ -1,6 +1,5 @@
 ---
-profile: shared
-
+profile: min
 exclude_paths:
   - .cache/
   - .github/
@@ -10,3 +9,8 @@ exclude_paths:
   - infra/
   - k8s/
   - terraform/
+warn_list:
+  - yaml[line-length]
+# skip_list:
+#  - yaml[line-length]
+task_name_prefix: "{stem} | "
