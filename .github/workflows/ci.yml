@@ -1,17 +1,40 @@
 ---
-name: Continous Integration
+name: CI - Main
 
 on: # yamllint disable-line rule:truthy
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'README.md'
   push:
     branches:
       - main
     paths-ignore:
-      - '**/README.md'
+      - 'README.md'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
 
 jobs:
 
-  pre-commit:
-    uses: ./.github/workflows/pre-commit.yml
+  main:
+    name: Main Workflow
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@v24.9.2
+        with:
+          args: "-c ./.config/.ansible-lint.yml"
+          setup_python: "true"
+          working_directory: ""
+          requirements_file: "./collections/requirements.yml"
