@@ -7,7 +7,7 @@ networks:
 
 services:
   podinfo:
-    image: docker.io/stefanprodan/podinfo:6.6.2
+    image: docker.io/stefanprodan/podinfo:6.7.1
     pull_policy: always
     container_name: podinfo
     restart: unless-stopped
