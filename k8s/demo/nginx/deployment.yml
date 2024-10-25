@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: docker.io/nginx:1.26.0-alpine-slim
+          image: docker.io/nginx:1.27.2-alpine-slim
           ports:
             - name: nginx
               containerPort: 80
