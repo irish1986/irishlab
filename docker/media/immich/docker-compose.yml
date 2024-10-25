@@ -53,7 +53,7 @@ services:
 
   redis:
     container_name: immich_redis
-    image: docker.io/redis:6.2-alpine3.19
+    image: docker.io/redis:7.2-alpine3.19
     restart: always
 
   database:
