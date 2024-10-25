@@ -9,6 +9,6 @@ collections:
   - name: community.general
     version: 9.0.0
   - name: community.sops
-    version: 1.6.7
+    version: 1.9.1
   - name: kubernetes.core
     version: 3.0.1
