@@ -6,7 +6,7 @@ name: mqtt
 services:
   mqtt:
     container_name: mqtt
-    image: docker.io/eclipse-mosquitto:2.0.18
+    image: docker.io/eclipse-mosquitto:2.0.20
     volumes:
       - ./mosquitto:/mosquitto
       - ./mosquitto/data:/mosquitto/data
