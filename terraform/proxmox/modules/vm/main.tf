@@ -2,7 +2,7 @@ terraform {
   required_providers {
     dns = {
       source  = "hashicorp/dns"
-      version = "3.4.1"
+      version = "3.4.2"
     }
     proxmox = {
       source  = "Telmate/proxmox"
