@@ -5,7 +5,7 @@ volumes:
   dbdata:
 services:
   netbootxyz:
-    image: lscr.io/linuxserver/netbootxyz:0.7.3
+    image: lscr.io/linuxserver/netbootxyz:2.0.53
     pull_policy: always
     container_name: netbootxyz
     restart: unless-stopped
