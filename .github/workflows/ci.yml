@@ -21,7 +21,7 @@ concurrency:
 jobs:
 
   main:
-    name: Call Hello World
+    name: Call Ansible-Lint
     uses: irishlab-io/admin/.github/workflows/reusable-ansible-lint.yml@main
     with:
       configuration_file: "-c ./.config/.ansible-lint.yml"
