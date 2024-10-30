@@ -22,7 +22,7 @@ jobs:
 
   main:
     name: Call Hello World
-    uses: irishlab-io/admin/.github/workflows/reusable-hello-world.yml@main
+    uses: irishlab-io/admin/.github/workflows/reusable-ansible-lint.yml@main
     with:
       configuration_file: "-c ./.config/.ansible-lint.yml"
       requirements_file: ""
