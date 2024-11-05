@@ -5,11 +5,10 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
 jobs:
 
-  runner-tf:
-    uses: ./.github/workflows/runner-tf.yml
+  hello-world:
+    name: Call Hello World
+    uses: irishlab-io/admin/.github/workflows/reusable-hello-world.yml@main
 
-  runner-dns:
-    uses: ./.github/workflows/runner-dns.yml
-
-  runner-ansible:
-    uses: ./.github/workflows/runner-ansible.yml
+    with:
+      comments: "4321tset"
+      enable: false
