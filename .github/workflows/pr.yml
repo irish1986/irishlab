@@ -16,7 +16,7 @@ concurrency:
 jobs:
   secret:
     name: Call Secret Scanning
-    uses: irishlab-io/admin/.github/workflows/reusable-ggshield.yml@main
+    uses: irishlab-io/admin/.github/workflows/reusable-secret.yml@main
     secrets: inherit
 
   ansible-lint:
