@@ -1,5 +1,8 @@
 /.wip
 .env
+/infra/cloudinit/*
+!infra/cloudinit/template/
+
 # Local .terraform directories
 **/.terraform/*
 
