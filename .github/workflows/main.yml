@@ -1,12 +1,7 @@
 ---
-name: CI - Main
+name: Continous Integration - Main
 
 on: # yamllint disable-line rule:truthy
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - 'README.md'
   push:
     branches:
       - main
@@ -19,10 +14,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  secret:
+    name: Call Secret Scanning
+    uses: irishlab-io/admin/.github/workflows/reusable-ggshield.yml@main
+    secrets: inherit
 
-  main:
+  ansible-lint:
     name: Call Ansible-Lint
     uses: irishlab-io/admin/.github/workflows/reusable-ansible-lint.yml@main
+
+    needs:
+      - secret
+
     with:
       configuration_file: "-c ./.config/.ansible-lint.yml"
       requirements_file: "./ansible/collections/requirements.yml"

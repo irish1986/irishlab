@@ -1,0 +1,61 @@
+---
+name: Continous Integration - Cron
+
+on: # yamllint disable-line rule:truthy
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  secret:
+    name: Call Secret Scanning
+    uses: irishlab-io/admin/.github/workflows/reusable-secret.yml@main
+
+    secrets: inherit
+
+  hello-world:
+    name: Call Hello World
+    uses: irishlab-io/admin/.github/workflows/reusable-hello-world.yml@main
+
+    needs:
+      - secret
+
+    with:
+      comments: "4321tset"
+      enable: false
+
+  ansible-lint:
+    name: Call Ansible-Lint
+    uses: irishlab-io/admin/.github/workflows/reusable-ansible-lint.yml@main
+
+    needs:
+      - secret
+
+    with:
+      configuration_file: "-c ./.config/.ansible-lint.yml"
+      requirements_file: "./ansible/collections/requirements.yml"
+
+  gh-labeler:
+    name: Call GitHub Labeler
+    uses: irishlab-io/admin/.github/workflows/reusable-gh-labeler.yml@main
+
+    needs:
+      - secret
+
+    with:
+      configuration_file: "./.github/labeler.yml"
+
+  meta-sync:
+    name: Call Sync Label
+    uses: irishlab-io/admin/.github/workflows/reusable-sync-label.yml@main
+
+    needs:
+      - gh-labeler
+
+    with:
+      configuration_file: "./.github/labels.yml"
