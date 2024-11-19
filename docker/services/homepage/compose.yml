@@ -8,7 +8,7 @@ networks:
 services:
   homepage:
     container_name: homepage
-    image: ghcr.io/gethomepage/homepage:v0.9.11
+    image: ghcr.io/gethomepage/homepage:v0.9.12
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config:/app/config
