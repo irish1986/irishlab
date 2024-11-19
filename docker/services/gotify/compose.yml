@@ -7,7 +7,7 @@ networks:
 
 services:
   gotify:
-    image: gotify/server:2.5.0
+    image: gotify/server:2.6.1
     container_name: gotify
     pull_policy: always
     restart: unless-stopped
