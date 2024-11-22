@@ -14,7 +14,7 @@ volumes:
 services:
   immich-server:
     container_name: immich_server
-    image: ghcr.io/immich-app/immich-server:v1.120.2
+    image: ghcr.io/immich-app/immich-server:v1.121.0
     command: ['start.sh', 'immich']
     volumes:
       - pictures:/usr/src/app/upload
@@ -30,7 +30,7 @@ services:
 
   immich-microservices:
     container_name: immich_microservices
-    image: ghcr.io/immich-app/immich-server:v1.120.2
+    image: ghcr.io/immich-app/immich-server:v1.121.0
     command: ['start.sh', 'microservices']
     volumes:
       - pictures:/usr/src/app/upload
