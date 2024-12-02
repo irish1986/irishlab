@@ -3,7 +3,7 @@ name: nginx
 
 services:
   nginx:
-    image: nginx:1.27.2-alpine
+    image: nginx:1.27.3-alpine
     pull_policy: always
     container_name: nginx
     restart: unless-stopped
