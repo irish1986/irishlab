@@ -8,7 +8,7 @@ volumes:
 
 services:
   prometheus:
-    image: docker.io/prom/prometheus:v3.0.0
+    image: docker.io/prom/prometheus:v3.0.1
     container_name: prometheus
     ports:
       - 9090:9090
