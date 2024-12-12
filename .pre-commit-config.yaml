@@ -70,7 +70,7 @@ repos:
     hooks:
       - id: actionlint
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v24.10.0
+    rev: v24.12.2
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
