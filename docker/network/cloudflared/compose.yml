@@ -8,7 +8,7 @@ networks:
 services:
   cloudflared:
     container_name: cloudflare-tunnel
-    image: docker.io/cloudflare/cloudflared:2024.11.1
+    image: docker.io/cloudflare/cloudflared:2024.12.2
     command: tunnel run --token ${api_token}
     restart: unless-stopped
     volumes:
