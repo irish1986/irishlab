@@ -7,7 +7,7 @@ services:
 
   gluetun:
     container_name: gluetun
-    image: docker.io/qmcgaw/gluetun:v3.38.0
+    image: docker.io/qmcgaw/gluetun:v3.39.1
     cap_add:
       - NET_ADMIN
     networks:
