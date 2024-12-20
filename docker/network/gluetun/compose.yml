@@ -1,0 +1,25 @@
+---
+networks:
+  gluetun:
+    name: gluetun
+
+services:
+
+  gluetun:
+    container_name: gluetun
+    image: docker.io/qmcgaw/gluetun:v3.38.0
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - gluetun
+    ports:
+      - 8000:8000
+      - 6881:6881
+      - 6881:6881/udp
+    environment:
+      - VPN_SERVICE_PROVIDER=<secret>
+      - OPENVPN_USER=<secret>
+      - OPENVPN_PASSWORD=<secret>
+      - SERVER_REGIONS=<secret>
+      - SERVER_HOSTNAMES=<secret>
+    restart: unless-stopped

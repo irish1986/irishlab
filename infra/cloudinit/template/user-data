@@ -7,7 +7,7 @@ ssh_pwauth: true
 
 users:
 - name: groot
-  gecos: irish
+  gecos: general root
   groups: sudo
   sudo: "ALL=(ALL) NOPASSWD:ALL"
   lock_passwd: false
@@ -21,8 +21,17 @@ package_upgrade: true
 package_reboot_if_required: true
 
 packages:
+- ansible
 - git
 - sudo
+
+runcmd:
+  - ['sh', '-c', 'curl -fsSL https://tailscale.com/install.sh | sh']
+  - ['sh', '-c', "echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf && echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf && sudo sysctl -p /etc/sysctl.d/99-tailscale.conf" ]
+  - ['tailscale', 'up', '--auth-key=tskey-abcdef1432341818']
+  - ['tailscale', 'set', '--ssh']
+  # (Optional) Include this line to configure this machine as an exit node
+  - ['tailscale', 'set', '--advertise-exit-node']
 
 output: {all: '| tee -a /var/log/cloud-init-output.log'}
 

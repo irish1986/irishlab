@@ -3,15 +3,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: whoami-ingress
-  namespace: default
+  namespace: demo
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
-  entryPoints:
-    - web
-  routes:
-    - match: Host(`whoami.irishlab.io`)
-      kind: Rule
-      services:
-        - name: whoami-svc
-          port: 80
+  rules:
+    - http:
+        paths:
+          - path: /demo
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami-svc
+                port:
+                  number: 80

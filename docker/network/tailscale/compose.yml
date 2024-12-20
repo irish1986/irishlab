@@ -1,7 +1,7 @@
 ---
 name: tailscaled
 
-# docker exec tailscale tailscale up --advertise-exit-node
+# docker exec tailscaled tailscale up --hostname=rpi4-0 --advertise-exit-node  --accept-dns=true --advertise-routes=192.168.1.0/24,192.168.10.0/24,192.168.20.0/24,192.168.30.0/24,192.168.107.0/24
 
 services:
   tailscaled:
@@ -13,7 +13,8 @@ services:
       - /var/lib:/var/lib
       - /dev/net/tun:/dev/net/tun
     environment:
-      - TS_AUTH_KEY=tskey-auth-${api_token}
+      - TS_AUTH_KEY=<secret>
+      - TS_EXTRA_ARGS= --advertise-exit-node  --accept-dns=true --advertise-routes=192.168.1.0/24,192.168.10.0/24,192.168.20.0/24,192.168.30.0/24,192.168.107.0/24
     cap_add:
       - net_admin
       - sys_module

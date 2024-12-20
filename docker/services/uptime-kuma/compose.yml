@@ -2,8 +2,6 @@
 name: uptime-kuma
 
 networks:
-  cloud:
-    external: true
   proxy:
     external: true
 
@@ -22,5 +20,4 @@ services:
       - "traefik.http.routers.kuma.tls=true"
       - "traefik.http.services.kuma.loadbalancer.server.port=3001"
     networks:
-      - cloud
       - proxy

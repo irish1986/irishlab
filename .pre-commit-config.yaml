@@ -23,41 +23,56 @@ repos:
     hooks:
       - id: check-added-large-files
         args: [--maxkb=2048]
+        stages: [pre-commit]
       - id: check-case-conflict
+        stages: [pre-commit]
       - id: check-json
+        stages: [pre-commit]
       - id: check-merge-conflict
+        stages: [pre-commit]
       - id: check-vcs-permalinks
+        stages: [pre-commit]
       - id: check-yaml
         files: /.(yaml|yml)$
         exclude: ^k8s/cluster/homelab/base/flux-system
-      - id: detect-private-key
+        stages: [pre-commit]
       - id: end-of-file-fixer
+        stages: [pre-commit]
       - id: forbid-new-submodules
+        stages: [pre-commit]
       - id: forbid-submodules
+        stages: [pre-commit]
       - id: mixed-line-ending
         args:
           - --fix=lf
+        stages: [pre-commit]
       - id: trailing-whitespace
         args:
           - --markdown-linebreak-ext=md
+        stages: [pre-commit]
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.5
     hooks:
       - id: remove-crlf
+        stages: [pre-commit]
       - id: remove-tabs
+        stages: [pre-commit]
   - repo: https://github.com/sirosen/texthooks
     rev: 0.6.8
     hooks:
       - id: alphabetize-codeowners
       - id: fix-ligatures
+        stages: [pre-commit]
       - id: fix-smartquotes
+        stages: [pre-commit]
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.43.0
+    rev: v0.42.0
     hooks:
       - id: markdownlint
         args:
           - --config
           - .config/.markdown-lint.yml
+        stages: [pre-commit]
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.35.1
     hooks:
@@ -65,12 +80,14 @@ repos:
         args:
           - -c
           - .config/.yaml-lint.yml
+        stages: [pre-commit]
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.4
     hooks:
       - id: actionlint
+        stages: [pre-push]
   - repo: https://github.com/ansible-community/ansible-lint
-    rev: v24.10.0
+    rev: v24.12.2
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
@@ -78,3 +95,4 @@ repos:
           - -c
           - .config/.ansible-lint.yml
           - --fix
+        stages: [pre-commit]

@@ -2,78 +2,16 @@
 http:
   # region routers
   routers:
-    bazarr:
+    pihole:
       entryPoints:
-        - "https"
-      rule: "Host(`bazarr.local.irishlab.io`)"
+        - websecure
+      rule: "Host(`pihole.local.irishlab.io`)"
       middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: bazarr
-    ctr:
-      entryPoints:
-        - "https"
-      rule: "Host(`ctr.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: ctr
-    immich:
-      entryPoints:
-        - "https"
-      rule: "Host(`immich.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: immich
-    nas-1:
-      entryPoints:
-        - "https"
-      rule: "Host(`nas-1.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: nas-1
-    overseerr:
-      entryPoints:
-        - "https"
-      rule: "Host(`overseerr.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: overseerr
-    pbs-1:
-      entryPoints:
-        - "https"
-      rule: "Host(`pbs-1.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: pbs-1
-    plex:
-      entryPoints:
-        - "https"
-      rule: "Host(`plex.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: plex
-    prowlarr:
-      entryPoints:
-        - "https"
-      rule: "Host(`prowlarr.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: prowlarr
+        - pihole-redirectregex
+        - pihole-addprefix
+      tls:
+        certResolver: le
+      service: pihole
     pve-1:
       entryPoints:
         - "https"
@@ -83,80 +21,12 @@ http:
         - https-redirectscheme
       tls: {}
       service: pve-1
-    pvt-1:
-      entryPoints:
-        - "https"
-      rule: "Host(`pvt-1.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: pvt-1
-    stash:
-      entryPoints:
-        - "https"
-      rule: "Host(`stash.local.irishlab.io`)"
-      middlewares:
-        - default-headers
-        - https-redirectscheme
-      tls: {}
-      service: stash
   # region services
   services:
-    bazarr:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.20.51:6767"
-        passHostHeader: true
-    ctr:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.1.2"
-        passHostHeader: true
-    immich:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.20.50:2283"
-        passHostHeader: true
-    nas-1:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.30.11"
-        passHostHeader: true
-    overseerr:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.20.51:5055"
-        passHostHeader: true
-    pbs-1:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.30.21:8007"
-        passHostHeader: true
-    plex:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.20.50:32400"
-        passHostHeader: true
-    prowlarr:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.20.51:9696"
-        passHostHeader: true
     pve-1:
       loadBalancer:
         servers:
-          - url: "https://192.168.20.21:8006"
-        passHostHeader: true
-    pvt-1:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.20.251:8006"
-        passHostHeader: true
-    stash:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.20.50:9999"
+          - url: "https://192.168.20.11:8006"
         passHostHeader: true
   # region middleware
   middlewares:
@@ -164,13 +34,13 @@ http:
       redirectScheme:
         scheme: https
         permanent: true
-    # addprefix-pihole:
-    #   addPrefix:
-    #     prefix: "/admin"
-    # redirectregex-pihole:
-    #   redirectRegex:
-    #     regex: "/admin/(.*)"
-    #     replacement: /
+    pihole-addprefix:
+      addPrefix:
+        prefix: /admin
+    pihole-redirectregex:
+      redirectRegex:
+        regex: /admin/$
+        replacement: /
     default-headers:
       headers:
         frameDeny: true

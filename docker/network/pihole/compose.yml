@@ -17,8 +17,8 @@ services:
       TZ: 'America/Toronto'
       WEBPASSWORD: ${password}
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - './pihole:/etc/pihole'
+      - './dnsmasq.d:/etc/dnsmasq.d'
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.pihole-prefix.addPrefix.prefix=/admin"

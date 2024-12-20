@@ -1,0 +1,18 @@
+---
+name: tsdproxy
+
+networks:
+  tails:
+    name: tails
+
+services:
+  tsdproxy:
+    image: almeidapaulopt/tsdproxy:v0.6.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data
+    environment:
+      - TSDPROXY_AUTHKEY=tskey-auth-
+      - TSDPROXY_HOSTNAME=192.168.1.5
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    restart: unless-stopped

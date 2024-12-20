@@ -2,6 +2,9 @@
 .env
 /infra/cloudinit/*
 !infra/cloudinit/template/
+/infra/proxmox/*
+!infra/proxmox/template/
+.cache_ggshield
 
 # Local .terraform directories
 **/.terraform/*
