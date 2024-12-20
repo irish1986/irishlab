@@ -98,7 +98,7 @@ repos:
           - --fix
         stages: [pre-commit]
   - repo: https://github.com/tarioch/flux-check-hook
-    rev: v0.5.0
+    rev: v0.6.0
     hooks:
       - id: check-flux-helm-values
         stages: [pre-commit]
