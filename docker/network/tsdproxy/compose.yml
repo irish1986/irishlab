@@ -7,7 +7,7 @@ networks:
 
 services:
   tsdproxy:
-    image: almeidapaulopt/tsdproxy:v0.6.0
+    image: almeidapaulopt/tsdproxy:1.2.0
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data:/data
