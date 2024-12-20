@@ -8,7 +8,7 @@ networks:
 services:
   uptime-kuma:
     container_name: uptime-kuma
-    image: louislam/uptime-kuma:1.23.15-alpine
+    image: louislam/uptime-kuma:1.23.16-alpine
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
