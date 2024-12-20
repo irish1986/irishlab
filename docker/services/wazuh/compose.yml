@@ -47,7 +47,7 @@ services:
     restart: unless-stopped
 
   wazuh.indexer:
-    image: wazuh/wazuh-indexer:4.8.1
+    image: wazuh/wazuh-indexer:4.9.2
     container_name: wazuh-prod-1-indexer
     hostname: wazuh.indexer
     ports:
