@@ -8,7 +8,7 @@ volumes:
 
 services:
   portainer:
-    image: docker.io/portainer/portainer-ce:2.24.0
+    image: docker.io/portainer/portainer-ce:2.25.1
     ports:
       - 8000:8000
       - 9443:9443
