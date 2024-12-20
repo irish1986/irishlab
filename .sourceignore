@@ -1,0 +1,14 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: <repository-name>
+spec:
+  ignore: |
+    # exclude all
+    /*
+    # include deploy dir
+    !/deploy
+    # exclude file extensions from deploy dir
+    /deploy/**/*.md
+    /deploy/**/*.txt

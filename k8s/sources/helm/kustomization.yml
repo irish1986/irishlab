@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - cert-manager.yml
+  - descheduler.yml
+  - eraser.yml
+  - kureboot.yml
+  - longhorn.yml
+  - metallb.yml
+  - nfs-subdir-external-provisioner.yml
+  - node-feature-discovery.yml
+  - nvidia-device-plugin.yml
+  - pihole.yml
+  - podinfo.yml
+  - rancher.yml
+  - reloader.yml
+  - traefik.yml

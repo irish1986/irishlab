@@ -34,7 +34,7 @@ repos:
         stages: [pre-commit]
       - id: check-yaml
         files: /.(yaml|yml)$
-        exclude: ^k8s/cluster/homelab/base/flux-system
+        exclude: ^k8s/cluster/demo/flux-system
         stages: [pre-commit]
       - id: end-of-file-fixer
         stages: [pre-commit]
@@ -77,6 +77,7 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
+        exclude: ^k8s/cluster/demo/flux-system
         args:
           - -c
           - .config/.yaml-lint.yml
@@ -95,4 +96,9 @@ repos:
           - -c
           - .config/.ansible-lint.yml
           - --fix
+        stages: [pre-commit]
+  - repo: https://github.com/tarioch/flux-check-hook
+    rev: v0.5.0
+    hooks:
+      - id: check-flux-helm-values
         stages: [pre-commit]
